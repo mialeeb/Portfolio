@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Mia Biehler</title>
 <!-- One stylesheet for all twelve faces, with the connection opened early.
      Four @import rules used to load one after another, which held up the
@@ -293,6 +293,11 @@
     border-top: 1px solid var(--p-rule); border-bottom: 1px solid var(--p-rule);
   }
   .bf-meta > div { min-width: 0; }
+  /* Merlin's entries run longer, so on wide screens its five groups share
+     the line edge to edge instead of using the fixed gap */
+  @media (min-width: 1200px) {
+    #view-merlin .bf-meta { justify-content: space-between; column-gap: 32px; }
+  }
   .bf-meta dt {
     font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm);
     letter-spacing: var(--ls-label); color: var(--p-accent); margin-bottom: 6px;
@@ -397,6 +402,10 @@
      never a single stranded word */
   :is(#view-butterfly, #view-merlin) .bf-band > p { max-width: 58em; text-wrap: balance; }
   .bf-band .bf-icon { background: color-mix(in srgb, var(--p-band-ink) 12%, transparent); border-color: color-mix(in srgb, var(--p-band-ink) 34%, transparent); margin-inline: auto; }
+  /* clips pause on click */
+  video.bf-autoplay, video.bf-play-once { cursor: pointer; }
+  video.bf-autoplay:focus-visible, video.bf-play-once:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 3px; }
+  .bf-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
   /* Discovery Stations: light green band with dark green type */
   #view-butterfly .bf-band-stations { --p-band: #e7ebdd; --p-band-ink: #234120; }
   /* stations: three over two, staggered. Six half-columns; each station
@@ -1287,16 +1296,39 @@
   #p-butterfly .card:not(.title) .shot-cap,
   #p-butterfly .bf-stats dd { color: #234120; }
   #p-butterfly .card.shot img { background: #dfe4d3; }
+  /* every Butterfly card opens the case study, with the title card's lift */
+  #p-butterfly a.card:not(.title) { transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1); }
+  #p-butterfly a.card:not(.title):hover { transform: translateY(-3px); }
+  @media (prefers-reduced-motion: reduce) { #p-butterfly a.card:not(.title):hover { transform: none; } }
   /* the two statements share one text style, set once */
   .card.bf-problem-card .bf-pc-block p {
     font-family: var(--font-display); font-size: var(--t-h4); font-weight: 500;
     line-height: 1.22; letter-spacing: -0.01em; font-kerning: normal; text-wrap: pretty;
   }
-  /* two equal blocks, each a label then its text, split by a hairline */
-  .card.bf-problem-card { justify-content: center; gap: 20px; }
+  /* problem statement and principle: two boxes stacked in one card slot,
+     together exactly as tall as the cards beside them */
+  .bf-pc-stack {
+    flex: none; scroll-snap-align: start;
+    width: clamp(230px, 29vw, 330px); height: clamp(260px, 32vw, 400px);
+    display: flex; flex-direction: column; gap: clamp(10px, 1.1vw, 16px);
+  }
+  .bf-pc-stack .card.bf-problem-card { height: auto; flex: 1 1 0; min-height: 0; justify-content: center; }
+  /* narrower screens: a wider slot and slightly smaller type so each
+     statement still fits its half-height box */
+  @media (max-width: 1279px) {
+    .bf-pc-stack { width: clamp(280px, 32vw, 330px); }
+    .bf-pc-stack .card.bf-problem-card { padding: 14px 18px; }
+    .bf-pc-stack .bf-pc-block { gap: 8px; }
+    .card.bf-problem-card .bf-pc-block p { font-size: clamp(15px, 1.5vw, 17px); line-height: 1.25; }
+  }
+  @media (max-width: 640px) {
+    .bf-pc-stack { width: 300px; }
+    .bf-pc-stack .card.bf-problem-card { padding: 12px 16px; }
+    .bf-pc-stack .bf-pc-block { gap: 6px; }
+    .card.bf-problem-card .bf-pc-block p { line-height: 1.2; }
+  }
   .bf-pc-block { display: grid; gap: 12px; }
   .bf-pc-block .c-kind { margin: 0; }
-  .bf-pc-block.bf-principle { padding-top: 20px; border-top: 1px solid rgba(35, 65, 32, 0.2); }
   .card.shot img.bf-pos-right { object-position: 88% 50%; }
   /* by-the-numbers card */
   .card.bf-stats { justify-content: center; }
@@ -1365,6 +1397,125 @@
   .mx-proc h4 { margin: 0; font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
   #view-merlin .mx-proc p { margin: 0; }
   .mx-proc span { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  /* ===== interactive user journey (Merlin) =====
+     The emotion/risk landscape is the spine: pick a scenario on it and the
+     panel below shows that moment's workflow, touchpoints, pains and gains,
+     and design opportunities. Process chips highlight one cognitive process
+     across every scenario. */
+  .uj { margin-top: clamp(20px, 2.4vw, 32px); --uj-line: var(--p-rule); }
+  #view-merlin .uj p { max-width: none; margin: 0; }
+  #view-merlin .uj li { max-width: none; margin: 0; font-size: inherit; line-height: inherit; color: inherit; }
+  .uj-step[aria-selected="true"] .uj-count { background: #fff; color: var(--p-band); }
+  .uj-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: clamp(14px, 1.6vw, 20px); }
+  .uj-filter-label { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-muted); margin-right: 4px; }
+  .uj-chip {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 14px;
+    border: 1px solid var(--uj-line); border-radius: 999px; background: var(--paper); color: var(--p-ink);
+    font: 500 var(--t-label-sm)/1 var(--font-body); cursor: pointer;
+  }
+  .uj-chip::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--c); flex: none; }
+  .uj-chip:hover { border-color: var(--c); }
+  .uj-chip[aria-pressed="true"] { background: var(--c); border-color: var(--c); color: #fff; }
+  .uj-chip[aria-pressed="true"]::before { background: #fff; }
+
+  .uj-map { position: relative; border: 1px solid var(--uj-line); border-radius: 14px; overflow: hidden; background: #fbfbfe; }
+  .uj-land { position: relative; height: clamp(150px, 20vw, 240px); }
+  .uj-land svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .uj-axis { position: absolute; left: 12px; font-family: var(--font-label); font-weight: var(--w-label); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--p-muted); pointer-events: none; z-index: 2; }
+  .uj-axis.top { top: 10px; } .uj-axis.bot { bottom: 10px; color: #8a3a44; }
+  .uj-col-hl { position: absolute; top: 0; bottom: 0; width: calc(100% / 9); background: rgba(47, 68, 168, 0.08); border-inline: 1px solid rgba(47, 68, 168, 0.35); transition: left 260ms cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; }
+  .uj-dot { position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--c); border: 2px solid #fff; box-shadow: 0 1px 3px rgba(16, 26, 66, 0.25); pointer-events: none; z-index: 1; }
+  .uj-risk { position: absolute; width: 9px; height: 9px; margin-left: -4.5px; bottom: 34px; transform: rotate(45deg); background: #b8323e; pointer-events: none; }
+
+  .uj-steps { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); border-top: 1px solid var(--uj-line); background: var(--paper); }
+  .uj-step {
+    position: relative; display: grid; gap: 4px; align-content: start; text-align: left;
+    padding: 10px 10px 12px; min-height: 44px; border: 0; border-left: 1px solid var(--uj-line);
+    background: none; color: var(--p-ink); cursor: pointer; font: inherit;
+  }
+  .uj-step:first-child { border-left: 0; }
+  .uj-step:hover { background: var(--p-highlight); }
+  .uj-step[aria-selected="true"] { background: var(--p-band); color: var(--p-band-ink); }
+  .uj-step-n { font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 0.02em; }
+  .uj-step-t { font-size: 12.5px; line-height: 1.3; opacity: 0.85; }
+  .uj-count { position: absolute; top: 8px; right: 8px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 10px; background: var(--c, var(--p-accent)); color: #fff; font: 700 11px/20px var(--font-body); text-align: center; }
+  .uj.is-filtered .uj-step.is-zero { opacity: 0.4; }
+  .uj-step:focus-visible, .uj-tab:focus-visible, .uj-chip:focus-visible, .uj-nav:focus-visible { outline: 2px solid var(--p-accent); outline-offset: -2px; }
+  @media (max-width: 899px) { .uj-step-t { display: none; } .uj-step { justify-items: center; padding-inline: 2px; } .uj-count { position: static; } }
+
+  .uj-panel { margin-top: clamp(16px, 2vw, 24px); border: 1px solid var(--uj-line); border-radius: 14px; background: var(--paper); padding: clamp(18px, 2.6vw, 36px); }
+  .uj-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  .uj-kicker { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  .uj-title { margin: 6px 0 0; font-family: var(--font-display); font-weight: 700; font-size: var(--t-h3); line-height: 1.15; letter-spacing: -0.01em; color: var(--p-ink); }
+  .uj-navs { display: flex; gap: 6px; flex: none; }
+  .uj-nav { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--uj-line); background: var(--paper); color: var(--p-ink); font-size: 18px; cursor: pointer; }
+  .uj-nav:hover:not(:disabled) { background: var(--p-highlight); }
+  .uj-nav:disabled { opacity: 0.35; cursor: default; }
+
+  .uj-state { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 2vw, 28px); margin-top: clamp(16px, 2vw, 24px); padding-top: clamp(16px, 2vw, 24px); border-top: 1px solid var(--uj-line); }
+  .uj-h5 { margin: 0 0 10px; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-muted); }
+  .uj-feel, .uj-riskitem { display: grid; grid-template-columns: 14px 1fr; column-gap: 10px; align-items: baseline; }
+  .uj-feel + .uj-feel, .uj-riskitem + .uj-riskitem { margin-top: 12px; }
+  .uj-feel::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--c); transform: translateY(1px); }
+  .uj-riskitem::before { content: ""; width: 9px; height: 9px; margin-left: 1px; background: #b8323e; transform: rotate(45deg); }
+  .uj-feel b, .uj-riskitem b { font-family: var(--font-display); font-weight: 700; color: var(--p-ink); }
+  #view-merlin .uj-feel p, #view-merlin .uj-riskitem p { grid-column: 2; font-size: var(--t-small); line-height: 1.5; color: var(--p-muted); margin-top: 2px; }
+  #view-merlin .uj-none { font-size: var(--t-small); color: var(--p-muted); }
+
+  .uj-tabs { display: flex; gap: 4px; margin-top: clamp(18px, 2.4vw, 28px); border-bottom: 1px solid var(--uj-line); overflow-x: auto; scrollbar-width: none; }
+  .uj-tab { flex: none; min-height: 44px; padding: 0 14px; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; background: none; color: var(--p-muted); font: 600 var(--t-small)/1 var(--font-body); cursor: pointer; }
+  .uj-tab:hover { color: var(--p-ink); }
+  .uj-tab[aria-selected="true"] { color: var(--p-ink); border-bottom-color: var(--p-accent); }
+  .uj-body { padding-top: clamp(16px, 2vw, 24px); }
+  .uj-body.is-in { animation: uj-in 260ms ease both; }
+  @keyframes uj-in { from { opacity: 0; transform: translateY(4px); } }
+  @media (prefers-reduced-motion: reduce) { .uj-body.is-in { animation: none; } .uj-col-hl { transition: none; } }
+
+  .uj-tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-label); font-weight: var(--w-label); font-size: 12px; letter-spacing: 0.03em; color: var(--p-muted); white-space: nowrap; }
+  .uj-tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+  .uj-flow { list-style: none; margin: 0; padding: 0; counter-reset: uj; display: grid; gap: 0; }
+  .uj-flow li { counter-increment: uj; display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 4px 14px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--uj-line); }
+  .uj-flow li:last-child { border-bottom: 0; }
+  .uj-flow li::before { content: counter(uj, decimal-leading-zero); font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--p-accent); }
+  #view-merlin .uj-flow p { font-size: var(--t-body); line-height: 1.55; color: var(--p-ink); }
+  .uj-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .uj-card { border: 1px solid var(--uj-line); border-left: 4px solid var(--c); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; align-content: start; }
+  .uj-card b { font-family: var(--font-display); font-weight: 700; color: var(--p-ink); }
+  #view-merlin .uj-card p { font-size: var(--t-small); line-height: 1.5; color: var(--p-muted); }
+  .uj-card .uj-tag { margin-top: 4px; }
+  .uj-opp { border-left-width: 1px; border-top: 4px solid var(--c); background: var(--p-highlight); border-color: transparent; border-top-color: var(--c); }
+  .uj-opp b { font-size: var(--f-sub); }
+  #view-merlin .uj-opp p { color: var(--p-ink); font-size: var(--t-body); line-height: 1.55; }
+  .uj-pg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 32px); }
+  .uj-pg ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .uj-pg li { padding: 12px 14px; border-radius: 10px; background: #f6f6f8; }
+  .uj-pg li.is-key { background: #fbe7ea; }
+  .uj-pg li.is-key::before { content: "Key pain point"; display: block; margin-bottom: 4px; font-family: var(--font-label); font-weight: var(--w-label); font-size: 12px; letter-spacing: 0.04em; color: #9b2c37; }
+  #view-merlin .uj-pg li p { font-size: var(--t-small); line-height: 1.55; color: var(--p-ink); }
+  .uj-pg .uj-h5 { display: flex; align-items: center; gap: 8px; }
+  .uj-pg .uj-h5::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+  .uj.is-filtered .uj-body [data-p]:not(.is-match) { opacity: 0.32; }
+  .uj [data-p] { transition: opacity 200ms ease; }
+
+  .uj-foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+  .uj-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  .uj-legend .uj-tag::before { width: 10px; height: 10px; }
+  .uj-full { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); text-decoration: none; border-bottom: 1px solid currentColor; padding-block: 10px 2px; }
+  .uj-full:hover { color: var(--p-ink); }
+  @media (max-width: 760px) {
+    .uj-state, .uj-grid, .uj-pg { grid-template-columns: minmax(0, 1fr); }
+    .uj-flow li { grid-template-columns: 28px minmax(0, 1fr); }
+    .uj-flow li .uj-tag { grid-column: 2; }
+  }
+  @media (max-width: 600px) {
+    .uj-filter { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-right: calc(-1 * var(--margin)); padding-right: var(--margin); }
+    .uj-filter-label { flex: none; }
+    .uj-chip { flex: none; }
+    .uj-axis { display: none; }
+    .uj-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-bottom: 0; }
+    .uj-tab { border-bottom: 1px solid var(--uj-line); margin-bottom: 0; }
+    .uj-tab[aria-selected="true"] { border-bottom: 3px solid var(--p-accent); }
+  }
   /* feature clips */
   .mx-clip { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; margin-top: clamp(16px, 2vw, 24px); border-radius: 10px; background: var(--p-highlight); outline: 1px solid var(--p-rule); outline-offset: -1px; }
   #view-merlin .mx-feature p { max-width: none; margin: 0; }
@@ -1700,7 +1851,7 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
     <!-- ---------- Butterfly exhibition ---------- -->
     <article class="proj" id="p-butterfly">
       <div class="rail-head">
-        <p class="eyebrow">Exhibition design</p>
+        <p class="eyebrow">Interactive exhibition design</p>
         <div class="rail-nav">
           <button type="button" class="rail-btn" data-dir="-1" aria-label="Scroll Butterfly exhibition left">&larr;</button>
           <button type="button" class="rail-btn" data-dir="1" aria-label="Scroll Butterfly exhibition right">&rarr;</button>
@@ -1713,50 +1864,54 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
           <span class="cta">See more <span class="arrow" aria-hidden="true">&rarr;</span></span>
         </a>
 
-        <div class="card q md bf-problem-card">
-          <div class="bf-pc-block">
-            <span class="c-kind">Problem statement</span>
-            <p>How might we use an immersive experience to turn visitors from passive observers into active participants?</p>
-          </div>
-          <div class="bf-pc-block bf-principle">
-            <span class="c-kind">Principle</span>
-            <p>Awe is an epistemic emotion. It's triggered when people notice a gap in what they know, and makes them want to fill it (Jones et al. 2022).</p>
-          </div>
+        <div class="bf-pc-stack">
+          <a class="card q bf-problem-card" href="#butterfly" tabindex="-1">
+            <div class="bf-pc-block">
+              <span class="c-kind">Problem statement</span>
+              <p>How might we use an immersive experience to turn visitors from passive observers into active participants?</p>
+            </div>
+          </a>
+          <a class="card q bf-problem-card" href="#butterfly" tabindex="-1">
+            <div class="bf-pc-block">
+              <span class="c-kind">Principle</span>
+              <p>Awe is an epistemic emotion. It's triggered when people notice a gap in what they know, and makes them want to fill it (Jones et al. 2022).</p>
+            </div>
+          </a>
         </div>
 
-        <figure class="card shot md" style="margin:0">
+        <a class="card shot md" href="#butterfly" tabindex="-1">
           <span class="c-kind">Larva Room</span>
           <img src="images/butterfly/station.jpg" alt="A visitor at the Food station in the projected forest, where a glowing milkweed has grown on a stump under a Great Choice! Milkweed sign." loading="lazy" />
-          <figcaption class="shot-cap">Discover the life of a caterpillar through five discovery stations.</figcaption>
-        </figure>
+          <span class="shot-cap">Discover the life of a caterpillar through five discovery stations.</span>
+        </a>
 
-        <figure class="card shot md" style="margin:0">
+        <a class="card shot md" href="#butterfly" tabindex="-1">
           <span class="c-kind">Bracelet</span>
           <img src="images/butterfly/watch-info.jpg" alt="The bracelet screen: Great Choice! Milkweed, with a note on why caterpillars that eat milkweed taste bad." loading="lazy" />
-          <figcaption class="shot-cap">The interactive bracelet records patrons' actions throughout the exhibit.</figcaption>
-        </figure>
+          <span class="shot-cap">The interactive bracelet records patrons' actions throughout the exhibit.</span>
+        </a>
 
-        <figure class="card shot md" style="margin:0">
+        <a class="card shot md" href="#butterfly" tabindex="-1">
           <span class="c-kind">Chrysalis Room</span>
           <img src="images/butterfly/rail-chrysalis-look.jpg?v=2" alt="A visitor looks up at a giant glowing yellow chrysalis in the dark Chrysalis Room." loading="lazy" />
-          <figcaption class="shot-cap">A quiet, dark room for the slow part of metamorphosis.</figcaption>
-        </figure>
+          <span class="shot-cap">A quiet, dark room for the slow part of metamorphosis.</span>
+        </a>
 
-        <figure class="card shot lg" style="margin:0">
+        <a class="card shot lg" href="#butterfly" tabindex="-1">
           <span class="c-kind">Emergence Room</span>
           <img class="bf-pos-right" src="images/butterfly/meet-butterfly.jpg" alt="A giant blue morpho projected across the Emergence Room wall as a visitor looks up at it." loading="lazy" />
-          <figcaption class="shot-cap">In the end, visitors meet their companion before releasing it into the butterfly conservatory.</figcaption>
-        </figure>
+          <span class="shot-cap">In the end, visitors meet their companion before releasing it into the butterfly conservatory.</span>
+        </a>
 
 
-        <div class="card stat sm bf-stats">
+        <a class="card stat sm bf-stats" href="#butterfly" tabindex="-1">
           <dl>
             <div><dt>3</dt><dd>immersive rooms</dd></div>
             <div><dt>5</dt><dd>discovery stations</dd></div>
             <div><dt>1</dt><dd>butterfly per visitor</dd></div>
             <div><dt>3</dt><dd>weeks to design</dd></div>
           </dl>
-        </div>
+        </a>
       </div>
     </article>
     <!-- ---------- Merlin ---------- -->
@@ -2049,6 +2204,7 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
       <div><dt>Team</dt><dd>Sean Ren, Tushita Kaul</dd></div>
       <div><dt>Client</dt><dd>The Laboratory for Analytic Sciences</dd></div>
       <div><dt>Year</dt><dd>2026 (11 weeks)</dd></div>
+      <div><dt>Tools</dt><dd>Figma, NotebookLM</dd></div>
     </dl>
 
     <video class="bf-autoplay bf-hero-img mx-hero" src="images/merlin/m-hero.mp4" poster="images/merlin/m-hero.jpg"
@@ -2126,7 +2282,60 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
       <div class="bf-proj">
         <h3 class="bf-feature-sub">User Journey Map</h3>
         <p>From our data, I isolated six daily cognitive processes that Aisha&rsquo;s work demands, and color-coded every step, touchpoint, and design opportunity in the map by the process it draws on.</p>
-        <div class="ph" style="--ar: 21 / 9; margin-top: clamp(20px, 2.4vw, 32px)">User journey map &mdash; color-coded by cognitive process</div>
+        <div class="uj" id="uj">
+          <div class="uj-filter" role="group" aria-label="Highlight one cognitive process across the journey">
+            <span class="uj-filter-label">Highlight a process</span>
+          </div>
+          <div class="uj-map">
+            <div class="uj-land" aria-hidden="true">
+              <svg viewBox="0 0 900 240" preserveAspectRatio="none">
+                <path d="M0.0,73.0 L0.8,73.0 L8.3,73.0 L15.8,73.0 L23.2,73.0 L30.7,73.0 L38.2,73.0 L45.6,73.0 L53.1,73.5 L60.6,74.6 L68.0,76.3 L75.5,78.7 L83.0,81.7 L90.5,85.3 L97.9,88.2 L105.2,90.2 L112.7,91.8 L120.1,93.2 L127.6,94.3 L135.1,81.5 L142.6,82.0 L150.1,88.1 L157.5,95.8 L165.0,95.8 L172.5,95.8 L180.0,95.8 L187.4,95.8 L194.9,97.6 L202.2,103.4 L209.7,113.7 L217.1,125.2 L224.6,134.6 L232.1,141.5 L239.6,146.0 L247.0,134.8 L254.5,135.8 L262.0,136.4 L269.5,150.5 L276.9,150.9 L284.4,151.2 L291.9,151.5 L299.4,151.5 L306.6,151.6 L314.1,151.6 L321.6,151.6 L329.1,151.6 L336.6,151.6 L344.0,151.5 L351.5,151.2 L359.0,150.2 L366.5,148.5 L373.9,146.1 L381.4,143.0 L388.9,139.1 L396.4,133.4 L403.6,126.4 L411.1,119.6 L418.6,114.2 L426.1,110.0 L433.5,107.1 L441.0,105.4 L448.5,104.8 L456.0,105.0 L463.4,105.5 L470.9,106.3 L478.4,107.3 L485.9,108.6 L493.4,110.1 L500.6,111.0 L508.1,110.6 L515.6,108.7 L523.1,105.5 L530.5,101.1 L538.0,95.0 L545.5,87.1 L553.0,78.7 L560.4,71.9 L567.9,67.5 L575.4,65.0 L582.9,63.8 L590.3,64.2 L597.8,67.9 L605.1,76.7 L612.6,88.5 L620.0,100.9 L627.5,111.5 L635.0,120.2 L642.5,126.2 L649.9,128.9 L657.4,126.2 L664.9,117.5 L672.4,106.5 L679.9,98.1 L687.3,93.1 L694.8,90.7 L702.1,88.0 L709.6,81.4 L717.0,70.4 L724.5,55.0 L732.0,45.5 L739.5,43.5 L746.9,40.9 L754.4,39.9 L761.9,40.1 L769.4,41.0 L776.8,42.7 L784.3,44.9 L791.8,48.0 L799.3,52.1 L806.5,56.0 L814.0,57.6 L821.5,56.5 L829.0,49.4 L836.4,40.7 L843.9,36.2 L851.4,31.4 L858.9,27.1 L866.4,24.3 L873.8,23.2 L881.3,23.2 L888.8,24.2 L896.3,25.4 L900.0,25.4 L900,240 L0,240 Z" fill="#dfe3f5"/>
+                <path d="M0.0,151.2 L0.8,151.2 L8.3,151.2 L15.8,151.2 L23.2,151.2 L30.7,151.2 L38.2,151.2 L45.6,151.3 L53.1,151.5 L60.6,152.1 L68.0,153.1 L75.5,154.4 L83.0,156.0 L90.5,157.8 L97.9,158.3 L105.2,157.3 L112.7,155.8 L120.1,154.5 L127.6,153.5 L135.1,152.8 L142.6,152.4 L150.1,152.3 L157.5,152.7 L165.0,153.5 L172.5,154.7 L180.0,156.4 L187.4,158.5 L194.9,161.5 L202.2,165.8 L209.7,172.0 L217.1,178.8 L224.6,184.2 L232.1,188.1 L239.6,190.6 L247.0,191.8 L254.5,192.0 L262.0,192.0 L269.5,192.0 L276.9,192.0 L284.4,192.0 L291.9,192.0 L299.4,192.0 L306.6,192.0 L314.1,192.0 L321.6,192.0 L329.1,192.0 L336.6,192.0 L344.0,192.0 L351.5,191.5 L359.0,190.2 L366.5,188.0 L373.9,184.8 L381.4,180.7 L388.9,175.8 L396.4,170.4 L403.6,165.3 L411.1,160.8 L418.6,157.3 L426.1,154.5 L433.5,152.6 L441.0,151.4 L448.5,151.0 L456.0,151.1 L463.4,151.5 L470.9,152.0 L478.4,152.7 L485.9,153.6 L493.4,154.5 L500.6,155.0 L508.1,154.5 L515.6,153.1 L523.1,150.9 L530.5,147.9 L538.0,143.8 L545.5,138.5 L553.0,132.9 L560.4,128.4 L567.9,125.6 L575.4,123.9 L582.9,123.1 L590.3,123.3 L597.8,125.7 L605.1,131.4 L612.6,139.3 L620.0,147.5 L627.5,154.6 L635.0,160.3 L642.5,164.3 L649.9,166.0 L657.4,164.3 L664.9,158.5 L672.4,151.3 L679.9,145.6 L687.3,142.4 L694.8,140.7 L702.1,139.0 L709.6,134.7 L717.0,127.5 L724.5,119.4 L732.0,113.1 L739.5,109.6 L746.9,107.9 L754.4,107.2 L761.9,107.3 L769.4,107.9 L776.8,109.0 L784.3,110.6 L791.8,112.6 L799.3,115.3 L806.5,117.8 L814.0,118.8 L821.5,118.1 L829.0,115.4 L836.4,110.9 L843.9,105.6 L851.4,101.2 L858.9,98.4 L866.4,96.8 L873.8,96.0 L881.3,96.0 L888.8,96.7 L896.3,97.5 L900.0,97.5 L900,240 L0,240 Z" fill="#efc6cd"/>
+                <path d="M0.0,168.7 L0.8,168.7 L8.3,168.7 L15.8,168.7 L23.2,168.7 L30.7,168.7 L38.2,168.7 L45.6,168.8 L53.1,169.0 L60.6,169.4 L68.0,170.2 L75.5,171.2 L83.0,172.5 L90.5,173.9 L97.9,173.9 L105.2,172.5 L112.7,171.1 L120.1,170.0 L127.6,169.2 L135.1,168.6 L142.6,168.3 L150.1,168.2 L157.5,168.5 L165.0,169.2 L172.5,170.2 L180.0,171.6 L187.4,173.3 L194.9,176.0 L202.2,180.0 L209.7,185.3 L217.1,190.7 L224.6,194.9 L232.1,198.1 L239.6,200.0 L247.0,200.9 L254.5,201.2 L262.0,201.2 L269.5,201.3 L276.9,201.4 L284.4,201.6 L291.9,201.8 L299.4,202.5 L306.6,203.2 L314.1,203.4 L321.6,203.4 L329.1,203.4 L336.6,203.4 L344.0,203.4 L351.5,203.0 L359.0,202.0 L366.5,200.3 L373.9,197.9 L381.4,194.8 L388.9,191.0 L396.4,187.1 L403.6,183.3 L411.1,180.0 L418.6,177.3 L426.1,175.2 L433.5,173.7 L441.0,172.8 L448.5,172.5 L456.0,172.6 L463.4,172.9 L470.9,173.3 L478.4,173.8 L485.9,174.5 L493.4,175.3 L500.6,175.8 L508.1,175.7 L515.6,174.7 L523.1,173.0 L530.5,170.8 L538.0,167.7 L545.5,163.8 L553.0,159.6 L560.4,156.2 L567.9,154.0 L575.4,152.8 L582.9,152.2 L590.3,152.4 L597.8,154.6 L605.1,159.3 L612.6,165.3 L620.0,171.4 L627.5,176.6 L635.0,180.9 L642.5,183.8 L649.9,185.1 L657.4,183.8 L664.9,179.5 L672.4,174.2 L679.9,170.0 L687.3,167.6 L694.8,166.5 L702.1,165.5 L709.6,162.5 L717.0,157.2 L724.5,151.2 L732.0,146.6 L739.5,144.0 L746.9,142.8 L754.4,142.3 L761.9,142.4 L769.4,142.8 L776.8,143.7 L784.3,144.8 L791.8,146.3 L799.3,148.3 L806.5,150.2 L814.0,151.0 L821.5,150.4 L829.0,148.4 L836.4,145.1 L843.9,141.2 L851.4,138.0 L858.9,135.9 L866.4,134.7 L873.8,134.2 L881.3,134.2 L888.8,134.7 L896.3,135.3 L900.0,135.3 L900,240 L0,240 Z" fill="#e6a2ab"/>
+                <g stroke="#fbfbfe" stroke-width="2" vector-effect="non-scaling-stroke">
+                  <line x1="100" y1="0" x2="100" y2="240" vector-effect="non-scaling-stroke"/><line x1="200" y1="0" x2="200" y2="240" vector-effect="non-scaling-stroke"/><line x1="300" y1="0" x2="300" y2="240" vector-effect="non-scaling-stroke"/><line x1="400" y1="0" x2="400" y2="240" vector-effect="non-scaling-stroke"/><line x1="500" y1="0" x2="500" y2="240" vector-effect="non-scaling-stroke"/><line x1="600" y1="0" x2="600" y2="240" vector-effect="non-scaling-stroke"/><line x1="700" y1="0" x2="700" y2="240" vector-effect="non-scaling-stroke"/><line x1="800" y1="0" x2="800" y2="240" vector-effect="non-scaling-stroke"/>
+                </g>
+              </svg>
+              <span class="uj-axis top">Feelings</span>
+              <span class="uj-axis bot">Risks</span>
+              <span class="uj-col-hl"></span>
+            </div>
+            <div class="uj-steps" role="tablist" aria-label="Scenarios in Aisha&rsquo;s day"></div>
+          </div>
+          <div class="uj-panel" role="tabpanel" aria-live="polite">
+            <div class="uj-head">
+              <div>
+                <span class="uj-kicker"></span>
+                <h4 class="uj-title"></h4>
+              </div>
+              <div class="uj-navs">
+                <button type="button" class="uj-nav" data-d="-1" aria-label="Previous scenario">&larr;</button>
+                <button type="button" class="uj-nav" data-d="1" aria-label="Next scenario">&rarr;</button>
+              </div>
+            </div>
+            <div class="uj-state">
+              <div><h5 class="uj-h5">How Aisha feels</h5><div class="uj-feels"></div></div>
+              <div><h5 class="uj-h5">What&rsquo;s at risk</h5><div class="uj-risks"></div></div>
+            </div>
+            <div class="uj-tabs" role="tablist" aria-label="Journey layers">
+              <button type="button" class="uj-tab" role="tab" data-t="wf">Workflow</button>
+              <button type="button" class="uj-tab" role="tab" data-t="tp">Touchpoints</button>
+              <button type="button" class="uj-tab" role="tab" data-t="pg">Pains &amp; gains</button>
+              <button type="button" class="uj-tab" role="tab" data-t="opp">Opportunities</button>
+            </div>
+            <div class="uj-body"></div>
+          </div>
+          <div class="uj-foot">
+            <div class="uj-legend" aria-label="Emotional states">
+              <span class="uj-tag" style="--c:#009689">Calm</span>
+              <span class="uj-tag" style="--c:#7a7a7a">On guard</span>
+              <span class="uj-tag" style="--c:#d9b77f">Frustrated</span>
+              <span class="uj-tag" style="--c:#006dff">Confident</span>
+              <span class="uj-tag" style="--c:#c02020">Intense pressure</span>
+            </div>
+            <a class="uj-full" href="images/merlin/journey-map.webp" target="_blank" rel="noopener">View the full journey map &#8599;</a>
+          </div>
+        </div>
       </div>
 
       <div class="mx-processes">
@@ -3507,20 +3716,46 @@ window.__motion = (function () {
 })();
 </script>
 
-</body></html><script>
+<script>
+  /* Every case-study clip can be paused with a click, or from the
+     keyboard: each one takes focus and screen readers hear the hint. */
+  (() => {
+    const vids = document.querySelectorAll('video.bf-autoplay, video.bf-play-once');
+    if (!vids.length) return;
+    const hint = document.createElement('span');
+    hint.id = 'bf-video-hint'; hint.className = 'bf-sr-only';
+    hint.textContent = 'Click, or press Space, to pause or play.';
+    document.body.appendChild(hint);
+    vids.forEach(v => { v.tabIndex = 0; v.setAttribute('aria-describedby', 'bf-video-hint'); });
+  })();
+</script>
+<script>
   /* Case-study clips: play only while on screen, and not at all for
      visitors who ask for reduced motion (they see the poster frame). */
   (() => {
     const clips = document.querySelectorAll('video.bf-autoplay');
     const still = matchMedia('(prefers-reduced-motion: reduce)');
+    /* a click (or Space/Enter) pauses a clip and keeps it paused, even
+       after scrolling away and back; another click plays it again */
+    const held = new Set();
     const io = new IntersectionObserver(entries => {
       for (const e of entries) {
-        if (e.isIntersecting && !still.matches) e.target.play().catch(() => {});
+        if (e.isIntersecting && !still.matches && !held.has(e.target)) e.target.play().catch(() => {});
         else e.target.pause();
       }
     }, { threshold: 0.15 });
     clips.forEach(v => io.observe(v));
     still.addEventListener('change', () => { if (still.matches) clips.forEach(v => v.pause()); });
+    clips.forEach(v => {
+      const toggle = () => {
+        if (v.paused) { held.delete(v); v.play().catch(() => {}); }
+        else { held.add(v); v.pause(); }
+      };
+      v.addEventListener('click', toggle);
+      v.addEventListener('keydown', e => {
+        if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); }
+      });
+    });
   })();
 </script>
 <script>
@@ -3532,18 +3767,378 @@ window.__motion = (function () {
     document.querySelectorAll('video.bf-play-once').forEach(v => {
       const btn = v.parentElement.querySelector('.bf-replay');
       const delay = +v.dataset.delay || 1500;
-      let timer = null, done = false;
+      let timer = null, done = false, held = false;
       const start = () => { v.play().catch(() => {}); };
       new IntersectionObserver(([e]) => {
-        if (e.isIntersecting && !done && !still.matches) {
+        if (e.isIntersecting && !done && !held && !still.matches) {
           if (!timer && v.paused) timer = setTimeout(start, v.currentTime > 0 ? 300 : delay);
         } else {
           clearTimeout(timer); timer = null; v.pause();
         }
       }, { threshold: 0.6 }).observe(v);
       v.addEventListener('ended', () => { done = true; timer = null; if (btn) btn.hidden = false; });
-      if (btn) btn.addEventListener('click', () => { btn.hidden = true; v.currentTime = 0; start(); });
+      if (btn) btn.addEventListener('click', () => { btn.hidden = true; done = false; held = false; v.currentTime = 0; start(); });
       if (still.matches && btn) btn.hidden = false;
+      /* click / Space / Enter pauses and resumes mid-play */
+      const toggle = () => {
+        if (done) return;
+        if (v.paused) { held = false; clearTimeout(timer); timer = null; start(); }
+        else { held = true; v.pause(); }
+      };
+      v.addEventListener('click', toggle);
+      v.addEventListener('keydown', e => {
+        if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); }
+      });
     });
   })();
 </script>
+<script>
+  /* Merlin: interactive user journey. Content transcribed from the team's
+     journey map; the landscape is traced from the map's own curves. */
+  (() => {
+    const root = document.getElementById('uj');
+    if (!root) return;
+    const UJ = [
+  { n: '01', title: 'Morning Meeting',
+    feel: [['calm', 'Calm', "Maintaining a steady mental map of the team's activity and upcoming deadlines."]],
+    risk: [['Deadline Compression Risk', 'Clustered 1200 and 1300 deadlines for the NSC and Navy create intense pressure that can compromise analytic rigor during the final release.']],
+    wf: [
+      ['urg', 'Aisha attends a virtual briefing for an overnight Zendia report flagged as high priority.'],
+      ['auth', 'Her senior reporting authority assigns her to be the releaser for the report.'],
+      ['jud', 'As the report is being drafted, she starts preparing her foresights, working through the scope of the report’s analytical intent.'],
+      ['jud', 'She considers who should know about this information and whether there are potentially actionable outcomes.'],
+      ['exp', 'Aisha begins forecasting appropriate distribution channels and tier release order.']],
+    tp: [
+      ['urg', 'Virtual Briefing Platform', 'The meeting focuses on “scoping” the analytic intent to rapidly align the team.'],
+      ['auth', 'Senior Reporting Authority', 'Aisha’s boss, who organizes the workflow ahead and assigns roles to each analyst.'],
+      ['urg', 'Haven Workflow Software', 'Aisha monitors her workflow software for red “priority release” labels and urgency arrows, and her inbox for “hot items”.'],
+      ['jud', 'ODNI Analytic Integrity Standards', 'AIS are established principles required to be followed during intelligence reporting.'],
+      ['exp', 'Customer Distribution Lists', 'Based on the meeting, she reviews which customers need this information and looks for any external coordination.']],
+    pains: ['Aisha is forecasting consequences, predicting exposure risk, and thinking through impact with incomplete information.',
+            'Her current system lacks visibility into connections with past data and reports and has no structured foresight tools, so she does high-level modeling in her head, leading to cognitive strain.'],
+    keyPain: false,
+    gains: ['Early foresight into the situation lets Aisha mentally prepare for these high-stakes decisions and proactively begin structuring her dissemination strategy.',
+            'This gives her time to identify customer groups that can act on the information and prioritize their release, so the customer can begin to mitigate consequences.'],
+    opp: [
+      ['jud', 'Brief Auto Transfer', 'Key decisions from the morning briefing automatically populate Aisha’s workspace, including priority level, analytical intent, known consumers, and external coordination requirements.'],
+      ['exp', 'Tier Classification Visualization', 'Based on classification, priority, and context, the system generates a visual tier layout that displays likely audiences and sanitization requirements, helping Aisha build her own understanding and gather information.']] },
+
+  { n: '02', title: 'High Priority Report Arrives',
+    feel: [['guard', 'On Guard', 'Systematic focus while scanning for technical errors and source protection.']],
+    risk: [['Cross-Audience Complexity Risk', 'Managing five intelligence tiers for diverse audiences risks sensitive secrets being accidentally included in broader, less-cleared reports.']],
+    wf: [
+      ['vig', 'Aisha receives and opens the edited report on her main monitor, and the underlying source traffic on her secondary monitor.'],
+      ['val', 'She reads from the top down, making sure the “bottom line up front” covers the analytic intent and the customer’s expected scope.'],
+      ['val', 'As Aisha goes through the report, she opens each cited source, checking names, dates and technical details to confirm the claims reflect the raw data accurately.'],
+      ['exp', 'On each tier she checks the overall classification to ensure it aligns with Analytic Integrity Standards.'],
+      ['exp', 'Line by line, Aisha reviews portion markings and verifies the words justify the assigned classification level.']],
+    tp: [
+      ['vig', 'The Dual Monitor', 'Aisha has the draft report on one monitor and the raw source data on another to conduct analytic verification.'],
+      ['val', 'BLUF', 'Title and intent summary. Aisha ensures it captures the most critical information and answers the “so what” for the customer.'],
+      ['exp', 'Portion Markings', 'Sentence-level classification labels applied within a report that indicate the sensitivity of each statement.'],
+      ['val', 'Ancillary Tabs', 'Metadata fields including identity links, source attachments, locations, Information Needs, and distribution tags.'],
+      ['exp', 'Tiered Report Drafts', 'Aisha pulls different report tiers beside each other so she can manually compare them.']],
+    pains: ['Aisha must continuously cross-reference draft language and the raw sources to ensure validity and that the original analytical intent is preserved across tiers.',
+            'Aisha must manually check every classification marking and its justification, with limited system-level validation support.'],
+    keyPain: true,
+    gains: ['This rigorous validation of technical details and source protection strengthens analytic integrity and the report’s evidentiary foundations.',
+            'Enforcing classification and aligning the distribution list with document sensitivity ensures defensible dissemination and protects institutional credibility.'],
+    opp: [
+      ['val', 'Intelligent Source to Intent Alignment', 'The system links report sentences to their cited source material and highlights mismatched phrasing, overstated certainty, missing citations, and unsupported claims.'],
+      ['exp', 'Tier Classification Visualization', 'The layout displays portion-marker density across the tiers, flags inconsistent classifications, and highlights language that does not seem justified by its assigned portion.']] },
+
+  { n: '03', title: 'Misalignment Found',
+    feel: [['frus', 'Frustrated', 'Annoyed that a simple wording issue requires another round of back-and-forth review.']],
+    risk: [['Policy Ambiguity Risk', 'Vague guidance on “gray-zone” reporting requires slow, case-by-case consultation that stalls the timeline.'],
+           ['Information Overload Propagation Risk', 'Contradictory intelligence streams lead to unresolved ambiguities that can confuse the final consumer if not caught by the releaser.']],
+    wf: [
+      ['exp', 'During her review she finds a sentence whose wording indirectly reveals classified source information.'],
+      ['auth', 'Aisha inserts an annotation identifying the exact sentence with the misalignment.'],
+      ['exp', 'She cites the relevant classification guide and specifies that further sanitization of the wording is needed.'],
+      ['auth', 'She marks the report “Revision Required” and sends it back through the workflow system to the editor.']],
+    tp: [
+      ['exp', 'RAD Annotation Tool', 'Aisha highlights specific text blocks within RAD to leave memorialized comments.'],
+      ['auth', 'Haven Team Software', 'Aisha moves the report from “Release” back to “Edit/Draft” in the workflow system, formally triggering a revision cycle.'],
+      ['auth', 'Report Editor', 'The quality gatekeeper, ensuring reports are accurate, clear, and compliant before they reach the release stage.']],
+    pains: ['Ensuring adherence to policy and analytical standards carries a high cognitive load and relies heavily on experience, especially because policy information is not centralized.',
+            'Aisha manages multiple tier drafts while searching for issues, which creates high-accountability labor: she is the report’s “last eyes”.'],
+    keyPain: true,
+    gains: ['By detecting an indirect source revelation before dissemination, Aisha protects classified collection methods and the agency’s reputation.',
+            'Policy-grounded feedback creates a mentoring moment that helps junior reporters learn and strengthens the team’s reporting rigor.'],
+    opp: [
+      ['auth', 'Contextual Policy Layer', 'When Aisha flags problematic wording, the system surfaces the relevant classification rule inline, briefly explains the constraint, and suggests compliant phrasing.'],
+      ['exp', 'Language Risk Flagging', 'The system subtly highlights language patterns that could signal an exposure risk, such as technical identifiers, specific timings, clustered specifics, and descriptors.']] },
+
+  { n: '04', title: 'Agency Coordination is Required',
+    feel: [['guard', 'On Guard', 'High-alert monitoring to ensure sensitive foreign cooperation remains protected.'],
+           ['frus', 'Frustrated', 'Resignation to non-negotiable delays that conflict with customer urgency.']],
+    risk: [['Cognitive Drafting Strain', 'Struggling to keep separate focus across five tiers at once increases the chance of sensitive technical details “leaking” between versions.']],
+    wf: [
+      ['exp', 'Aisha recognizes that the report references cooperation between two foreign agencies. She knows this triggers an equity check.'],
+      ['auth', 'She identifies the relevant foreign stakeholders and sends secure coordination emails.'],
+      ['urg', 'She knows this will add hours to the timeline, but it is non-negotiable.'],
+      ['auth', 'Aisha calls any customers who have flagged this topic as urgent enough to warrant a preliminary notification.'],
+      ['vig', 'The report is now in revision, so she keeps track of the coordination process in her head while monitoring her inbox for a response.']],
+    tp: [
+      ['auth', 'Email Inbox', 'Aisha manages communication and sends documentation through her email inbox.'],
+      ['exp', 'Equity Stakeholders', 'External data owners who hold “equity” in the information being disseminated.'],
+      ['auth', 'Office Phone', 'Aisha prefers to call customers to explain situations and deadline changes, always choosing accuracy over speed.'],
+      ['auth', 'Internal Stakeholders', 'Regional and mission-adjacent organizations, and subject matter experts, that need structural alignment.']],
+    pains: ['Outside-agency coordination is not systematically integrated, so Aisha must manually initiate it and watch for email responses, adding risk to already delayed reports.',
+            'Any edits from cooperation feedback must be made by hand across every report tier.'],
+    keyPain: true,
+    gains: ['Inter-agency transparency on complex foreign cooperation data strengthens institutional credibility and upholds the standard of “accuracy over urgency”.',
+            'External coordination may surface additional data or perspectives, leading to more complete and defensible reporting.'],
+    opp: [
+      ['vig', 'Coordination Prompt', 'When a new report comes in, the system detects outside stakeholders who need an equity check and automatically prompts the coordination email.'],
+      ['auth', 'Delay Communication Prompt', 'When a report is delayed, the system drafts a structured email that explains the reason and keeps appropriate urgency framing for notifying customers.']] },
+
+  { n: '05', title: 'Inquiry about Report Timeline',
+    feel: [['calm', 'Calm', 'Routine multitasking while giving clear status updates to junior staff.']],
+    risk: [['Semantic Tier Drift', 'Inconsistent confidence language across tiers risks changing the “directional meaning” of the original analytic judgment for different audiences.']],
+    wf: [
+      ['vig', 'Aisha receives an inquiry from an intelligence analyst asking why the Zendia report has not yet been released.'],
+      ['vig', 'She checks the workflow system and verifies it is still in the revision phase.'],
+      ['auth', 'She explains the delay to the analyst in a way that helps them understand it for future reports.'],
+      ['jud', 'Aisha assesses the potential impacts of the delay and considers her options.'],
+      ['urg', 'Three more reports arrive in her inbox, and she adjusts her schedule accordingly.']],
+    tp: [
+      ['vig', 'Analyst Messaging Platform', 'A real-time internal channel for short exchanges between analysts and releasers.'],
+      ['auth', 'Junior Intelligence Analyst', 'An early-career analyst who focuses on gathering information and the initial structuring of intelligence reports.'],
+      ['vig', 'Haven Team Software', 'Aisha can view the whole team’s workflow to see what each member is currently working on.'],
+      ['urg', 'RAD Report Flagging', 'The report now carries a red label, meaning it has the highest priority for release.']],
+    pains: ['Incoming inquiries and new reports keep shifting her attention, fragmenting her thinking and increasing triage pressure.',
+            'The workflow system does not show specific delay reasons, so Aisha becomes the point of contact for explaining delays.'],
+    keyPain: false,
+    gains: ['Policy-grounded feedback creates a mentoring moment that helps junior reporters learn and strengthens the team’s reporting rigor.',
+            'Team communication builds rapport and sheds light on future team needs, creating clarity and adaptive responses.'],
+    opp: [
+      ['vig', 'Inquiry Integration', 'When a new inquiry arrives, the system assembles a status snapshot of the relevant information, so Aisha doesn’t have to mentally switch tasks.'],
+      ['urg', 'Priority Workflow Reordering', 'When new reports enter Aisha’s inbox, the system tags and reorders her current workflow by mission impact, deadlines, and dependencies.']] },
+
+  { n: '06', title: 'Update to a Dissemination Scope',
+    feel: [['conf', 'Confident', 'Decisive mastery, using deep access knowledge to enable the mission.']],
+    risk: [['Access Mismatch Risk', 'Senior leaders lacking clearance for the most sensitive tiers means critical strategic insights can stay siloed or be misunderstood.']],
+    wf: [
+      ['vig', 'Aisha receives a request from a customer representative asking whether distribution of last week’s report can be expanded.'],
+      ['jud', 'She identifies the nature of the request, weighs considerations for the new working group, and assesses whether the expansion is time-sensitive.'],
+      ['exp', 'Aisha checks the original classification levels and source protection constraints, looking for any caveats that would limit the expansion.'],
+      ['exp', 'She determines the expansion is permissible and performs a full manual audit to make sure no sensitive data is leaked.'],
+      ['auth', 'She documents the changes in the system and updates the distribution list.']],
+    tp: [
+      ['vig', 'Customer Request Portal', 'Aisha receives the request through a formal IC portal used for dissemination permissions and classification downgrades.'],
+      ['exp', 'Report Records', 'Aisha opens the original report to verify its classification levels and sourcing restrictions.'],
+      ['jud', 'Audit Trail Entries', 'Aisha records the justification for the expansion in the dissemination system for future traceability.'],
+      ['exp', 'Policy Reference Documents', 'Aisha cross-references governing policy to resolve any doubt about whether the expansion is permissible.'],
+      ['exp', 'Customer Distribution Lists', 'Aisha updates the dissemination fields in the system so the new working group gains access.']],
+    pains: ['Expanding distribution requires manual edits across separate tier drafts, adding cognitive strain and the risk of out-of-sync versions or pasting errors.',
+            'Complex downgrade and dissemination rules require time-consuming searches through scattered policy documents.'],
+    keyPain: false,
+    gains: ['Expanding a report’s distribution lets critical stakeholders keep using and acting on critical information.',
+            'The “Copy Report” shortcut preserves the report’s externals, so Aisha can focus on sanitizing content rather than rebuilding metadata.'],
+    opp: [
+      ['jud', 'New Customer Risk Panel', 'A panel profiles the new audience: access level, historical handling patterns, and known caveats on similar reports, so she can assess the request.'],
+      ['exp', 'Automated Tier Sanitation', 'When distribution expands, the system highlights previously sanitized language and sensitive sections for the new group’s classification, with suggested rewording.']] },
+
+  { n: '07', title: 'Finalized Release Authorization',
+    feel: [['press', 'Intense Pressure', 'Intense pressure to authorize products with major operational implications.'],
+           ['guard', 'On Guard', 'Analytical tension during difficult risk assessments about cyber source protection.']],
+    risk: [['Over-Distribution Exposure', 'Placing “ongoing intelligence collection at risk” by exposing sensitive technical information.']],
+    wf: [
+      ['vig', 'Aisha receives the edited Zendia report back and checks her inbox to confirm the coordination responses.'],
+      ['val', 'She begins her full audit again, starting with the memorialized information, to make sure the earlier issue was resolved.'],
+      ['jud', 'Aisha models the consequences of over-dissemination and sets acceptable exposure thresholds.'],
+      ['jud', 'She weighs access, fidelity, and operational risk across multiple products, adjusting the framing where needed.'],
+      ['exp', 'She sees that some intended senior consumers lack access to the most sensitive portions and adjusts the tier distribution list.'],
+      ['auth', 'Once everything has been checked, tagged appropriately, and secured, Aisha disseminates the final report.']],
+    tp: [
+      ['vig', 'Email Inbox', 'Aisha checks her email for final equity clearances before returning to the report in RAD.'],
+      ['val', 'Memorialized Information Panel', 'Aisha reviews her earlier annotations to verify the original issue was fully resolved.'],
+      ['val', '5 Whys', 'Aisha runs the five “why” questions against the report to make sure the bottom line and core facts stay intact.'],
+      ['val', 'ICD 203 Standards', 'Standardized confidence language Aisha checks against during her audit to rule out bias or semantic drift.'],
+      ['auth', 'RAD System Release', 'Once everything is correct, Aisha disseminates the report through RAD.']],
+    pains: ['Re-evaluating the original classification against new distribution needs is manual work, and there is currently no way to see the changes made between revisions.',
+            'Aisha must weigh many thresholds and impact variables, creating heavy executive strain before dissemination.'],
+    keyPain: true,
+    gains: ['Successful dissemination enables downstream action, reinforcing the organization’s role in mitigating risk and strengthening national security outcomes.',
+            'The professional fulfillment of clearing actionable intelligence for release and helping her customers.'],
+    opp: [
+      ['val', 'Edit Visibility and Resolution', 'The system highlights changes made in the last edit and confirms whether the exact exposure concern was fixed, including updated portion markings and wording.'],
+      ['jud', 'Distribution Impact Simulator', 'Before final release, the tier view simulates dissemination scope across products, showing exposure thresholds, access mismatches, and the projected impact of widening or narrowing tiers.']] },
+
+  { n: '08', title: 'Seeking Policy Clarification',
+    feel: [['guard', 'On Guard', 'Active alertness while navigating “incomplete guidance” to prevent method exposure.'],
+           ['conf', 'Confident', 'Collaborative logic-checking with her senior reporting authority to solve complex gray-area problems.']],
+    risk: [],
+    wf: [
+      ['jud', 'While finalizing another report, Aisha recognizes a potential gray zone.'],
+      ['jud', 'Details of the report have been publicly corroborated, but the internal source is still classified, so the tier language is ambiguous.'],
+      ['exp', 'She pulls up the relevant analytic integrity standards, the original source protection protocols, and office-level operating procedures.'],
+      ['jud', 'She brings them to her senior reporting authority, and together they weigh the options and risks, referring to past release decisions for guidance.'],
+      ['jud', 'Knowing it’s best to err on the side of caution, they release the information with controlled attribution.'],
+      ['auth', 'Aisha updates the wording and documents their rationale for release.']],
+    tp: [
+      ['exp', 'Standard Operating Procedures', 'Formal office-level instructions that define the required steps and rules for specific tasks.'],
+      ['exp', 'Source Protection Protocols', 'Safeguards that govern how intelligence sources, methods, and sensitive capabilities must be described, masked, or withheld.'],
+      ['exp', 'Report Archives', 'Aisha reviews past release decisions and similar cases to find precedents.'],
+      ['jud', 'Senior Reporting Authority', 'Aisha turns to her reporting authority for guidance on decisions she feels unsure about.']],
+    pains: ['Finding all the relevant policies, guidelines, and past reports is a hassle because they live in different places.',
+            'Working through ambiguous areas is stressful: there may be no concrete answer, yet there is real responsibility and risk if the best one isn’t chosen.'],
+    keyPain: false,
+    gains: ['These situations allow calibrated solutions rather than rigid formal standards, and working with a senior reporting authority builds valuable experience.',
+            'Gray zones sharpen analytic judgment, and over time documented rationale becomes precedent, reducing future ambiguity.'],
+    opp: [
+      ['exp', 'Integrated Policy Panel', 'When Aisha hits a gray area, the system pulls the relevant standards, source protection protocols, office procedures, and precedents into one document.'],
+      ['auth', 'Integrated Reasoning Tagging', 'Aisha highlights the policy, precedents, and reasoning behind her decision; the system builds a rationale document and tags it to the report as an information trail.']] },
+
+  { n: '09', title: 'Continuous Queue Monitoring',
+    feel: [['guard', 'On Guard', 'Vigilant readiness for the “inevitable” arrival of the next high-priority task.'],
+           ['calm', 'Calm', 'Keeping a proactive, composed overview of the reporting lifecycle.']],
+    risk: [],
+    wf: [
+      ['vig', 'Aisha continuously monitors her inbox queue for the next high-priority report.'],
+      ['vig', 'She watches for priority indicators and stays ready to pivot her current workflow immediately.'],
+      ['urg', 'Throughout the day she keeps a mental map of activity across teams, preparing for incoming reports and managing approaching deadlines.'],
+      ['urg', 'When a new report arrives, Aisha does a rapid check of its state and information needs.'],
+      ['vig', 'She is often switching tasks and allocating her attention on the fly.'],
+      [null, 'By afternoon she has cleared four reports for release, coordinated two disseminations with partner agencies, and fielded multiple questions about release timelines.']],
+    tp: [
+      ['vig', 'Haven Team Dashboard', 'A bird’s-eye view of reports across lifecycle phases (Draft, Tech Review, Coordination) to anticipate workload shifts.'],
+      ['urg', 'RAD Visual Priority Indicators', 'Aisha watches the red “priority release” labels and urgency arrows to re-sequence her work through the day.'],
+      ['vig', 'Push-to-Tasker Function', 'Turns urgent email items into structured workflow tasks in the management system.']],
+    pains: ['Aisha can view the full team’s report workflows, but there is no individual task prioritization or personal workflow customization.',
+            'Working in a fragmented system and switching between shifting high-priority items creates chronic cognitive fatigue.'],
+    keyPain: true,
+    gains: ['A “ready” posture for high-impact decisions under pressure lets her jump into urgent tasks as they come.',
+            'Clearing her work brings Aisha professional satisfaction, and it has a large downstream effect that helps the intelligence community stay active and mitigate risk.'],
+    opp: [
+      ['urg', 'Priority Radar', 'A tool that continuously visualizes incoming report signals, approaching deadlines, team drafting activity, and likely high-priority triggers, so she doesn’t have to keep checking her inbox.'],
+      ['vig', 'Entry Task Generator', 'As new priorities arrive, the system generates entry tasks that orient her, reducing the vigilance needed to keep switching tasks.']] }
+];
+
+    const PROC = {
+      urg:  ['Urgency Triage', '#3349b3'],
+      val:  ['Analytical Validation', '#5a6fd6'],
+      jud:  ['Strategic Judgment', '#24316a'],
+      exp:  ['Exposure Compliance', '#101a42'],
+      auth: ['Institutional Authority', '#7d8fe3'],
+      vig:  ['Vigilance and Entry', '#2a3c96']
+    };
+    const FEEL = { calm: '#009689', guard: '#7a7a7a', frus: '#d9b77f', conf: '#006dff', press: '#c02020' };
+    const TOPS = [73.2, 95.8, 129.8, 151.4, 104.8, 81.2, 129.4, 40.3, 33.2];   /* feelings curve height at each scenario, of 240 */
+    const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const tag = p => p ? `<span class="uj-tag" style="--c:${PROC[p][1]}">${PROC[p][0]}</span>` : '';
+    let cur = 0, tab = 'wf', proc = null;
+
+    /* landscape markers */
+    const land = root.querySelector('.uj-land');
+    UJ.forEach((s, i) => {
+      s.feel.forEach((f, j) => {
+        const d = document.createElement('span');
+        d.className = 'uj-dot';
+        const off = (j - (s.feel.length - 1) / 2) * 18;
+        d.style.cssText = `--c:${FEEL[f[0]]}; left: calc(${(i * 100 + 50) / 9}% + ${off}px); top: ${TOPS[i] / 240 * 100}%`;
+        land.appendChild(d);
+      });
+      s.risk.forEach((r, j) => {
+        const d = document.createElement('span');
+        d.className = 'uj-risk';
+        d.style.left = `calc(${(i * 100 + 50) / 9}% + ${(j - (s.risk.length - 1) / 2) * 16}px)`;
+        land.appendChild(d);
+      });
+    });
+
+    /* process chips */
+    const filter = root.querySelector('.uj-filter');
+    Object.entries(PROC).forEach(([k, [name, c]]) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'uj-chip'; b.style.setProperty('--c', c);
+      b.textContent = name; b.dataset.p = k; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => { proc = proc === k ? null : k; paint(); });
+      filter.appendChild(b);
+    });
+
+    /* scenario selector */
+    const steps = root.querySelector('.uj-steps');
+    UJ.forEach((s, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'uj-step'; b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', `Scenario ${s.n}: ${s.title}`);
+      b.innerHTML = `<span class="uj-step-n">${s.n}</span><span class="uj-step-t">${esc(s.title)}</span><span class="uj-count" hidden></span>`;
+      b.addEventListener('click', () => { cur = i; paint(); });
+      b.addEventListener('keydown', e => {
+        const k = { ArrowRight: 1, ArrowLeft: -1, Home: -99, End: 99 }[e.key];
+        if (k === undefined) return;
+        e.preventDefault();
+        cur = Math.max(0, Math.min(8, k === 99 ? 8 : k === -99 ? 0 : cur + k));
+        paint(); steps.children[cur].focus();
+      });
+      steps.appendChild(b);
+    });
+    root.querySelectorAll('.uj-nav').forEach(b => b.addEventListener('click', () => {
+      cur = Math.max(0, Math.min(8, cur + +b.dataset.d)); paint();
+    }));
+
+    /* layer tabs */
+    const tabs = [...root.querySelectorAll('.uj-tab')];
+    tabs.forEach((b, i) => {
+      b.addEventListener('click', () => { tab = b.dataset.t; paint(true); });
+      b.addEventListener('keydown', e => {
+        const k = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+        if (!k) return;
+        e.preventDefault();
+        const n = tabs[(i + k + tabs.length) % tabs.length];
+        tab = n.dataset.t; paint(true); n.focus();
+      });
+    });
+
+    const count = s => !proc ? 0 :
+      [...s.wf, ...s.tp, ...s.opp].filter(x => x[0] === proc).length;
+
+    function body(s) {
+      const m = p => `data-p="${p || ''}" class="${proc && p === proc ? 'is-match' : ''}"`;
+      if (tab === 'wf') return `<ol class="uj-flow">${s.wf.map(([p, t]) =>
+        `<li ${m(p)}><p>${esc(t)}</p>${tag(p)}</li>`).join('')}</ol>`;
+      if (tab === 'tp') return `<div class="uj-grid">${s.tp.map(([p, h, t]) =>
+        `<div ${m(p)} style="--c:${PROC[p][1]}"><div class="uj-card"  style="--c:${PROC[p][1]}"><b>${esc(h)}</b><p>${esc(t)}</p>${tag(p)}</div></div>`).join('')}</div>`;
+      if (tab === 'opp') return `<div class="uj-grid">${s.opp.map(([p, h, t]) =>
+        `<div ${m(p)}><div class="uj-card uj-opp" style="--c:${PROC[p][1]}"><b>${esc(h)}</b><p>${esc(t)}</p>${tag(p)}</div></div>`).join('')}</div>`;
+      return `<div class="uj-pg">
+        <div><h5 class="uj-h5" style="--c:#b8323e">Pains</h5><ul>${s.pains.map((t, j) =>
+          `<li class="${j === 0 && s.keyPain ? 'is-key' : ''}"><p>${esc(t)}</p></li>`).join('')}</ul></div>
+        <div><h5 class="uj-h5" style="--c:#009689">Gains</h5><ul>${s.gains.map(t =>
+          `<li><p>${esc(t)}</p></li>`).join('')}</ul></div></div>`;
+    }
+
+    const $ = q => root.querySelector(q);
+    function paint(tabOnly) {
+      const s = UJ[cur];
+      root.classList.toggle('is-filtered', !!proc);
+      filter.querySelectorAll('.uj-chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.p === proc)));
+      [...steps.children].forEach((b, i) => {
+        const on = i === cur;
+        b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1;
+        const c = b.querySelector('.uj-count'), n = count(UJ[i]);
+        c.hidden = !proc || !n; c.textContent = n;
+        if (proc) c.style.setProperty('--c', PROC[proc][1]);
+        b.classList.toggle('is-zero', !!proc && !n);
+      });
+      $('.uj-col-hl').style.left = `${cur / 9 * 100}%`;
+      $('.uj-kicker').textContent = `Scenario ${s.n} of 09`;
+      $('.uj-title').textContent = s.title;
+      $('.uj-nav[data-d="-1"]').disabled = cur === 0;
+      $('.uj-nav[data-d="1"]').disabled = cur === 8;
+      $('.uj-feels').innerHTML = s.feel.map(([k, n, t]) =>
+        `<div class="uj-feel" style="--c:${FEEL[k]}"><b>${n}</b><p>${esc(t)}</p></div>`).join('');
+      $('.uj-risks').innerHTML = s.risk.length ? s.risk.map(([n, t]) =>
+        `<div class="uj-riskitem"><b>${esc(n)}</b><p>${esc(t)}</p></div>`).join('')
+        : '<p class="uj-none">No major risk flagged in this scenario.</p>';
+      tabs.forEach(b => { const on = b.dataset.t === tab; b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; });
+      const bd = $('.uj-body');
+      bd.innerHTML = body(s);
+      bd.classList.remove('is-in'); void bd.offsetWidth; bd.classList.add('is-in');
+    }
+    paint();
+  })();
+</script>
+</body></html>
