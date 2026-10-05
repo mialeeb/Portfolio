@@ -1368,7 +1368,7 @@
   .mx-turing { margin-top: clamp(40px, 6vw, 84px); align-items: center; }
   :is(#view-merlin) p.mx-cite { font-size: var(--t-small); color: var(--p-muted); }
   .mx-num {
-    font-family: var(--font-display); font-weight: 700; font-size: clamp(1.9rem, 3vw, 2.4rem);
+    font-family: var(--font-display); font-weight: 700; font-size: var(--t-h2);
     line-height: 1; letter-spacing: -0.02em; color: var(--p-accent); align-self: end;
   }
   .bf-band .mx-num { color: #8fa2ff; }
@@ -1410,13 +1410,13 @@
   .uj-chip {
     display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 14px;
     border: 1px solid var(--uj-line); border-radius: 999px; background: var(--paper); color: var(--p-ink);
-    font: 500 var(--t-label-sm)/1 var(--font-body); cursor: pointer;
+    font: var(--w-label) var(--t-label-sm)/1 var(--font-label); letter-spacing: var(--ls-label); cursor: pointer;
   }
   .uj-chip::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--c); flex: none; }
   .uj-chip:hover { border-color: var(--c); }
   .uj-chip[aria-pressed="true"] { background: color-mix(in srgb, var(--c) 16%, var(--paper)); border-color: var(--c); box-shadow: inset 0 0 0 1px var(--c); font-weight: 700; }
 
-  .uj-map { position: relative; border: 1px solid var(--uj-line); border-radius: 14px; overflow: hidden; background: var(--paper); }
+  .uj-map { position: relative; border: 1px solid var(--uj-line); border-radius: 10px; overflow: hidden; background: var(--paper); }
   /* the day: nine columns of blocks, one block per workflow step */
   .uj-day { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); padding: clamp(10px, 1.4vw, 16px) 0; }
   .uj-daycol { display: flex; flex-direction: column; gap: 4px; padding: 0 clamp(4px, 0.7vw, 10px); border-left: 1px solid var(--uj-line); cursor: pointer; }
@@ -1437,19 +1437,19 @@
   .uj-step:first-child { border-left: 0; }
   .uj-step:hover { background: var(--p-highlight); }
   .uj-step[aria-selected="true"] { background: var(--p-band); color: var(--p-band-ink); }
-  .uj-step-n { font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 0.02em; }
-  .uj-step-t { font-size: 12.5px; line-height: 1.3; opacity: 0.85; }
+  .uj-step-n { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label); letter-spacing: var(--ls-label); }
+  .uj-step-t { font-size: var(--t-label-sm); line-height: 1.35; opacity: 0.85; }
   .uj-count { position: absolute; top: 8px; right: 8px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 10px; background: var(--paper); color: var(--p-ink); box-shadow: inset 0 0 0 2px var(--c, var(--p-accent)); font: 700 11px/20px var(--font-body); text-align: center; }
   .uj.is-filtered .uj-step.is-zero { opacity: 0.4; }
   .uj-step:focus-visible, .uj-tab:focus-visible, .uj-chip:focus-visible, .uj-nav:focus-visible { outline: 2px solid var(--p-accent); outline-offset: -2px; }
   @media (max-width: 899px) { .uj-step-t { display: none; } .uj-step { justify-items: center; padding-inline: 2px; } .uj-count { position: static; } }
 
-  .uj-panel { margin-top: clamp(16px, 2vw, 24px); border: 1px solid var(--uj-line); border-radius: 14px; background: var(--paper); padding: clamp(18px, 2.6vw, 36px); }
+  .uj-panel { margin-top: clamp(16px, 2vw, 24px); border: 1px solid var(--uj-line); border-radius: 10px; background: var(--paper); padding: clamp(18px, 2.6vw, 36px); }
   .uj-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
   .uj-kicker { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
-  .uj-title { margin: 6px 0 0; font-family: var(--font-display); font-weight: 700; font-size: var(--t-h3); line-height: 1.15; letter-spacing: -0.01em; color: var(--p-ink); }
+  .uj-title { margin: 6px 0 0; font-family: var(--font-display); font-weight: var(--f-sub-weight); font-size: var(--f-sub); line-height: 1.2; letter-spacing: var(--f-sub-track); color: var(--p-ink); }
   .uj-navs { display: flex; gap: 6px; flex: none; }
-  .uj-nav { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--uj-line); background: var(--paper); color: var(--p-ink); font-size: 18px; cursor: pointer; }
+  .uj-nav { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--uj-line); background: var(--paper); color: var(--p-ink); font: var(--t-body)/1 var(--font-body); cursor: pointer; }
   .uj-nav:hover:not(:disabled) { background: var(--p-highlight); }
   .uj-nav:disabled { opacity: 0.35; cursor: default; }
 
@@ -1459,8 +1459,8 @@
   .uj-feel + .uj-feel, .uj-riskitem + .uj-riskitem { margin-top: 12px; }
   .uj-feel::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--c); transform: translateY(1px); }
   .uj-riskitem::before { content: ""; width: 9px; height: 9px; margin-left: 1px; background: #b8323e; transform: rotate(45deg); }
-  .uj-feel b, .uj-riskitem b { font-family: var(--font-display); font-weight: 700; color: var(--p-ink); }
-  #view-merlin .uj-feel p, #view-merlin .uj-riskitem p { grid-column: 2; font-size: var(--t-small); line-height: 1.5; color: var(--p-muted); margin-top: 2px; }
+  .uj-feel b, .uj-riskitem b { font-family: var(--font-display); font-weight: var(--f-sub-weight); font-size: var(--f-sub); letter-spacing: var(--f-sub-track); line-height: 1.2; color: var(--p-ink); }
+  #view-merlin .uj-feel p, #view-merlin .uj-riskitem p { grid-column: 2; font-size: var(--t-small); line-height: 1.6; color: var(--p-muted); margin-top: 2px; }
   #view-merlin .uj-none { font-size: var(--t-small); color: var(--p-muted); }
 
   .uj-tabs { display: flex; gap: 4px; margin-top: clamp(18px, 2.4vw, 28px); border-bottom: 1px solid var(--uj-line); overflow-x: auto; scrollbar-width: none; }
@@ -1472,28 +1472,28 @@
   @keyframes uj-in { from { opacity: 0; transform: translateY(4px); } }
   @media (prefers-reduced-motion: reduce) { .uj-body.is-in { animation: none; } }
 
-  .uj-tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-label); font-weight: var(--w-label); font-size: 12px; letter-spacing: 0.03em; color: var(--p-muted); white-space: nowrap; }
+  .uj-tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-muted); white-space: nowrap; }
   .uj-tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
   .uj-flow { list-style: none; margin: 0; padding: 0; counter-reset: uj; display: grid; gap: 0; }
   .uj-flow li { counter-increment: uj; display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 4px 14px; align-items: baseline; padding: 12px 14px 12px 16px; border-bottom: 1px solid var(--uj-line); border-left: 5px solid var(--c); }
   .uj-flow li[data-active] { background: color-mix(in srgb, var(--c) 12%, var(--paper)); }
   .uj-flow li:last-child { border-bottom: 0; }
   .uj-flow li::before { content: counter(uj, decimal-leading-zero); font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--p-accent); }
-  #view-merlin .uj-flow p { font-size: var(--t-body); line-height: 1.55; color: var(--p-ink); }
+  #view-merlin .uj-flow p { font-size: var(--t-body); line-height: var(--lh-body); color: var(--p-ink); }
   .uj-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .uj-card { border: 1px solid var(--uj-line); border-left: 4px solid var(--c); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; align-content: start; }
-  .uj-card b { font-family: var(--font-display); font-weight: 700; color: var(--p-ink); }
-  #view-merlin .uj-card p { font-size: var(--t-small); line-height: 1.5; color: var(--p-muted); }
+  .uj-card b { font-family: var(--font-display); font-weight: var(--f-sub-weight); font-size: var(--f-sub); letter-spacing: var(--f-sub-track); line-height: 1.2; color: var(--p-ink); }
+  #view-merlin .uj-card p { font-size: var(--t-small); line-height: 1.6; color: var(--p-muted); }
   .uj-card .uj-tag { margin-top: 4px; }
   .uj-opp { border-left-width: 1px; border-top: 4px solid var(--c); background: var(--p-highlight); border-color: transparent; border-top-color: var(--c); }
   .uj-opp b { font-size: var(--f-sub); }
-  #view-merlin .uj-opp p { color: var(--p-ink); font-size: var(--t-body); line-height: 1.55; }
+  #view-merlin .uj-opp p { color: var(--p-ink); font-size: var(--t-body); line-height: var(--lh-body); }
   .uj-pg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 32px); }
   .uj-pg ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
   .uj-pg li { padding: 12px 14px; border-radius: 10px; background: #f6f6f8; }
   .uj-pg li.is-key { background: #fbe7ea; }
-  .uj-pg li.is-key::before { content: "Key pain point"; display: block; margin-bottom: 4px; font-family: var(--font-label); font-weight: var(--w-label); font-size: 12px; letter-spacing: 0.04em; color: #9b2c37; }
-  #view-merlin .uj-pg li p { font-size: var(--t-small); line-height: 1.55; color: var(--p-ink); }
+  .uj-pg li.is-key::before { content: "Key pain point"; display: block; margin-bottom: 4px; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: #9b2c37; }
+  #view-merlin .uj-pg li p { font-size: var(--t-small); line-height: 1.6; color: var(--p-ink); }
   .uj-pg .uj-h5 { display: flex; align-items: center; gap: 8px; }
   .uj-pg .uj-h5::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
   .uj.is-filtered .uj-body [data-p]:not(.is-match) { opacity: 0.32; }
@@ -2235,7 +2235,7 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
       <div class="bf-band">
         <h2>Project Launch</h2>
         <p>We began the project by meeting with intelligence analysts, who introduced us to the sanitization and tiered reporting process.</p>
-        <div class="bf-three" style="margin-top: clamp(24px, 3vw, 40px)">
+        <div class="bf-three" style="margin-top: clamp(28px, 4vw, 52px)">
           <div>
             <span class="mx-num" aria-hidden="true">01</span>
             <h3>Ambiguity</h3>
@@ -2258,7 +2258,7 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
     <!-- ---------- ux research: persona ---------- -->
     <section class="bf-sec">
       <h2 class="bf-center">UX Research</h2>
-      <div class="mx-persona">
+      <div class="mx-persona" style="margin-top: var(--f-title-gap)">
         <div class="mx-persona-id">
           <span class="mx-avatar" aria-hidden="true">A</span>
           <div>
@@ -2332,7 +2332,7 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
     <!-- ---------- first sketches ---------- -->
     <section class="bf-sec">
       <h2 class="bf-center">First Sketches</h2>
-      <div class="bf-three" style="margin-top: clamp(24px, 3vw, 40px)">
+      <div class="bf-three" style="margin-top: var(--f-title-gap)">
         <div>
           <span class="mx-num" aria-hidden="true">01</span>
           <h3>Tier Comparison</h3>
@@ -2358,9 +2358,9 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
 
     <!-- ---------- mockups ---------- -->
     <section class="bf-sec">
-      <h2>Building the Proposed Task Analysis</h2>
-      <p class="bf-lede">Using our proposed task analysis, we broke the dashboard into three segments and began creating software mockups.</p>
-      <div class="bf-row three" style="margin-top: clamp(20px, 2.4vw, 32px)">
+      <h2 class="bf-center">Building the Proposed Task Analysis</h2>
+      <p class="bf-lede bf-center">Using our proposed task analysis, we broke the dashboard into three segments and began creating software mockups.</p>
+      <div class="bf-row three" style="margin-top: clamp(28px, 4vw, 52px)">
         <div class="ph" style="--ar: 4 / 3">Segment 1 &middot; 5 frames &mdash; Customer management</div>
         <div class="ph" style="--ar: 4 / 3">Segment 2 &middot; 11 frames &mdash; Report analysis</div>
         <div class="ph" style="--ar: 4 / 3">Segment 3 &middot; 3 frames &mdash; Annotation feedback</div>
