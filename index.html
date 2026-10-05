@@ -1405,7 +1405,6 @@
   .uj { margin-top: clamp(20px, 2.4vw, 32px); --uj-line: var(--p-rule); }
   #view-merlin .uj p { max-width: none; margin: 0; }
   #view-merlin .uj li { max-width: none; margin: 0; font-size: inherit; line-height: inherit; color: inherit; }
-  .uj-step[aria-selected="true"] .uj-count { background: #fff; color: var(--p-band); }
   .uj-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: clamp(14px, 1.6vw, 20px); }
   .uj-filter-label { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-muted); margin-right: 4px; }
   .uj-chip {
@@ -1415,18 +1414,20 @@
   }
   .uj-chip::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--c); flex: none; }
   .uj-chip:hover { border-color: var(--c); }
-  .uj-chip[aria-pressed="true"] { background: var(--c); border-color: var(--c); color: #fff; }
-  .uj-chip[aria-pressed="true"]::before { background: #fff; }
+  .uj-chip[aria-pressed="true"] { background: color-mix(in srgb, var(--c) 16%, var(--paper)); border-color: var(--c); box-shadow: inset 0 0 0 1px var(--c); font-weight: 700; }
 
-  .uj-map { position: relative; border: 1px solid var(--uj-line); border-radius: 14px; overflow: hidden; background: #fbfbfe; }
-  .uj-land { position: relative; height: clamp(150px, 20vw, 240px); }
-  .uj-land svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-  .uj-axis { position: absolute; left: 12px; font-family: var(--font-label); font-weight: var(--w-label); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--p-muted); pointer-events: none; z-index: 2; }
-  .uj-axis.top { top: 10px; } .uj-axis.bot { bottom: 10px; color: #8a3a44; }
-  .uj-col-hl { position: absolute; top: 0; bottom: 0; width: calc(100% / 9); background: rgba(47, 68, 168, 0.08); border-inline: 1px solid rgba(47, 68, 168, 0.35); transition: left 260ms cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; }
-  .uj-dot { position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--c); border: 2px solid #fff; box-shadow: 0 1px 3px rgba(16, 26, 66, 0.25); pointer-events: none; z-index: 1; }
-  .uj-risk { position: absolute; width: 9px; height: 9px; margin-left: -4.5px; bottom: 34px; transform: rotate(45deg); background: #b8323e; pointer-events: none; }
-
+  .uj-map { position: relative; border: 1px solid var(--uj-line); border-radius: 14px; overflow: hidden; background: var(--paper); }
+  /* the day: nine columns of blocks, one block per workflow step */
+  .uj-day { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); padding: clamp(10px, 1.4vw, 16px) 0; }
+  .uj-daycol { display: flex; flex-direction: column; gap: 4px; padding: 0 clamp(4px, 0.7vw, 10px); border-left: 1px solid var(--uj-line); cursor: pointer; }
+  .uj-daycol:first-child { border-left: 0; }
+  .uj-daycol.is-on { background: linear-gradient(var(--p-highlight), var(--p-highlight)) center / 100% calc(100% + 32px) no-repeat; }
+  .uj-block { display: block; height: clamp(16px, 2.2vw, 26px); border-radius: 4px; background: var(--c); transition: opacity 200ms ease, transform 200ms ease, box-shadow 200ms ease; }
+  .uj-daycol:hover .uj-block { transform: scaleX(1.04); }
+  .uj-block.is-step { box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--p-ink); }
+  .uj.is-filtered .uj-block:not(.is-match) { opacity: 0.16; }
+  #view-merlin p.uj-hint { font-size: var(--t-small); color: var(--p-muted); margin-bottom: 12px; }
+  @media (prefers-reduced-motion: reduce) { .uj-block { transition: none; } .uj-daycol:hover .uj-block { transform: none; } }
   .uj-steps { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); border-top: 1px solid var(--uj-line); background: var(--paper); }
   .uj-step {
     position: relative; display: grid; gap: 4px; align-content: start; text-align: left;
@@ -1438,7 +1439,7 @@
   .uj-step[aria-selected="true"] { background: var(--p-band); color: var(--p-band-ink); }
   .uj-step-n { font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 0.02em; }
   .uj-step-t { font-size: 12.5px; line-height: 1.3; opacity: 0.85; }
-  .uj-count { position: absolute; top: 8px; right: 8px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 10px; background: var(--c, var(--p-accent)); color: #fff; font: 700 11px/20px var(--font-body); text-align: center; }
+  .uj-count { position: absolute; top: 8px; right: 8px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 10px; background: var(--paper); color: var(--p-ink); box-shadow: inset 0 0 0 2px var(--c, var(--p-accent)); font: 700 11px/20px var(--font-body); text-align: center; }
   .uj.is-filtered .uj-step.is-zero { opacity: 0.4; }
   .uj-step:focus-visible, .uj-tab:focus-visible, .uj-chip:focus-visible, .uj-nav:focus-visible { outline: 2px solid var(--p-accent); outline-offset: -2px; }
   @media (max-width: 899px) { .uj-step-t { display: none; } .uj-step { justify-items: center; padding-inline: 2px; } .uj-count { position: static; } }
@@ -1469,12 +1470,13 @@
   .uj-body { padding-top: clamp(16px, 2vw, 24px); }
   .uj-body.is-in { animation: uj-in 260ms ease both; }
   @keyframes uj-in { from { opacity: 0; transform: translateY(4px); } }
-  @media (prefers-reduced-motion: reduce) { .uj-body.is-in { animation: none; } .uj-col-hl { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .uj-body.is-in { animation: none; } }
 
   .uj-tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-label); font-weight: var(--w-label); font-size: 12px; letter-spacing: 0.03em; color: var(--p-muted); white-space: nowrap; }
   .uj-tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
   .uj-flow { list-style: none; margin: 0; padding: 0; counter-reset: uj; display: grid; gap: 0; }
-  .uj-flow li { counter-increment: uj; display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 4px 14px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--uj-line); }
+  .uj-flow li { counter-increment: uj; display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 4px 14px; align-items: baseline; padding: 12px 14px 12px 16px; border-bottom: 1px solid var(--uj-line); border-left: 5px solid var(--c); }
+  .uj-flow li[data-active] { background: color-mix(in srgb, var(--c) 12%, var(--paper)); }
   .uj-flow li:last-child { border-bottom: 0; }
   .uj-flow li::before { content: counter(uj, decimal-leading-zero); font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--p-accent); }
   #view-merlin .uj-flow p { font-size: var(--t-body); line-height: 1.55; color: var(--p-ink); }
@@ -1497,21 +1499,18 @@
   .uj.is-filtered .uj-body [data-p]:not(.is-match) { opacity: 0.32; }
   .uj [data-p] { transition: opacity 200ms ease; }
 
-  .uj-foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
-  .uj-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; }
-  .uj-legend .uj-tag::before { width: 10px; height: 10px; }
+  .uj-foot { display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
   .uj-full { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); text-decoration: none; border-bottom: 1px solid currentColor; padding-block: 10px 2px; }
   .uj-full:hover { color: var(--p-ink); }
   @media (max-width: 760px) {
     .uj-state, .uj-grid, .uj-pg { grid-template-columns: minmax(0, 1fr); }
-    .uj-flow li { grid-template-columns: 28px minmax(0, 1fr); }
+    .uj-flow li { grid-template-columns: 28px minmax(0, 1fr); padding-left: 12px; }
     .uj-flow li .uj-tag { grid-column: 2; }
   }
   @media (max-width: 600px) {
     .uj-filter { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-right: calc(-1 * var(--margin)); padding-right: var(--margin); }
     .uj-filter-label { flex: none; }
     .uj-chip { flex: none; }
-    .uj-axis { display: none; }
     .uj-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-bottom: 0; }
     .uj-tab { border-bottom: 1px solid var(--uj-line); margin-bottom: 0; }
     .uj-tab[aria-selected="true"] { border-bottom: 3px solid var(--p-accent); }
@@ -2283,23 +2282,12 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
         <h3 class="bf-feature-sub">User Journey Map</h3>
         <p>From our data, I isolated six daily cognitive processes that Aisha&rsquo;s work demands, and color-coded every step, touchpoint, and design opportunity in the map by the process it draws on.</p>
         <div class="uj" id="uj">
+          <p class="uj-hint">Each block is one step in Aisha&rsquo;s day, colored by the cognitive process it draws on. Select a block or a scenario to explore it.</p>
           <div class="uj-filter" role="group" aria-label="Highlight one cognitive process across the journey">
             <span class="uj-filter-label">Highlight a process</span>
           </div>
           <div class="uj-map">
-            <div class="uj-land" aria-hidden="true">
-              <svg viewBox="0 0 900 240" preserveAspectRatio="none">
-                <path d="M0.0,73.0 L0.8,73.0 L8.3,73.0 L15.8,73.0 L23.2,73.0 L30.7,73.0 L38.2,73.0 L45.6,73.0 L53.1,73.5 L60.6,74.6 L68.0,76.3 L75.5,78.7 L83.0,81.7 L90.5,85.3 L97.9,88.2 L105.2,90.2 L112.7,91.8 L120.1,93.2 L127.6,94.3 L135.1,81.5 L142.6,82.0 L150.1,88.1 L157.5,95.8 L165.0,95.8 L172.5,95.8 L180.0,95.8 L187.4,95.8 L194.9,97.6 L202.2,103.4 L209.7,113.7 L217.1,125.2 L224.6,134.6 L232.1,141.5 L239.6,146.0 L247.0,134.8 L254.5,135.8 L262.0,136.4 L269.5,150.5 L276.9,150.9 L284.4,151.2 L291.9,151.5 L299.4,151.5 L306.6,151.6 L314.1,151.6 L321.6,151.6 L329.1,151.6 L336.6,151.6 L344.0,151.5 L351.5,151.2 L359.0,150.2 L366.5,148.5 L373.9,146.1 L381.4,143.0 L388.9,139.1 L396.4,133.4 L403.6,126.4 L411.1,119.6 L418.6,114.2 L426.1,110.0 L433.5,107.1 L441.0,105.4 L448.5,104.8 L456.0,105.0 L463.4,105.5 L470.9,106.3 L478.4,107.3 L485.9,108.6 L493.4,110.1 L500.6,111.0 L508.1,110.6 L515.6,108.7 L523.1,105.5 L530.5,101.1 L538.0,95.0 L545.5,87.1 L553.0,78.7 L560.4,71.9 L567.9,67.5 L575.4,65.0 L582.9,63.8 L590.3,64.2 L597.8,67.9 L605.1,76.7 L612.6,88.5 L620.0,100.9 L627.5,111.5 L635.0,120.2 L642.5,126.2 L649.9,128.9 L657.4,126.2 L664.9,117.5 L672.4,106.5 L679.9,98.1 L687.3,93.1 L694.8,90.7 L702.1,88.0 L709.6,81.4 L717.0,70.4 L724.5,55.0 L732.0,45.5 L739.5,43.5 L746.9,40.9 L754.4,39.9 L761.9,40.1 L769.4,41.0 L776.8,42.7 L784.3,44.9 L791.8,48.0 L799.3,52.1 L806.5,56.0 L814.0,57.6 L821.5,56.5 L829.0,49.4 L836.4,40.7 L843.9,36.2 L851.4,31.4 L858.9,27.1 L866.4,24.3 L873.8,23.2 L881.3,23.2 L888.8,24.2 L896.3,25.4 L900.0,25.4 L900,240 L0,240 Z" fill="#dfe3f5"/>
-                <path d="M0.0,151.2 L0.8,151.2 L8.3,151.2 L15.8,151.2 L23.2,151.2 L30.7,151.2 L38.2,151.2 L45.6,151.3 L53.1,151.5 L60.6,152.1 L68.0,153.1 L75.5,154.4 L83.0,156.0 L90.5,157.8 L97.9,158.3 L105.2,157.3 L112.7,155.8 L120.1,154.5 L127.6,153.5 L135.1,152.8 L142.6,152.4 L150.1,152.3 L157.5,152.7 L165.0,153.5 L172.5,154.7 L180.0,156.4 L187.4,158.5 L194.9,161.5 L202.2,165.8 L209.7,172.0 L217.1,178.8 L224.6,184.2 L232.1,188.1 L239.6,190.6 L247.0,191.8 L254.5,192.0 L262.0,192.0 L269.5,192.0 L276.9,192.0 L284.4,192.0 L291.9,192.0 L299.4,192.0 L306.6,192.0 L314.1,192.0 L321.6,192.0 L329.1,192.0 L336.6,192.0 L344.0,192.0 L351.5,191.5 L359.0,190.2 L366.5,188.0 L373.9,184.8 L381.4,180.7 L388.9,175.8 L396.4,170.4 L403.6,165.3 L411.1,160.8 L418.6,157.3 L426.1,154.5 L433.5,152.6 L441.0,151.4 L448.5,151.0 L456.0,151.1 L463.4,151.5 L470.9,152.0 L478.4,152.7 L485.9,153.6 L493.4,154.5 L500.6,155.0 L508.1,154.5 L515.6,153.1 L523.1,150.9 L530.5,147.9 L538.0,143.8 L545.5,138.5 L553.0,132.9 L560.4,128.4 L567.9,125.6 L575.4,123.9 L582.9,123.1 L590.3,123.3 L597.8,125.7 L605.1,131.4 L612.6,139.3 L620.0,147.5 L627.5,154.6 L635.0,160.3 L642.5,164.3 L649.9,166.0 L657.4,164.3 L664.9,158.5 L672.4,151.3 L679.9,145.6 L687.3,142.4 L694.8,140.7 L702.1,139.0 L709.6,134.7 L717.0,127.5 L724.5,119.4 L732.0,113.1 L739.5,109.6 L746.9,107.9 L754.4,107.2 L761.9,107.3 L769.4,107.9 L776.8,109.0 L784.3,110.6 L791.8,112.6 L799.3,115.3 L806.5,117.8 L814.0,118.8 L821.5,118.1 L829.0,115.4 L836.4,110.9 L843.9,105.6 L851.4,101.2 L858.9,98.4 L866.4,96.8 L873.8,96.0 L881.3,96.0 L888.8,96.7 L896.3,97.5 L900.0,97.5 L900,240 L0,240 Z" fill="#efc6cd"/>
-                <path d="M0.0,168.7 L0.8,168.7 L8.3,168.7 L15.8,168.7 L23.2,168.7 L30.7,168.7 L38.2,168.7 L45.6,168.8 L53.1,169.0 L60.6,169.4 L68.0,170.2 L75.5,171.2 L83.0,172.5 L90.5,173.9 L97.9,173.9 L105.2,172.5 L112.7,171.1 L120.1,170.0 L127.6,169.2 L135.1,168.6 L142.6,168.3 L150.1,168.2 L157.5,168.5 L165.0,169.2 L172.5,170.2 L180.0,171.6 L187.4,173.3 L194.9,176.0 L202.2,180.0 L209.7,185.3 L217.1,190.7 L224.6,194.9 L232.1,198.1 L239.6,200.0 L247.0,200.9 L254.5,201.2 L262.0,201.2 L269.5,201.3 L276.9,201.4 L284.4,201.6 L291.9,201.8 L299.4,202.5 L306.6,203.2 L314.1,203.4 L321.6,203.4 L329.1,203.4 L336.6,203.4 L344.0,203.4 L351.5,203.0 L359.0,202.0 L366.5,200.3 L373.9,197.9 L381.4,194.8 L388.9,191.0 L396.4,187.1 L403.6,183.3 L411.1,180.0 L418.6,177.3 L426.1,175.2 L433.5,173.7 L441.0,172.8 L448.5,172.5 L456.0,172.6 L463.4,172.9 L470.9,173.3 L478.4,173.8 L485.9,174.5 L493.4,175.3 L500.6,175.8 L508.1,175.7 L515.6,174.7 L523.1,173.0 L530.5,170.8 L538.0,167.7 L545.5,163.8 L553.0,159.6 L560.4,156.2 L567.9,154.0 L575.4,152.8 L582.9,152.2 L590.3,152.4 L597.8,154.6 L605.1,159.3 L612.6,165.3 L620.0,171.4 L627.5,176.6 L635.0,180.9 L642.5,183.8 L649.9,185.1 L657.4,183.8 L664.9,179.5 L672.4,174.2 L679.9,170.0 L687.3,167.6 L694.8,166.5 L702.1,165.5 L709.6,162.5 L717.0,157.2 L724.5,151.2 L732.0,146.6 L739.5,144.0 L746.9,142.8 L754.4,142.3 L761.9,142.4 L769.4,142.8 L776.8,143.7 L784.3,144.8 L791.8,146.3 L799.3,148.3 L806.5,150.2 L814.0,151.0 L821.5,150.4 L829.0,148.4 L836.4,145.1 L843.9,141.2 L851.4,138.0 L858.9,135.9 L866.4,134.7 L873.8,134.2 L881.3,134.2 L888.8,134.7 L896.3,135.3 L900.0,135.3 L900,240 L0,240 Z" fill="#e6a2ab"/>
-                <g stroke="#fbfbfe" stroke-width="2" vector-effect="non-scaling-stroke">
-                  <line x1="100" y1="0" x2="100" y2="240" vector-effect="non-scaling-stroke"/><line x1="200" y1="0" x2="200" y2="240" vector-effect="non-scaling-stroke"/><line x1="300" y1="0" x2="300" y2="240" vector-effect="non-scaling-stroke"/><line x1="400" y1="0" x2="400" y2="240" vector-effect="non-scaling-stroke"/><line x1="500" y1="0" x2="500" y2="240" vector-effect="non-scaling-stroke"/><line x1="600" y1="0" x2="600" y2="240" vector-effect="non-scaling-stroke"/><line x1="700" y1="0" x2="700" y2="240" vector-effect="non-scaling-stroke"/><line x1="800" y1="0" x2="800" y2="240" vector-effect="non-scaling-stroke"/>
-                </g>
-              </svg>
-              <span class="uj-axis top">Feelings</span>
-              <span class="uj-axis bot">Risks</span>
-              <span class="uj-col-hl"></span>
-            </div>
+            <div class="uj-day" aria-hidden="true"></div>
             <div class="uj-steps" role="tablist" aria-label="Scenarios in Aisha&rsquo;s day"></div>
           </div>
           <div class="uj-panel" role="tabpanel" aria-live="polite">
@@ -2326,25 +2314,18 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
             <div class="uj-body"></div>
           </div>
           <div class="uj-foot">
-            <div class="uj-legend" aria-label="Emotional states">
-              <span class="uj-tag" style="--c:#009689">Calm</span>
-              <span class="uj-tag" style="--c:#7a7a7a">On guard</span>
-              <span class="uj-tag" style="--c:#d9b77f">Frustrated</span>
-              <span class="uj-tag" style="--c:#006dff">Confident</span>
-              <span class="uj-tag" style="--c:#c02020">Intense pressure</span>
-            </div>
             <a class="uj-full" href="images/merlin/journey-map.webp" target="_blank" rel="noopener">View the full journey map &#8599;</a>
           </div>
         </div>
       </div>
 
       <div class="mx-processes">
-        <div class="mx-proc" style="--c:#3349b3"><h4>Urgency Triage</h4><p>Dynamically prioritizing tasks by deadline proximity, mission impact, and workflow under time pressure.</p><span>5 phases &middot; 4 touchpoints &middot; 2 opportunities</span></div>
-        <div class="mx-proc" style="--c:#5a6fd6"><h4>Analytical Validation</h4><p>Verifying that analytic claims reflect the source data and that intended scope stays consistent across report tiers.</p><span>3 phases &middot; 5 touchpoints &middot; 2 opportunities</span></div>
-        <div class="mx-proc" style="--c:#24316a"><h4>Strategic Judgment</h4><p>High-level sensemaking under ambiguity, balancing institutional, analytic, and operational factors.</p><span>10 phases &middot; 3 touchpoints &middot; 3 opportunities</span></div>
-        <div class="mx-proc" style="--c:#101a42"><h4>Exposure Compliance</h4><p>Assessing classification constraints, source protection, and dissemination boundaries to prevent overexposure.</p><span>10 phases &middot; 11 touchpoints &middot; 5 opportunities</span></div>
-        <div class="mx-proc" style="--c:#7d8fe3"><h4>Institutional Authority</h4><p>Holding formal decision authority in a hierarchical structure, including accountability for release.</p><span>9 phases &middot; 8 touchpoints &middot; 3 opportunities</span></div>
-        <div class="mx-proc" style="--c:#2a3c96"><h4>Vigilance and Entry</h4><p>Continuous monitoring and task switching to keep the workflow moving through interruptions.</p><span>9 phases &middot; 7 touchpoints &middot; 3 opportunities</span></div>
+        <div class="mx-proc" style="--c:#dd4362"><h4>Urgency Triage</h4><p>Dynamically prioritizing tasks by deadline proximity, mission impact, and workflow under time pressure.</p><span>5 phases &middot; 4 touchpoints &middot; 2 opportunities</span></div>
+        <div class="mx-proc" style="--c:#e36727"><h4>Analytical Validation</h4><p>Verifying that analytic claims reflect the source data and that intended scope stays consistent across report tiers.</p><span>3 phases &middot; 5 touchpoints &middot; 2 opportunities</span></div>
+        <div class="mx-proc" style="--c:#94ae55"><h4>Strategic Judgment</h4><p>High-level sensemaking under ambiguity, balancing institutional, analytic, and operational factors.</p><span>10 phases &middot; 3 touchpoints &middot; 3 opportunities</span></div>
+        <div class="mx-proc" style="--c:#1ea69f"><h4>Exposure Compliance</h4><p>Assessing classification constraints, source protection, and dissemination boundaries to prevent overexposure.</p><span>10 phases &middot; 11 touchpoints &middot; 5 opportunities</span></div>
+        <div class="mx-proc" style="--c:#4e73a0"><h4>Institutional Authority</h4><p>Holding formal decision authority in a hierarchical structure, including accountability for release.</p><span>9 phases &middot; 8 touchpoints &middot; 3 opportunities</span></div>
+        <div class="mx-proc" style="--c:#a961a0"><h4>Vigilance and Entry</h4><p>Continuous monitoring and task switching to keep the workflow moving through interruptions.</p><span>9 phases &middot; 7 touchpoints &middot; 3 opportunities</span></div>
       </div>
     </section>
 
@@ -4017,35 +3998,32 @@ window.__motion = (function () {
 ];
 
     const PROC = {
-      urg:  ['Urgency Triage', '#3349b3'],
-      val:  ['Analytical Validation', '#5a6fd6'],
-      jud:  ['Strategic Judgment', '#24316a'],
-      exp:  ['Exposure Compliance', '#101a42'],
-      auth: ['Institutional Authority', '#7d8fe3'],
-      vig:  ['Vigilance and Entry', '#2a3c96']
+      urg:  ['Urgency Triage', '#dd4362'],
+      val:  ['Analytical Validation', '#e36727'],
+      jud:  ['Strategic Judgment', '#94ae55'],
+      exp:  ['Exposure Compliance', '#1ea69f'],
+      auth: ['Institutional Authority', '#4e73a0'],
+      vig:  ['Vigilance and Entry', '#a961a0']
     };
     const FEEL = { calm: '#009689', guard: '#7a7a7a', frus: '#d9b77f', conf: '#006dff', press: '#c02020' };
-    const TOPS = [73.2, 95.8, 129.8, 151.4, 104.8, 81.2, 129.4, 40.3, 33.2];   /* feelings curve height at each scenario, of 240 */
     const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
     const tag = p => p ? `<span class="uj-tag" style="--c:${PROC[p][1]}">${PROC[p][0]}</span>` : '';
-    let cur = 0, tab = 'wf', proc = null;
+    let cur = 0, tab = 'wf', proc = null, step = -1;
 
-    /* landscape markers */
-    const land = root.querySelector('.uj-land');
+    /* the day: one column per scenario, one block per workflow step */
+    const day = root.querySelector('.uj-day');
     UJ.forEach((s, i) => {
-      s.feel.forEach((f, j) => {
-        const d = document.createElement('span');
-        d.className = 'uj-dot';
-        const off = (j - (s.feel.length - 1) / 2) * 18;
-        d.style.cssText = `--c:${FEEL[f[0]]}; left: calc(${(i * 100 + 50) / 9}% + ${off}px); top: ${TOPS[i] / 240 * 100}%`;
-        land.appendChild(d);
+      const col = document.createElement('div');
+      col.className = 'uj-daycol';
+      col.innerHTML = s.wf.map(([p], j) =>
+        `<span class="uj-block" data-i="${i}" data-j="${j}" data-p="${p || ''}" title="${p ? PROC[p][0] + ': ' : ''}${esc(s.wf[j][1]).replace(/"/g, '&quot;')}" style="--c:${p ? PROC[p][1] : '#c9cbd6'}"></span>`).join('');
+      col.addEventListener('click', e => {
+        const b = e.target.closest('.uj-block');
+        cur = i; step = b ? +b.dataset.j : -1;
+        if (b && tab !== 'wf') tab = 'wf';
+        paint();
       });
-      s.risk.forEach((r, j) => {
-        const d = document.createElement('span');
-        d.className = 'uj-risk';
-        d.style.left = `calc(${(i * 100 + 50) / 9}% + ${(j - (s.risk.length - 1) / 2) * 16}px)`;
-        land.appendChild(d);
-      });
+      day.appendChild(col);
     });
 
     /* process chips */
@@ -4065,18 +4043,18 @@ window.__motion = (function () {
       b.type = 'button'; b.className = 'uj-step'; b.setAttribute('role', 'tab');
       b.setAttribute('aria-label', `Scenario ${s.n}: ${s.title}`);
       b.innerHTML = `<span class="uj-step-n">${s.n}</span><span class="uj-step-t">${esc(s.title)}</span><span class="uj-count" hidden></span>`;
-      b.addEventListener('click', () => { cur = i; paint(); });
+      b.addEventListener('click', () => { cur = i; step = -1; paint(); });
       b.addEventListener('keydown', e => {
         const k = { ArrowRight: 1, ArrowLeft: -1, Home: -99, End: 99 }[e.key];
         if (k === undefined) return;
         e.preventDefault();
-        cur = Math.max(0, Math.min(8, k === 99 ? 8 : k === -99 ? 0 : cur + k));
+        cur = Math.max(0, Math.min(8, k === 99 ? 8 : k === -99 ? 0 : cur + k)); step = -1;
         paint(); steps.children[cur].focus();
       });
       steps.appendChild(b);
     });
     root.querySelectorAll('.uj-nav').forEach(b => b.addEventListener('click', () => {
-      cur = Math.max(0, Math.min(8, cur + +b.dataset.d)); paint();
+      cur = Math.max(0, Math.min(8, cur + +b.dataset.d)); step = -1; paint();
     }));
 
     /* layer tabs */
@@ -4092,13 +4070,12 @@ window.__motion = (function () {
       });
     });
 
-    const count = s => !proc ? 0 :
-      [...s.wf, ...s.tp, ...s.opp].filter(x => x[0] === proc).length;
+    const count = s => !proc ? 0 : s.wf.filter(x => x[0] === proc).length;
 
     function body(s) {
       const m = p => `data-p="${p || ''}" class="${proc && p === proc ? 'is-match' : ''}"`;
-      if (tab === 'wf') return `<ol class="uj-flow">${s.wf.map(([p, t]) =>
-        `<li ${m(p)}><p>${esc(t)}</p>${tag(p)}</li>`).join('')}</ol>`;
+      if (tab === 'wf') return `<ol class="uj-flow">${s.wf.map(([p, t], j) =>
+        `<li ${m(p)} style="--c:${p ? PROC[p][1] : '#c9cbd6'}"${j === step ? ' data-active' : ''}><p>${esc(t)}</p>${tag(p)}</li>`).join('')}</ol>`;
       if (tab === 'tp') return `<div class="uj-grid">${s.tp.map(([p, h, t]) =>
         `<div ${m(p)} style="--c:${PROC[p][1]}"><div class="uj-card"  style="--c:${PROC[p][1]}"><b>${esc(h)}</b><p>${esc(t)}</p>${tag(p)}</div></div>`).join('')}</div>`;
       if (tab === 'opp') return `<div class="uj-grid">${s.opp.map(([p, h, t]) =>
@@ -4123,7 +4100,11 @@ window.__motion = (function () {
         if (proc) c.style.setProperty('--c', PROC[proc][1]);
         b.classList.toggle('is-zero', !!proc && !n);
       });
-      $('.uj-col-hl').style.left = `${cur / 9 * 100}%`;
+      [...day.children].forEach((c, i) => c.classList.toggle('is-on', i === cur));
+      day.querySelectorAll('.uj-block').forEach(b => {
+        b.classList.toggle('is-step', +b.dataset.i === cur && +b.dataset.j === step);
+        b.classList.toggle('is-match', !!proc && b.dataset.p === proc);
+      });
       $('.uj-kicker').textContent = `Scenario ${s.n} of 09`;
       $('.uj-title').textContent = s.title;
       $('.uj-nav[data-d="-1"]').disabled = cur === 0;
