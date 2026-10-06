@@ -1394,6 +1394,9 @@
     gap: clamp(12px, 1.6vw, 20px); margin-top: clamp(20px, 2.4vw, 32px);
   }
   .mx-proc { border: 1px solid color-mix(in srgb, var(--c) 45%, var(--paper)); border-top: 4px solid var(--c); background: var(--paper); border-radius: 4px 4px 10px 10px; padding: 16px 18px 18px; display: grid; grid-template-rows: auto 1fr auto; gap: 8px; }
+  .mx-proc { transition: background-color 200ms ease, border-color 200ms ease; }
+  .mx-proc.is-match { background: color-mix(in srgb, var(--c) 18%, var(--paper)); border-color: var(--c); }
+  .mx-proc.is-match span { color: color-mix(in srgb, var(--c) 55%, #000); }   /* stays readable on the tint */
   .mx-proc h4 { margin: 0; font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
   #view-merlin .mx-proc p { margin: 0; }
   /* caption in the card's own process colour, deepened just enough to stay readable */
@@ -2338,12 +2341,12 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
         <h2 class="mx-uj-title">User Journey Map</h2>
         <p>From our data, I isolated six daily cognitive processes that Aisha&rsquo;s work demands, and color-coded every step, touchpoint, and design opportunity in the map by the process it draws on.</p>
         <div class="mx-processes">
-          <div class="mx-proc" style="--c:#dd4362"><h4>Urgency Triage</h4><p>Dynamically prioritizing tasks by deadline proximity, mission impact, and workflow under time pressure.</p><span>5&nbsp;phases &middot; 4&nbsp;touchpoints &middot; 2&nbsp;opportunities</span></div>
-          <div class="mx-proc" style="--c:#e36727"><h4>Analytical Validation</h4><p>Verifying that analytic claims reflect the source data and that intended scope stays consistent across report tiers.</p><span>3&nbsp;phases &middot; 5&nbsp;touchpoints &middot; 2&nbsp;opportunities</span></div>
-          <div class="mx-proc" style="--c:#94ae55"><h4>Strategic Judgment</h4><p>High-level sensemaking under ambiguity, balancing institutional, analytic, and operational factors.</p><span>10&nbsp;phases &middot; 3&nbsp;touchpoints &middot; 3&nbsp;opportunities</span></div>
-          <div class="mx-proc" style="--c:#1ea69f"><h4>Exposure Compliance</h4><p>Assessing classification constraints, source protection, and dissemination boundaries to prevent overexposure.</p><span>10&nbsp;phases &middot; 11&nbsp;touchpoints &middot; 5&nbsp;opportunities</span></div>
-          <div class="mx-proc" style="--c:#4e73a0"><h4>Institutional Authority</h4><p>Holding formal decision authority in a hierarchical structure, including accountability for release.</p><span>9&nbsp;phases &middot; 8&nbsp;touchpoints &middot; 3&nbsp;opportunities</span></div>
-          <div class="mx-proc" style="--c:#a961a0"><h4>Vigilance and Entry</h4><p>Continuous monitoring and task switching to keep the workflow moving through interruptions.</p><span>9&nbsp;phases &middot; 7&nbsp;touchpoints &middot; 3&nbsp;opportunities</span></div>
+          <div class="mx-proc" data-p="urg" style="--c:#dd4362"><h4>Urgency Triage</h4><p>Dynamically prioritizing tasks by deadline proximity, mission impact, and workflow under time pressure.</p><span>5&nbsp;phases &middot; 4&nbsp;touchpoints &middot; 2&nbsp;opportunities</span></div>
+          <div class="mx-proc" data-p="val" style="--c:#e36727"><h4>Analytical Validation</h4><p>Verifying that analytic claims reflect the source data and that intended scope stays consistent across report tiers.</p><span>3&nbsp;phases &middot; 5&nbsp;touchpoints &middot; 2&nbsp;opportunities</span></div>
+          <div class="mx-proc" data-p="jud" style="--c:#94ae55"><h4>Strategic Judgment</h4><p>High-level sensemaking under ambiguity, balancing institutional, analytic, and operational factors.</p><span>10&nbsp;phases &middot; 3&nbsp;touchpoints &middot; 3&nbsp;opportunities</span></div>
+          <div class="mx-proc" data-p="exp" style="--c:#1ea69f"><h4>Exposure Compliance</h4><p>Assessing classification constraints, source protection, and dissemination boundaries to prevent overexposure.</p><span>10&nbsp;phases &middot; 11&nbsp;touchpoints &middot; 5&nbsp;opportunities</span></div>
+          <div class="mx-proc" data-p="auth" style="--c:#4e73a0"><h4>Institutional Authority</h4><p>Holding formal decision authority in a hierarchical structure, including accountability for release.</p><span>9&nbsp;phases &middot; 8&nbsp;touchpoints &middot; 3&nbsp;opportunities</span></div>
+          <div class="mx-proc" data-p="vig" style="--c:#a961a0"><h4>Vigilance and Entry</h4><p>Continuous monitoring and task switching to keep the workflow moving through interruptions.</p><span>9&nbsp;phases &middot; 7&nbsp;touchpoints &middot; 3&nbsp;opportunities</span></div>
         </div>
         <div class="uj" id="uj">
           <p class="uj-hint">Each block is one step in Aisha&rsquo;s day, colored by the cognitive process it draws on. Select a block or a scenario to explore it.</p>
@@ -4153,6 +4156,8 @@ window.__motion = (function () {
       const s = UJ[cur];
       root.classList.toggle('is-filtered', !!proc);
       filter.querySelectorAll('.uj-chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.p === proc)));
+      /* the matching definition card above lights up in its colour too */
+      document.querySelectorAll('.mx-proc[data-p]').forEach(c => c.classList.toggle('is-match', c.dataset.p === proc));
       [...steps.children].forEach((b, i) => {
         const on = i === cur;
         b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1;
