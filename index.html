@@ -1393,10 +1393,11 @@
     display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(12px, 1.6vw, 20px); margin-top: clamp(20px, 2.4vw, 32px);
   }
-  .mx-proc { border-top: 4px solid var(--c); background: var(--paper); border-radius: 4px 4px 10px 10px; padding: 16px 4px 4px; display: grid; gap: 8px; align-content: start; }
+  .mx-proc { border: 1px solid color-mix(in srgb, var(--c) 45%, var(--paper)); border-top: 4px solid var(--c); background: var(--paper); border-radius: 4px 4px 10px 10px; padding: 16px 18px 18px; display: grid; grid-template-rows: auto 1fr auto; gap: 8px; }
   .mx-proc h4 { margin: 0; font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
   #view-merlin .mx-proc p { margin: 0; }
-  .mx-proc span { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  /* caption in the card's own process colour, deepened just enough to stay readable */
+  .mx-proc span { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: color-mix(in srgb, var(--c) 68%, #000); }
   /* ===== interactive user journey (Merlin) =====
      The emotion/risk landscape is the spine: pick a scenario on it and the
      panel below shows that moment's workflow, touchpoints, pains and gains,
@@ -1476,24 +1477,24 @@
 
   .uj-tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-muted); white-space: nowrap; }
   .uj-tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
-  .uj-flow { list-style: none; margin: 0; padding: 0; counter-reset: uj; display: grid; gap: 0; }
-  .uj-flow li { counter-increment: uj; display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 4px 14px; align-items: baseline; padding: 12px 14px 12px 16px; border-bottom: 1px solid var(--uj-line); border-left: 5px solid var(--c); }
+  .uj-flow { list-style: none; margin: 0; padding: 0; counter-reset: uj; display: grid; grid-template-columns: auto minmax(0, 1fr) max-content; gap: 0; }
+  .uj-flow li { counter-increment: uj; grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; gap: 4px 0; align-items: baseline; padding: 12px 14px 12px 16px; border-bottom: 1px solid var(--uj-line); border-left: 5px solid var(--c); }
   .uj-flow li[data-active] { background: color-mix(in srgb, var(--c) 12%, var(--paper)); }
   .uj-flow li:last-child { border-bottom: 0; }
   .uj-flow li::before { content: counter(uj, decimal-leading-zero); font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--p-accent); }
-  #view-merlin .uj-flow p { font-size: var(--t-body); line-height: var(--lh-body); color: var(--p-ink); }
+  #view-merlin .uj-flow p { grid-column: 2; padding-left: 14px; font-size: var(--t-body); line-height: var(--lh-body); color: var(--p-ink); }
+  /* every tag starts on the same line, with clear space after the longest sentence */
+  .uj-flow li .uj-tag { grid-column: 3; justify-self: start; padding-left: clamp(28px, 3.4vw, 48px); }
+  @supports not (grid-template-columns: subgrid) { .uj-flow li { grid-template-columns: 32px minmax(0, 1fr) 15em; } }
   .uj-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .uj-card { border: 1px solid var(--uj-line); border-left: 4px solid var(--c); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; align-content: start; }
   .uj-card b { font-family: var(--font-display); font-weight: var(--f-sub-weight); font-size: var(--f-sub); letter-spacing: var(--f-sub-track); line-height: 1.2; color: var(--p-ink); }
   #view-merlin .uj-card p { font-size: var(--t-small); line-height: 1.6; color: var(--p-muted); }
   .uj-card .uj-tag { margin-top: 4px; }
-  .uj-opp { border-left-width: 1px; border-top: 4px solid var(--c); background: var(--p-highlight); border-color: transparent; border-top-color: var(--c); }
-  .uj-opp b { font-size: var(--f-sub); }
-  #view-merlin .uj-opp p { color: var(--p-ink); font-size: var(--t-body); line-height: var(--lh-body); }
   .uj-pg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 32px); }
   .uj-pg ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-  .uj-pg li { padding: 12px 14px; border-radius: 10px; background: #f6f6f8; }
-  .uj-pg li.is-key { background: #fbe7ea; }
+  .uj-pg li { padding: 14px 16px; border: 1px solid var(--uj-line); border-left: 4px solid var(--c); border-radius: 10px; }
+  .uj-pg li.is-key { background: #fbe7ea; border-color: #e7b7be; border-left-color: var(--c); }
   .uj-pg li.is-key::before { content: "Key pain point"; display: block; margin-bottom: 4px; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: #9b2c37; }
   #view-merlin .uj-pg li p { font-size: var(--t-small); line-height: 1.6; color: var(--p-ink); }
   .uj-pg .uj-h5 { display: flex; align-items: center; gap: 8px; }
@@ -1502,7 +1503,6 @@
   .uj.is-filtered .uj-body [data-p]:not(.is-match) { opacity: 0.86; }
   .uj.is-filtered .uj-flow li.is-match { background: color-mix(in srgb, var(--c) 18%, var(--paper)); }
   .uj.is-filtered .uj-grid > .is-match > .uj-card { background: color-mix(in srgb, var(--c) 18%, var(--paper)); border-color: var(--c); }
-  .uj.is-filtered .uj-grid > .is-match > .uj-opp { background: color-mix(in srgb, var(--c) 22%, var(--paper)); border-color: transparent; border-top-color: var(--c); }
   .uj [data-p] { transition: opacity 200ms ease; }
 
   .uj-foot { display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
@@ -1510,8 +1510,10 @@
   .uj-full:hover { color: var(--p-ink); }
   @media (max-width: 760px) {
     .uj-state, .uj-grid, .uj-pg { grid-template-columns: minmax(0, 1fr); }
+    .uj-flow { grid-template-columns: minmax(0, 1fr); }
     .uj-flow li { grid-template-columns: 28px minmax(0, 1fr); padding-left: 12px; }
-    .uj-flow li .uj-tag { grid-column: 2; }
+    #view-merlin .uj-flow p { padding-left: 0; }
+    .uj-flow li .uj-tag { grid-column: 2; padding-left: 0; }
   }
   @media (max-width: 600px) {
     .uj-filter { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-right: calc(-1 * var(--margin)); padding-right: var(--margin); }
@@ -1521,6 +1523,23 @@
     .uj-tab { border-bottom: 1px solid var(--uj-line); margin-bottom: 0; }
     .uj-tab[aria-selected="true"] { border-bottom: 3px solid var(--p-accent); }
   }
+  /* dedicated journey page: shares the Merlin view, shows only itself */
+  .mx-jpage { display: none; }
+  body.is-mjourney .mx-jpage { display: block; }
+  body.is-mjourney #view-merlin > .shell > :not(.bf-top):not(.mx-jpage) { display: none; }
+  .mx-jback { display: none; }
+  body.is-mjourney .mx-jback { display: inline-block; }
+  body.is-mjourney .mx-allwork { display: none; }
+  .mx-jbar { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px; margin-bottom: clamp(16px, 2vw, 24px); }
+  .mx-jbar .bf-feature-sub { margin: 0; }
+  .mx-jtools { display: flex; align-items: baseline; gap: 18px; }
+  .mx-jzoom { min-height: 44px; padding: 0 16px; border: 1px solid var(--p-rule); border-radius: 999px; background: var(--paper); color: var(--p-ink); font: var(--w-label) var(--t-label-sm)/1 var(--font-label); letter-spacing: var(--ls-label); cursor: pointer; }
+  .mx-jzoom:hover { background: var(--p-highlight); }
+  .mx-jframe { overflow: auto; border: 1px solid var(--p-rule); border-radius: 10px; background: #fff; overscroll-behavior: contain; }
+  .mx-jframe img { display: block; width: 100%; height: auto; }
+  .mx-jframe.is-zoomed { max-height: 80vh; cursor: grab; }
+  .mx-jframe.is-zoomed img { width: 300%; max-width: none; }
+  .mx-jframe:focus-visible, .mx-jzoom:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 3px; }
   /* feature clips */
   .mx-clip { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; margin-top: clamp(16px, 2vw, 24px); border-radius: 10px; background: var(--p-highlight); outline: 1px solid var(--p-rule); outline-offset: -1px; }
   #view-merlin .mx-feature p { max-width: none; margin: 0; }
@@ -2193,9 +2212,38 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
 <div id="view-merlin" class="cs-view" hidden>
   <div class="shell">
     <div class="bf-top">
-      <a class="bf-back" href="#work">&larr; All work</a>
+      <a class="bf-back mx-allwork" href="#work">&larr; All work</a>
+      <a class="bf-back mx-jback" href="#merlin">&larr; Merlin case study</a>
       <a class="bf-who" href="#top">Mia Biehler</a>
     </div>
+
+    <!-- ---------- dedicated journey map page (hash route: #merlin-journey) ---------- -->
+    <section class="mx-jpage" id="mx-jpage" aria-labelledby="mx-jpage-title">
+      <header class="bf-hero mx-jhero">
+        <p class="bf-kicker">Merlin &middot; UX Research</p>
+        <h1 id="mx-jpage-title">Aisha&rsquo;s User Journey</h1>
+        <p class="bf-lede">Nine scenarios across a report releaser&rsquo;s day, color-coded by the six cognitive processes her work draws on.</p>
+      </header>
+
+      <div class="bf-proj">
+        <h2 class="bf-feature-sub">Narrative Video</h2>
+        <div class="ph" style="--ar: 16 / 9; margin-top: clamp(16px, 2vw, 24px)">Narrative video &mdash; walking through Aisha&rsquo;s day</div>
+      </div>
+
+      <div class="bf-proj">
+        <div class="mx-jbar">
+          <h2 class="bf-feature-sub">Full Journey Map</h2>
+          <div class="mx-jtools">
+            <button type="button" class="mx-jzoom" aria-pressed="false">Zoom in</button>
+            <a class="uj-full" href="images/merlin/journey-map.webp" target="_blank" rel="noopener">Open full size &#8599;</a>
+          </div>
+        </div>
+        <div class="mx-jframe" tabindex="0" role="region" aria-label="Full journey map, scrollable when zoomed">
+          <img src="images/merlin/journey-map.webp" width="6000" height="3611" decoding="async"
+               alt="The full Merlin user journey map for Aisha, a senior report releaser: nine scenarios from Morning Meeting to Continuous Queue Monitoring, each with workflow steps, touchpoints, pains and gains, feelings and risks, and design opportunities, color-coded by six cognitive processes." />
+        </div>
+      </div>
+    </section>
 
     <header class="bf-hero">
       <p class="bf-kicker">Case study</p>
@@ -2316,18 +2364,18 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
             <div class="uj-body"></div>
           </div>
           <div class="uj-foot">
-            <a class="uj-full" href="images/merlin/journey-map.webp" target="_blank" rel="noopener">View the full journey map &#8599;</a>
+            <a class="uj-full" href="#merlin-journey">See the full journey map &rarr;</a>
           </div>
         </div>
       </div>
 
       <div class="mx-processes">
-        <div class="mx-proc" style="--c:#dd4362"><h4>Urgency Triage</h4><p>Dynamically prioritizing tasks by deadline proximity, mission impact, and workflow under time pressure.</p><span>5 phases &middot; 4 touchpoints &middot; 2 opportunities</span></div>
-        <div class="mx-proc" style="--c:#e36727"><h4>Analytical Validation</h4><p>Verifying that analytic claims reflect the source data and that intended scope stays consistent across report tiers.</p><span>3 phases &middot; 5 touchpoints &middot; 2 opportunities</span></div>
-        <div class="mx-proc" style="--c:#94ae55"><h4>Strategic Judgment</h4><p>High-level sensemaking under ambiguity, balancing institutional, analytic, and operational factors.</p><span>10 phases &middot; 3 touchpoints &middot; 3 opportunities</span></div>
-        <div class="mx-proc" style="--c:#1ea69f"><h4>Exposure Compliance</h4><p>Assessing classification constraints, source protection, and dissemination boundaries to prevent overexposure.</p><span>10 phases &middot; 11 touchpoints &middot; 5 opportunities</span></div>
-        <div class="mx-proc" style="--c:#4e73a0"><h4>Institutional Authority</h4><p>Holding formal decision authority in a hierarchical structure, including accountability for release.</p><span>9 phases &middot; 8 touchpoints &middot; 3 opportunities</span></div>
-        <div class="mx-proc" style="--c:#a961a0"><h4>Vigilance and Entry</h4><p>Continuous monitoring and task switching to keep the workflow moving through interruptions.</p><span>9 phases &middot; 7 touchpoints &middot; 3 opportunities</span></div>
+        <div class="mx-proc" style="--c:#dd4362"><h4>Urgency Triage</h4><p>Dynamically prioritizing tasks by deadline proximity, mission impact, and workflow under time pressure.</p><span>5&nbsp;phases &middot; 4&nbsp;touchpoints &middot; 2&nbsp;opportunities</span></div>
+        <div class="mx-proc" style="--c:#e36727"><h4>Analytical Validation</h4><p>Verifying that analytic claims reflect the source data and that intended scope stays consistent across report tiers.</p><span>3&nbsp;phases &middot; 5&nbsp;touchpoints &middot; 2&nbsp;opportunities</span></div>
+        <div class="mx-proc" style="--c:#94ae55"><h4>Strategic Judgment</h4><p>High-level sensemaking under ambiguity, balancing institutional, analytic, and operational factors.</p><span>10&nbsp;phases &middot; 3&nbsp;touchpoints &middot; 3&nbsp;opportunities</span></div>
+        <div class="mx-proc" style="--c:#1ea69f"><h4>Exposure Compliance</h4><p>Assessing classification constraints, source protection, and dissemination boundaries to prevent overexposure.</p><span>10&nbsp;phases &middot; 11&nbsp;touchpoints &middot; 5&nbsp;opportunities</span></div>
+        <div class="mx-proc" style="--c:#4e73a0"><h4>Institutional Authority</h4><p>Holding formal decision authority in a hierarchical structure, including accountability for release.</p><span>9&nbsp;phases &middot; 8&nbsp;touchpoints &middot; 3&nbsp;opportunities</span></div>
+        <div class="mx-proc" style="--c:#a961a0"><h4>Vigilance and Entry</h4><p>Continuous monitoring and task switching to keep the workflow moving through interruptions.</p><span>9&nbsp;phases &middot; 7&nbsp;touchpoints &middot; 3&nbsp;opportunities</span></div>
       </div>
     </section>
 
@@ -3353,18 +3401,22 @@ window.__motion = (function () {
   /* one entry per case study: hash → { element, title, body class } */
   const VIEWS = {
     '#merlin':    { el: document.getElementById('view-merlin'),    title: 'Merlin — Mia Biehler',    cls: 'is-merlin' },
+    '#merlin-journey': { el: document.getElementById('view-merlin'), title: 'Merlin User Journey — Mia Biehler', cls: 'is-merlin', sub: 'is-mjourney' },
     '#butterfly': { el: document.getElementById('view-butterfly'), title: 'Butterfly Exhibition — Mia Biehler', cls: 'is-butterfly' }
   };
   const TITLES = { home: 'Mia Biehler' };
+  let lastHash = location.hash;
 
   function route(isInitial) {
     const view = VIEWS[location.hash];
     const onMerlin = !!view;              /* "in a case study", whichever one */
     home.hidden = onMerlin;
-    Object.keys(VIEWS).forEach((k) => {
-      VIEWS[k].el.hidden = VIEWS[k] !== view;
-      document.body.classList.toggle(VIEWS[k].cls, VIEWS[k] === view);
-    });
+    /* two routes can share one view element (#merlin and its journey page) */
+    Object.keys(VIEWS).forEach((k) => { VIEWS[k].el.hidden = !view || VIEWS[k].el !== view.el; });
+    Object.keys(VIEWS).forEach((k) => { document.body.classList.remove(VIEWS[k].cls); if (VIEWS[k].sub) document.body.classList.remove(VIEWS[k].sub); });
+    if (view) { document.body.classList.add(view.cls); if (view.sub) document.body.classList.add(view.sub); }
+    const fromJourney = lastHash === '#merlin-journey' && location.hash === '#merlin';
+    lastHash = location.hash;
     document.title = view ? view.title : TITLES.home;
 
     if (window.__heroReel) {
@@ -3379,11 +3431,16 @@ window.__motion = (function () {
 
     if (isInitial) return;
 
+    if (fromJourney) {
+      /* back from the journey page: return to the journey explorer */
+      const uj = document.getElementById('uj');
+      if (uj) { uj.scrollIntoView({ block: 'start' }); return; }
+    }
     if (onMerlin) {
       window.scrollTo(0, 0);
       /* move focus into the new view so a keyboard or screen-reader user
          lands at the top of the case study, not where the link was */
-      const h1 = view.el.querySelector('h1');
+      const h1 = [...view.el.querySelectorAll('h1')].find(h => h.offsetParent);
       if (h1) {
         h1.setAttribute('tabindex', '-1');
         h1.focus({ preventScroll: true });
@@ -4081,11 +4138,11 @@ window.__motion = (function () {
       if (tab === 'tp') return `<div class="uj-grid">${s.tp.map(([p, h, t]) =>
         `<div ${m(p)} style="--c:${PROC[p][1]}"><div class="uj-card"  style="--c:${PROC[p][1]}"><b>${esc(h)}</b><p>${esc(t)}</p>${tag(p)}</div></div>`).join('')}</div>`;
       if (tab === 'opp') return `<div class="uj-grid">${s.opp.map(([p, h, t]) =>
-        `<div ${m(p)}><div class="uj-card uj-opp" style="--c:${PROC[p][1]}"><b>${esc(h)}</b><p>${esc(t)}</p>${tag(p)}</div></div>`).join('')}</div>`;
+        `<div ${m(p)}><div class="uj-card" style="--c:${PROC[p][1]}"><b>${esc(h)}</b><p>${esc(t)}</p>${tag(p)}</div></div>`).join('')}</div>`;
       return `<div class="uj-pg">
-        <div><h5 class="uj-h5" style="--c:#b8323e">Pains</h5><ul>${s.pains.map((t, j) =>
+        <div style="--c:#b8323e"><h5 class="uj-h5">Pains</h5><ul>${s.pains.map((t, j) =>
           `<li class="${j === 0 && s.keyPain ? 'is-key' : ''}"><p>${esc(t)}</p></li>`).join('')}</ul></div>
-        <div><h5 class="uj-h5" style="--c:#009689">Gains</h5><ul>${s.gains.map(t =>
+        <div style="--c:#009689"><h5 class="uj-h5">Gains</h5><ul>${s.gains.map(t =>
           `<li><p>${esc(t)}</p></li>`).join('')}</ul></div></div>`;
     }
 
@@ -4115,6 +4172,30 @@ window.__motion = (function () {
       bd.classList.remove('is-in'); void bd.offsetWidth; bd.classList.add('is-in');
     }
     paint();
+  })();
+</script>
+<script>
+  /* journey page: zoom the full map and drag to pan */
+  (() => {
+    const btn = document.querySelector('.mx-jzoom'), frame = document.querySelector('.mx-jframe');
+    if (!btn || !frame) return;
+    btn.addEventListener('click', () => {
+      const on = frame.classList.toggle('is-zoomed');
+      btn.setAttribute('aria-pressed', String(on));
+      btn.textContent = on ? 'Zoom out' : 'Zoom in';
+    });
+    let drag = null;
+    frame.addEventListener('pointerdown', e => {
+      if (!frame.classList.contains('is-zoomed') || e.pointerType !== 'mouse') return;
+      drag = { x: e.clientX, y: e.clientY, l: frame.scrollLeft, t: frame.scrollTop };
+      frame.style.cursor = 'grabbing';
+    });
+    window.addEventListener('pointermove', e => {
+      if (!drag) return;
+      frame.scrollLeft = drag.l - (e.clientX - drag.x);
+      frame.scrollTop = drag.t - (e.clientY - drag.y);
+    });
+    window.addEventListener('pointerup', () => { drag = null; frame.style.cursor = ''; });
   })();
 </script>
 </body></html>
