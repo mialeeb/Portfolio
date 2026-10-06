@@ -1443,7 +1443,6 @@
   .uj-step-n { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label); letter-spacing: var(--ls-label); }
   .uj-step-t { font-size: var(--t-label-sm); line-height: 1.35; opacity: 0.85; }
   .uj-count { position: absolute; top: 8px; right: 8px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 10px; background: var(--paper); color: var(--p-ink); box-shadow: inset 0 0 0 2px var(--c, var(--p-accent)); font: 700 11px/20px var(--font-body); text-align: center; }
-  .uj.is-filtered .uj-step.is-zero { opacity: 0.72; }
   .uj-step:focus-visible, .uj-tab:focus-visible, .uj-chip:focus-visible, .uj-nav:focus-visible { outline: 2px solid var(--p-accent); outline-offset: -2px; }
   @media (max-width: 899px) { .uj-step-t { display: none; } .uj-step { justify-items: center; padding-inline: 2px; } .uj-count { position: static; } }
 
@@ -4155,8 +4154,6 @@ window.__motion = (function () {
       [...steps.children].forEach((b, i) => {
         const on = i === cur;
         b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1;
-        const n = count(UJ[i]);
-        b.classList.toggle('is-zero', !!proc && !n);
       });
       [...day.children].forEach((c, i) => c.classList.toggle('is-on', i === cur));
       day.querySelectorAll('.uj-block').forEach(b => {
