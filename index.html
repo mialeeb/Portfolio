@@ -1419,10 +1419,10 @@
 
   .uj-map { position: relative; border: 1px solid var(--uj-line); border-radius: 10px; overflow: hidden; background: var(--paper); }
   /* the day: nine columns of blocks, one block per workflow step */
-  .uj-day { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); padding: clamp(10px, 1.4vw, 16px) 0; }
-  .uj-daycol { display: flex; flex-direction: column; gap: 4px; padding: 0 clamp(4px, 0.7vw, 10px); border-left: 1px solid var(--uj-line); cursor: pointer; }
+  .uj-day { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); }
+  .uj-daycol { display: flex; flex-direction: column; gap: 4px; padding: clamp(10px, 1.4vw, 16px) clamp(4px, 0.7vw, 10px); border-left: 1px solid var(--uj-line); cursor: pointer; }
   .uj-daycol:first-child { border-left: 0; }
-  .uj-daycol.is-on { background: linear-gradient(var(--p-highlight), var(--p-highlight)) center / 100% calc(100% + 32px) no-repeat; }
+  .uj-daycol.is-on { background: var(--p-highlight); }   /* fills the column top to bottom line */
   .uj-block { display: block; height: clamp(16px, 2.2vw, 26px); border-radius: 4px; background: var(--c); transition: opacity 200ms ease, transform 200ms ease, box-shadow 200ms ease; }
   .uj-daycol:hover .uj-block { transform: scaleX(1.04); }
   .uj-block.is-step { box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--p-ink); }
