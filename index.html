@@ -4038,7 +4038,7 @@ window.__motion = (function () {
       const b = document.createElement('button');
       b.type = 'button'; b.className = 'uj-step'; b.setAttribute('role', 'tab');
       b.setAttribute('aria-label', `Scenario ${s.n}: ${s.title}`);
-      b.innerHTML = `<span class="uj-step-n">${s.n}</span><span class="uj-step-t">${esc(s.title)}</span><span class="uj-count" hidden></span>`;
+      b.innerHTML = `<span class="uj-step-n">${s.n}</span><span class="uj-step-t">${esc(s.title)}</span>`;
       b.addEventListener('click', () => { cur = i; step = -1; paint(); });
       b.addEventListener('keydown', e => {
         const k = { ArrowRight: 1, ArrowLeft: -1, Home: -99, End: 99 }[e.key];
@@ -4091,9 +4091,7 @@ window.__motion = (function () {
       [...steps.children].forEach((b, i) => {
         const on = i === cur;
         b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1;
-        const c = b.querySelector('.uj-count'), n = count(UJ[i]);
-        c.hidden = !proc || !n; c.textContent = n;
-        if (proc) c.style.setProperty('--c', PROC[proc][1]);
+        const n = count(UJ[i]);
         b.classList.toggle('is-zero', !!proc && !n);
       });
       [...day.children].forEach((c, i) => c.classList.toggle('is-on', i === cur));
