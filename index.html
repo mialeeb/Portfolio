@@ -1392,6 +1392,31 @@
   #view-merlin p.mx-role { margin: 0; font-size: var(--t-small); color: var(--p-muted); }
   .mx-persona-body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
   #view-merlin .mx-persona-body p { margin: 0; }
+  /* persona: editorial, unboxed. Name and stance on the left, facts as
+     hairline rows on the right */
+  .mx-aisha { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+  #view-merlin .mx-aisha p { max-width: none; margin: 0; }
+  .mx-aisha-kicker { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent) !important; }
+  :is(#view-merlin) .bf-sec h2.mx-aisha-name { margin: 10px 0 0; font-family: var(--font-display); font-weight: 700; font-size: var(--t-h1); line-height: 1; letter-spacing: var(--ls-tight); color: var(--p-ink); }
+  #view-merlin p.mx-aisha-role { margin-top: 12px; font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-muted); }
+  #view-merlin p.mx-aisha-motto { margin-top: clamp(24px, 3vw, 36px); padding-left: 18px; border-left: 3px solid var(--p-accent); font-size: var(--f-lede); line-height: 1.5; color: var(--p-ink); text-wrap: balance; }
+  .mx-aisha-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: clamp(28px, 3.4vw, 44px) 0 0; padding-top: 20px; border-top: 1px solid var(--p-rule); }
+  .mx-aisha-stats dt { font-family: var(--font-display); font-weight: 700; font-size: var(--t-h2); line-height: 1; letter-spacing: var(--ls-tight); color: var(--p-accent); }
+  .mx-aisha-stats dd { margin: 8px 0 0; font-size: var(--t-small); line-height: 1.4; color: var(--p-muted); }
+  .mx-aisha-facts { margin: 0; border-top: 1px solid var(--p-rule); }
+  .mx-aisha-facts > div { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); gap: 8px 24px; padding: clamp(18px, 2.2vw, 26px) 0; border-bottom: 1px solid var(--p-rule); }
+  .mx-aisha-facts dt { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); padding-top: 4px; }
+  .mx-aisha-facts dd { margin: 0; font-size: var(--t-body); line-height: var(--lh-body); color: var(--p-ink); }
+  @media (max-width: 860px) {
+    .mx-aisha { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (min-width: 861px) {
+    .mx-aisha-id { position: sticky; top: 96px; }
+  }
+  @media (max-width: 1180px) {
+    .mx-aisha-facts > div { grid-template-columns: minmax(0, 1fr); }
+    .mx-aisha-facts dt { padding-top: 0; }
+  }
   /* six cognitive processes */
   .mx-processes {
     display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2343,27 +2368,38 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
       </div>
     </section>
 
-    <!-- ---------- ux research: persona ---------- -->
+    <!-- ---------- persona ---------- -->
     <section class="bf-sec">
-      <h2 class="bf-center">UX Research</h2>
-      <div class="mx-persona" style="margin-top: var(--f-title-gap)">
-        <div class="mx-persona-id">
-          <span class="mx-avatar" aria-hidden="true">A</span>
-          <div>
-            <h3 class="bf-feature-sub">Aisha</h3>
-            <p class="mx-role">Senior Report Releaser &middot; 8 years in intelligence</p>
-          </div>
+      <div class="mx-aisha">
+        <div class="mx-aisha-id">
+          <p class="mx-aisha-kicker">Persona</p>
+          <h2 class="mx-aisha-name">Aisha</h2>
+          <p class="mx-aisha-role">Senior Report Releaser</p>
+          <p class="mx-aisha-motto">Quality first. Accuracy and analytic integrity always beat speed.</p>
+          <dl class="mx-aisha-stats">
+            <div><dt>8</dt><dd>years in intelligence</dd></div>
+            <div><dt>3</dt><dd>years as release authority</dd></div>
+            <div><dt>5</dt><dd>classification tiers per report</dd></div>
+          </dl>
         </div>
-        <div class="mx-persona-body">
+        <dl class="mx-aisha-facts">
           <div>
-            <h3 class="bf-feature-sub">About</h3>
-            <p>Aisha serves as the ultimate checkpoint, providing a &ldquo;final sanity check&rdquo; to ensure reports are accurate, properly classified, and meet the intelligence needs of customers.</p>
+            <dt>About</dt>
+            <dd>Aisha is the final checkpoint before a report goes out: the &ldquo;final sanity check&rdquo; that it is accurate, properly classified, and meets the intelligence needs of its customers.</dd>
           </div>
           <div>
-            <h3 class="bf-feature-sub">Responsibilities</h3>
-            <p>She is responsible for final release authorization: verifying classification markings, reviewing source protection measures, and tailoring distribution channels to specific customer requirements.</p>
+            <dt>Responsibilities</dt>
+            <dd>Final release authorization: verifying classification markings, reviewing source protection measures, and tailoring distribution channels to each customer&rsquo;s requirements.</dd>
           </div>
-        </div>
+          <div>
+            <dt>Motivations</dt>
+            <dd>The excitement of delivering high-value intelligence that customers can act on, and the chance to teach junior reporters how to keep analytic integrity while protecting sensitive sources.</dd>
+          </div>
+          <div>
+            <dt>Philosophy</dt>
+            <dd>Interpretive fidelity: as intelligence is downgraded for lower tiers, it must keep the core meaning of the original source narrative.</dd>
+          </div>
+        </dl>
       </div>
 
       <div class="bf-proj">
