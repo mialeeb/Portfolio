@@ -1427,11 +1427,14 @@
   /* user flow: scan the spine, zoom the board, read the stage */
   .fl { margin-top: clamp(28px, 4vw, 52px); }
   .fl-spine { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(8px, 1vw, 14px); }
-  .fl-stage { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-rows: auto auto 1fr auto; gap: 6px; width: 100%; height: 100%; padding: 14px 14px 16px; border: 1px solid var(--p-rule); border-top: 4px solid var(--p-accent); border-radius: 4px 4px 10px 10px; background: var(--paper); transition: background-color 200ms ease, border-color 200ms ease; }
-  .fl-stage:hover { border-color: var(--p-accent); background: color-mix(in srgb, var(--p-accent) 6%, var(--paper)); }
-  .fl-stage:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 3px; }
-  .fl-stage[aria-pressed="true"] { background: var(--p-highlight); border-color: var(--p-accent); box-shadow: inset 0 0 0 1px var(--p-accent); }
-  .fl-num { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  .fl-stage { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-rows: auto auto 1fr auto auto; gap: 6px; width: 100%; height: 100%; padding: 14px 14px 16px; border: 1px solid var(--p-rule); border-top: 4px solid var(--c, var(--p-accent)); border-radius: 4px 4px 10px 10px; background: var(--paper); transition: background-color 200ms ease, border-color 200ms ease; }
+  .fl-stage:hover { border-color: var(--c, var(--p-accent)); background: color-mix(in srgb, var(--c, var(--p-accent)) 6%, var(--paper)); }
+  .fl-stage:focus-visible { outline: 2px solid var(--c, var(--p-accent)); outline-offset: 3px; }
+  .fl-stage[aria-pressed="true"] { background: color-mix(in srgb, var(--c, var(--p-accent)) 15%, var(--paper)); border-color: var(--c, var(--p-accent)); box-shadow: inset 0 0 0 1px var(--c, var(--p-accent)); }
+  .fl-goals[aria-pressed="true"] { background: var(--p-highlight); }
+  .fl-num { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: color-mix(in srgb, var(--c, var(--p-accent)) 70%, #000); }
+  .fl-goals .fl-num { color: var(--p-accent); }
+  .fl-proc { font-family: var(--font-label); font-weight: var(--w-label); font-size: 12px; letter-spacing: var(--ls-label); color: color-mix(in srgb, var(--c) 62%, #000); }
   .fl-name { font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
   .fl-cap { font-size: var(--t-small); line-height: 1.45; color: var(--p-ink); font-weight: 600; }
   .fl-loop { border-top-style: dashed; }
@@ -1442,7 +1445,7 @@
   .fl-goal-note { margin-left: auto; font-size: var(--t-small); color: var(--p-muted); }
   #view-merlin .fl-lead { margin: 0 0 clamp(14px, 1.8vw, 22px); max-width: 62ch; font-size: var(--t-body); line-height: var(--lh-body); color: var(--p-ink); }
 
-  .fl-dots { display: flex; flex-wrap: wrap; gap: 4px 3px; margin-top: 6px; align-items: center; }
+  .fl-dots { display: flex; flex-wrap: wrap; gap: 4px 3px; margin-top: 4px; align-items: center; align-content: flex-start; min-height: 32px; }
   .fl-sh { display: inline-block; width: 8px; height: 8px; flex: none; background: var(--c); }
   .fl-sh-sq { border-radius: 1px; }
   .fl-sh-rr { width: 12px; border-radius: 4px; }
@@ -2598,35 +2601,41 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
       <div class="fl">
         <button type="button" class="fl-stage fl-goals" data-s="goals" data-r="10.0,20.0,680.0,420.0" aria-pressed="false" aria-controls="fl-detail"><span class="fl-num">Aisha&rsquo;s goals</span><span class="fl-goal-list"><span><i class="fl-sh fl-sh-sq" style="--c:#a961a0"></i>Orientation</span><span><i class="fl-sh fl-sh-sq" style="--c:#dd4362"></i>Prioritization</span><span><i class="fl-sh fl-sh-sq" style="--c:#a961a0"></i>Entry</span></span><span class="fl-goal-note">The task analysis behind every stage</span></button>
         <ol class="fl-spine" aria-label="Stages of the user flow">
-          <li><button type="button" class="fl-stage" data-s="triage" data-r="180.0,470.0,800.0,1240.0" aria-pressed="false" aria-controls="fl-detail">
+          <li><button type="button" class="fl-stage" data-s="triage" data-r="180.0,470.0,800.0,1240.0" style="--c:#dd4362" aria-pressed="false" aria-controls="fl-detail">
               <span class="fl-num">01</span>
               <span class="fl-name">Triage</span>
               <span class="fl-cap">What needs me first?</span>
+              <span class="fl-proc">Urgency Triage</span>
               <span class="fl-dots" aria-hidden="true"><i class="fl-sh fl-sh-rr" style="--c:#dd4362"></i><i class="fl-sh fl-sh-sq" style="--c:#dd4362"></i><i class="fl-sh fl-sh-ci" style="--c:#dd4362"></i><i class="fl-sh fl-sh-ci" style="--c:#dd4362"></i><i class="fl-sh fl-sh-ci" style="--c:#dd4362"></i><i class="fl-sh fl-sh-di" style="--c:#dd4362"></i><i class="fl-sh fl-sh-ci" style="--c:#94ae55"></i><i class="fl-sh fl-sh-rr" style="--c:#4e73a0"></i><i class="fl-sh fl-sh-ci" style="--c:#4e73a0"></i><i class="fl-sh fl-sh-rr" style="--c:#a961a0"></i><i class="fl-sh fl-sh-rr" style="--c:#a961a0"></i><i class="fl-sh fl-sh-rr" style="--c:#a961a0"></i><i class="fl-sh fl-sh-ci" style="--c:#a961a0"></i><i class="fl-sh fl-sh-ci" style="--c:#a961a0"></i><i class="fl-sh fl-sh-ci" style="--c:#a961a0"></i><i class="fl-sh fl-sh-di" style="--c:#a961a0"></i></span>
-            </button></li><li><button type="button" class="fl-stage fl-loop" data-s="coordinate" data-r="730.0,50.0,1170.0,535.0" aria-pressed="false" aria-controls="fl-detail">
+            </button></li><li><button type="button" class="fl-stage fl-loop" data-s="coordinate" data-r="730.0,50.0,1170.0,535.0" style="--c:#4e73a0" aria-pressed="false" aria-controls="fl-detail">
               <span class="fl-num">02 &middot; side loop</span>
               <span class="fl-name">Coordinate</span>
               <span class="fl-cap">Who else has to act?</span>
+              <span class="fl-proc">Institutional Authority</span>
               <span class="fl-dots" aria-hidden="true"><i class="fl-sh fl-sh-rr" style="--c:#94ae55"></i><i class="fl-sh fl-sh-rr" style="--c:#1ea69f"></i><i class="fl-sh fl-sh-rr" style="--c:#1ea69f"></i><i class="fl-sh fl-sh-rr" style="--c:#4e73a0"></i><i class="fl-sh fl-sh-rr" style="--c:#4e73a0"></i><i class="fl-sh fl-sh-ci" style="--c:#4e73a0"></i><i class="fl-sh fl-sh-rr" style="--c:#a961a0"></i></span>
-            </button></li><li><button type="button" class="fl-stage" data-s="validate" data-r="810.0,490.0,1700.0,1440.0" aria-pressed="false" aria-controls="fl-detail">
+            </button></li><li><button type="button" class="fl-stage" data-s="validate" data-r="810.0,490.0,1700.0,1440.0" style="--c:#e36727" aria-pressed="false" aria-controls="fl-detail">
               <span class="fl-num">03</span>
               <span class="fl-name">Validate</span>
               <span class="fl-cap">Is the analysis sound?</span>
+              <span class="fl-proc">Analytical Validation</span>
               <span class="fl-dots" aria-hidden="true"><i class="fl-sh fl-sh-rr" style="--c:#dd4362"></i><i class="fl-sh fl-sh-rr" style="--c:#dd4362"></i><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-sq" style="--c:#e36727"></i><i class="fl-sh fl-sh-sq" style="--c:#e36727"></i><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-ci" style="--c:#e36727"></i><i class="fl-sh fl-sh-ci" style="--c:#e36727"></i><i class="fl-sh fl-sh-ci" style="--c:#e36727"></i><i class="fl-sh fl-sh-ci" style="--c:#e36727"></i><i class="fl-sh fl-sh-rr" style="--c:#94ae55"></i><i class="fl-sh fl-sh-rr" style="--c:#1ea69f"></i><i class="fl-sh fl-sh-rr" style="--c:#a961a0"></i><i class="fl-sh fl-sh-rr" style="--c:#a961a0"></i><i class="fl-sh fl-sh-ci" style="--c:#a961a0"></i><i class="fl-sh fl-sh-ci" style="--c:#a961a0"></i></span>
-            </button></li><li><button type="button" class="fl-stage" data-s="protect" data-r="1710.0,840.0,2020.0,1340.0" aria-pressed="false" aria-controls="fl-detail">
+            </button></li><li><button type="button" class="fl-stage" data-s="protect" data-r="1710.0,840.0,2020.0,1340.0" style="--c:#1ea69f" aria-pressed="false" aria-controls="fl-detail">
               <span class="fl-num">04</span>
               <span class="fl-name">Protect</span>
               <span class="fl-cap">Is it safe at every tier?</span>
+              <span class="fl-proc">Exposure Compliance</span>
               <span class="fl-dots" aria-hidden="true"><i class="fl-sh fl-sh-sq" style="--c:#1ea69f"></i><i class="fl-sh fl-sh-rr" style="--c:#1ea69f"></i><i class="fl-sh fl-sh-rr" style="--c:#1ea69f"></i><i class="fl-sh fl-sh-rr" style="--c:#1ea69f"></i><i class="fl-sh fl-sh-rr" style="--c:#1ea69f"></i><i class="fl-sh fl-sh-ci" style="--c:#1ea69f"></i></span>
-            </button></li><li><button type="button" class="fl-stage" data-s="reconcile" data-r="1850.0,530.0,2400.0,780.0" aria-pressed="false" aria-controls="fl-detail">
+            </button></li><li><button type="button" class="fl-stage" data-s="reconcile" data-r="1850.0,530.0,2400.0,780.0" style="--c:#a961a0" aria-pressed="false" aria-controls="fl-detail">
               <span class="fl-num">05</span>
               <span class="fl-name">Reconcile</span>
               <span class="fl-cap">What changed when it came back?</span>
+              <span class="fl-proc">Vigilance and Entry</span>
               <span class="fl-dots" aria-hidden="true"><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-rr" style="--c:#e36727"></i><i class="fl-sh fl-sh-ci" style="--c:#a961a0"></i><i class="fl-sh fl-sh-ci" style="--c:#a961a0"></i><i class="fl-sh fl-sh-di" style="--c:#a961a0"></i></span>
-            </button></li><li><button type="button" class="fl-stage" data-s="release" data-r="2410.0,530.0,3090.0,900.0" aria-pressed="false" aria-controls="fl-detail">
+            </button></li><li><button type="button" class="fl-stage" data-s="release" data-r="2410.0,530.0,3090.0,900.0" style="--c:#4e73a0" aria-pressed="false" aria-controls="fl-detail">
               <span class="fl-num">06</span>
               <span class="fl-name">Release</span>
               <span class="fl-cap">Is it ready, and who gets it?</span>
+              <span class="fl-proc">Institutional Authority</span>
               <span class="fl-dots" aria-hidden="true"><i class="fl-sh fl-sh-rr" style="--c:#1ea69f"></i><i class="fl-sh fl-sh-rr" style="--c:#4e73a0"></i><i class="fl-sh fl-sh-rr" style="--c:#4e73a0"></i><i class="fl-sh fl-sh-rr" style="--c:#4e73a0"></i><i class="fl-sh fl-sh-ci" style="--c:#4e73a0"></i><i class="fl-sh fl-sh-ci" style="--c:#4e73a0"></i><i class="fl-sh fl-sh-rr" style="--c:#a961a0"></i></span>
             </button></li>
         </ol>
