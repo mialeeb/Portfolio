@@ -1368,8 +1368,15 @@
   /* research question opens the section; Research and Discovery follows it */
   .bf-statement.mx-rq-first { margin-top: 0; }
   :is(#view-merlin) .bf-sec h2.mx-rd-after { margin-top: clamp(40px, 6vw, 84px); }
-  .mx-turing { margin-top: clamp(40px, 6vw, 84px); align-items: center; }
+  #view-merlin .mx-rd { max-width: 54rem; }
+  #view-merlin .mx-rd .bf-lede { max-width: none; margin-left: 0; margin-right: 0; text-align: left; }
+  :is(#view-merlin) .bf-sec .mx-rd h2.mx-rd-after { text-align: left; }
+  .mx-turing { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(28px, 4vw, 64px); align-items: center; margin-top: clamp(36px, 5vw, 64px); }
+  #view-merlin .mx-turing-copy p { max-width: 34ch; }
+  @media (max-width: 860px) { .mx-turing { grid-template-columns: minmax(0, 1fr); } #view-merlin .mx-turing-copy p { max-width: none; } }
   .mx-tt { display: block; width: 100%; height: auto; }
+  .mx-tt-sm { display: none; }
+  @media (max-width: 600px) { .mx-tt-lg { display: none; } .mx-tt-sm { display: block; } }
   :is(#view-merlin) p.mx-cite { font-size: var(--t-small); color: var(--p-muted); }
   .mx-num {
     font-family: var(--font-display); font-weight: 700; font-size: var(--t-h2);
@@ -2312,33 +2319,48 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
         <p><span class="bf-hmw">How might</span> the design of an interface automate the tiered reporting process, so that reporters can more efficiently and knowledgeably team with AI to sanitize and deliver sensitive information across classified tiers?</p>
       </div>
 
-      <h2 class="bf-center mx-rd-after">Research and Discovery</h2>
-      <p class="bf-lede bf-center">Rather than asking which analyst tasks a machine could take over, we asked what new work analysts could do with AI as a partner.</p>
+      <div class="mx-rd">
+        <h2 class="mx-rd-after">Research and Discovery</h2>
+        <p class="bf-lede">Rather than asking which analyst tasks a machine could take over, we asked what new work analysts could do with AI as a partner.</p>
+      </div>
 
-      <div class="bf-two mx-turing">
-        <div>
+      <div class="mx-turing">
+        <div class="mx-turing-copy">
           <h3 class="bf-feature-sub">What might AI&ndash;human teaming look like in the future?</h3>
           <p>We framed the project around augmentation rather than automation: the goal was new capability for analysts, not fewer analysts.</p>
           <p class="mx-cite">Figure adapted from Brynjolfsson (2022), <em>The Turing Trap</em>.</p>
         </div>
         <!-- The Turing Trap, redrawn in the Merlin palette; labels use the page's Red Hat Display -->
-        <svg class="mx-tt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" role="img" aria-labelledby="mx-tt-t mx-tt-d">
+        <svg class="mx-tt mx-tt-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 560" role="img" aria-labelledby="mx-tt-t mx-tt-d">
         <title id="mx-tt-t">The Turing Trap: automation versus augmentation</title>
-        <desc id="mx-tt-d">A large rectangle of new tasks that humans could do with the help of machines. Inside it, an ellipse of tasks that humans can do, and inside that a smaller dark ellipse of human tasks that machines could automate.</desc>
-        <defs><pattern id="mx-tt-hatch" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="12" fill="#e4e8f6"/><line x1="0" y1="0" x2="0" y2="12" stroke="#c9d0ec" stroke-width="1.2"/></pattern><clipPath id="mx-tt-inner"><ellipse cx="306" cy="310" rx="72" ry="54"/></clipPath></defs>
+        <desc id="mx-tt-d">A wide rectangle of new tasks that humans could do with the help of machines. At its right end, an ellipse of tasks that humans can do, and inside that a smaller dark ellipse of human tasks that machines could automate. Most of the rectangle lies outside both ellipses.</desc>
+        <defs><pattern id="mx-tt-hatch" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="12" fill="#e4e8f6"/><line x1="0" y1="0" x2="0" y2="12" stroke="#c9d0ec" stroke-width="1.2"/></pattern><clipPath id="mx-tt-inner"><ellipse cx="880" cy="290" rx="76" ry="56"/></clipPath></defs>
         <style>.mx-tt-l{font-family:"Red Hat Display",system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.01em}</style>
-        <rect x="24" y="150" width="752" height="350" rx="14" fill="url(#mx-tt-hatch)" stroke="#2f44a8" stroke-width="2"/>
-        <ellipse cx="232" cy="300" rx="150" ry="108" fill="#ffffff" stroke="#141c45" stroke-width="2"/>
-        <ellipse cx="306" cy="310" rx="72" ry="54" fill="#101a42"/>
-        <path d="M100,100 Q120,190 178,290" fill="none" stroke="#141c45" stroke-width="2.25" stroke-linecap="round"/><path d="M177.6,278.0 L178,290 L167.8,283.7" fill="none" stroke="#141c45" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M420,100 Q330,170 312,296" fill="none" stroke="#141c45" stroke-width="2.25" stroke-linecap="round"/><path d="M319.1,286.3 L312,296 L307.9,284.7" fill="none" stroke="#141c45" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M470,530 Q480,460 540,385" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round"/><path d="M529.0,389.8 L540,385 L537.8,396.8" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M610,530 Q620,470 640,420" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round"/><path d="M630.8,427.7 L640,420 L641.3,431.9" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M720,530 Q760,400 700,260" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round"/><path d="M699.0,272.0 L700,260 L709.4,267.5" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-        <g clip-path="url(#mx-tt-inner)"><path d="M420,100 Q330,170 312,296" fill="none" stroke="#e4e8f6" stroke-width="2.25" stroke-linecap="round"/><path d="M319.1,286.3 L312,296 L307.9,284.7" fill="none" stroke="#e4e8f6" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></g>
-        <text class="mx-tt-l" x="36" y="52" fill="#141c45"><tspan x="36" dy="0">Tasks that</tspan><tspan x="36" dy="34">humans can do</tspan></text>
-        <text class="mx-tt-l" x="330" y="52" fill="#141c45"><tspan x="330" dy="0">Human tasks that</tspan><tspan x="330" dy="34">machines could automate</tspan></text>
-        <text class="mx-tt-l" x="318" y="568" fill="#2f44a8"><tspan x="318" dy="0">New tasks that humans could</tspan><tspan x="318" dy="34">do with the help of machines</tspan></text>
+        <rect x="200" y="130" width="816" height="300" rx="14" fill="url(#mx-tt-hatch)" stroke="#2f44a8" stroke-width="2"/>
+        <ellipse cx="800" cy="280" rx="164" ry="114" fill="#ffffff" stroke="#141c45" stroke-width="2"/>
+        <ellipse cx="880" cy="290" rx="76" ry="56" fill="#101a42"/>
+        <path d="M500,100 Q540,210 708,268" fill="none" stroke="#141c45" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M696.1,269.9 L708,268 L699.8,259.2" fill="none" stroke="#141c45" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M900,100 Q872,180 874,284" fill="none" stroke="#141c45" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M868.2,273.5 L874,284 L879.4,273.3" fill="none" stroke="#141c45" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M150,462 Q170,360 268,262" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M264.5,273.5 L268,262 L256.5,265.5" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M300,462 Q312,400 372,338" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M368.7,349.5 L372,338 L360.6,341.7" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M432,470 Q470,380 520,236" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M521.8,247.9 L520,236 L511.2,244.2" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <g clip-path="url(#mx-tt-inner)"><path d="M900,100 Q872,180 874,284" fill="none" stroke="#e4e8f6" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M868.2,273.5 L874,284 L879.4,273.3" fill="none" stroke="#e4e8f6" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <text class="mx-tt-l" x="430" y="46" fill="#141c45"><tspan x="430" dy="0">Tasks that</tspan><tspan x="430" dy="34">humans can do</tspan></text>
+        <text class="mx-tt-l" x="1016" y="46" text-anchor="end" fill="#141c45"><tspan x="1016" dy="0">Human tasks that</tspan><tspan x="1016" dy="34">machines could automate</tspan></text>
+        <text class="mx-tt-l" x="24" y="506" fill="#2f44a8"><tspan x="24" dy="0">New tasks that humans could</tspan><tspan x="24" dy="34">do with the help of machines</tspan></text>
+        </svg>
+        <svg class="mx-tt mx-tt-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="mx-tts-t mx-tts-d">
+        <title id="mx-tts-t">The Turing Trap: automation versus augmentation</title>
+        <desc id="mx-tts-d">A rectangle of new tasks that humans could do with the help of machines. Inside it, an ellipse of tasks that humans can do, and inside that a smaller dark ellipse of human tasks that machines could automate.</desc>
+        <defs><pattern id="mx-tts-hatch" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="12" fill="#e4e8f6"/><line x1="0" y1="0" x2="0" y2="12" stroke="#c9d0ec" stroke-width="1.2"/></pattern><clipPath id="mx-tts-inner"><ellipse cx="470" cy="300" rx="72" ry="54"/></clipPath></defs>
+        <rect x="24" y="130" width="552" height="330" rx="14" fill="url(#mx-tts-hatch)" stroke="#2f44a8" stroke-width="2"/>
+        <ellipse cx="400" cy="290" rx="150" ry="110" fill="#ffffff" stroke="#141c45" stroke-width="2"/>
+        <ellipse cx="470" cy="300" rx="72" ry="54" fill="#101a42"/>
+        <path d="M110,100 Q140,220 300,282" fill="none" stroke="#141c45" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M288.1,283.4 L300,282 L292.2,272.9" fill="none" stroke="#141c45" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M470,100 Q450,180 468,292" fill="none" stroke="#141c45" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M460.8,282.4 L468,292 L471.9,280.6" fill="none" stroke="#141c45" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M70,508 Q76,420 120,330" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M120.4,342.0 L120,330 L110.3,337.0" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M196,508 Q204,452 190,398" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M198.1,406.8 L190,398 L187.2,409.7" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M330,512 Q332,470 296,432" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M307.4,435.8 L296,432 L299.2,443.6" fill="none" stroke="#2f44a8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <g clip-path="url(#mx-tts-inner)"><path d="M470,100 Q450,180 468,292" fill="none" stroke="#e4e8f6" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M460.8,282.4 L468,292 L471.9,280.6" fill="none" stroke="#e4e8f6" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <text class="mx-tt-l" x="24" y="46" fill="#141c45"><tspan x="24" dy="0">Tasks that</tspan><tspan x="24" dy="34">humans can do</tspan></text>
+        <text class="mx-tt-l" x="576" y="46" text-anchor="end" fill="#141c45"><tspan x="576" dy="0">Human tasks that</tspan><tspan x="576" dy="34">machines could automate</tspan></text>
+        <text class="mx-tt-l" x="24" y="546" fill="#2f44a8"><tspan x="24" dy="0">New tasks that humans could</tspan><tspan x="24" dy="34">do with the help of machines</tspan></text>
         </svg>
       </div>
     </section>
