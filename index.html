@@ -1424,6 +1424,65 @@
     .mx-aisha-facts > div { grid-template-columns: minmax(0, 1fr); }
     .mx-aisha-facts dt { padding-top: 0; }
   }
+  /* first sketches: concept tabs, sketch picker, pinned sticky notes */
+  .sk { margin-top: var(--f-title-gap); }
+  .sk-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(8px, 1.4vw, 16px); }
+  .sk-tab { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: baseline; gap: 12px; padding: clamp(14px, 1.8vw, 20px) clamp(14px, 2vw, 24px);
+    border: 2px solid var(--p-rule); border-radius: 12px; background: #fff; transition: border-color 200ms ease, background-color 200ms ease; }
+  .sk-tab:hover { border-color: color-mix(in srgb, var(--p-accent) 45%, var(--p-rule)); }
+  .sk-tab:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 3px; }
+  .sk-tab[aria-selected="true"] { border-color: var(--p-accent); background: color-mix(in srgb, var(--p-accent) 7%, #fff); }
+  .sk-tab-n { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 2.4vw, 32px); line-height: 1; letter-spacing: -0.02em; color: var(--p-accent); }
+  .sk-tab-name { font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
+  .sk-panel { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(24px, 4vw, 56px); margin-top: clamp(20px, 2.6vw, 32px); align-items: start; }
+  .sk-panel[hidden] { display: none; }
+  #view-merlin .sk-copy p { max-width: none; margin: 0; }
+  #view-merlin .sk-copy p.mx-pain { margin-top: 0; }
+  #view-merlin p.sk-idea { margin-top: clamp(16px, 2vw, 22px); font-size: var(--t-small); line-height: 1.55; color: var(--p-ink); padding-left: 16px; border-left: 3px solid var(--p-accent); }
+  .sk-idea span { display: block; margin-bottom: 4px; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  #view-merlin .sk-picks { list-style: none; margin: clamp(22px, 2.6vw, 32px) 0 0; padding: 0; max-width: none; display: grid; gap: 10px; }
+  #view-merlin .sk-picks li { max-width: none; margin: 0; }
+  .sk-pick { all: unset; box-sizing: border-box; cursor: pointer; width: 100%; display: grid; grid-template-columns: 88px 24px minmax(0, 1fr); align-items: center; gap: 12px;
+    padding: 8px; border: 2px solid transparent; border-radius: 10px; transition: background-color 200ms ease, border-color 200ms ease; }
+  .sk-pick img { width: 88px; height: 60px; object-fit: cover; object-position: center top; border-radius: 6px; border: 1px solid var(--p-rule); background: #fff; }
+  .sk-pick:hover { background: color-mix(in srgb, var(--p-accent) 5%, var(--paper)); }
+  .sk-pick:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 2px; }
+  .sk-pick[aria-pressed="true"] { border-color: var(--p-accent); background: var(--p-highlight); }
+  .sk-pick-n { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--p-rule); background: var(--paper);
+    font-family: var(--font-label); font-weight: var(--w-label); font-size: 12px; color: var(--p-accent); }
+  .sk-pick[aria-pressed="true"] .sk-pick-n { background: var(--p-accent); border-color: var(--p-accent); color: #fff; }
+  .sk-pick-name { font-family: var(--font-label); font-weight: 600; font-size: var(--t-small); line-height: 1.35; color: var(--p-ink); }
+  .sk-shot { margin: 0; }
+  .sk-shot[hidden] { display: none; }
+  .sk-shot:not([hidden]) { animation: sk-in 320ms ease both; }
+  @keyframes sk-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .sk-shot:not([hidden]) { animation: none; } }
+  .sk-img { position: relative; border-radius: clamp(12px, 1.4vw, 18px); overflow: hidden; background: #fff; border: 1px solid var(--p-rule); }
+  .sk-img img { display: block; width: 100%; height: auto; }
+  .sk-pin { position: absolute; transform: translate(-50%, -50%); display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%;
+    background: var(--p-accent); color: #fff; font-family: var(--font-label); font-weight: 700; font-size: 13px; box-shadow: 0 0 0 3px #fff, 0 2px 8px rgb(20 28 69 / 0.25); }
+  .sk-shot figcaption { margin-top: clamp(14px, 1.8vw, 20px); }
+  #view-merlin .sk-shot figcaption p { max-width: 68ch; margin: 0; }
+  #view-merlin .sk-shot p.sk-cap-h { font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
+  .sk-cap-n { display: block; margin-bottom: 4px; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  #view-merlin .sk-shot p.sk-cap { margin-top: 6px; font-size: var(--t-small); line-height: 1.55; color: var(--p-ink); }
+  #view-merlin .sk-shot p.sk-notes-h { margin-top: 16px; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-muted); }
+  #view-merlin .sk-notes { list-style: none; margin: 8px 0 0; padding: 0; max-width: 68ch; display: grid; gap: 8px; }
+  #view-merlin .sk-notes li { max-width: none; margin: 0; display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 10px; align-items: start; font-size: var(--t-small); line-height: 1.5; color: var(--p-ink); }
+  .sk-note-n { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--p-accent); color: #fff; font-family: var(--font-label); font-weight: 700; font-size: 12px; }
+  @media (max-width: 860px) {
+    .sk-panel { grid-template-columns: minmax(0, 1fr); }
+    #view-merlin .sk-picks { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .sk-pick { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; gap: 6px; padding: 6px; }
+    .sk-pick img { width: 100%; height: auto; aspect-ratio: 3 / 2; }
+    .sk-pick-n { display: none; }
+    .sk-pick-name { font-size: 13px; }
+  }
+  @media (max-width: 560px) {
+    .sk-tabs { grid-template-columns: minmax(0, 1fr); }
+    .sk-tab { padding: 12px 14px; }
+    .sk-pin { width: 22px; height: 22px; font-size: 11px; box-shadow: 0 0 0 2px #fff; }
+  }
   /* final deliverables: four showcases, each answering a pain point */
   .mx-show-block { margin-top: clamp(56px, 7vw, 104px); }
   .mx-show-block:first-of-type { margin-top: clamp(32px, 4vw, 56px); }
@@ -2571,10 +2630,6 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
             <dt>Motivations</dt>
             <dd>The excitement of delivering high-value intelligence that customers can act on, and the chance to teach junior reporters how to keep analytic integrity while protecting sensitive sources.</dd>
           </div>
-          <div>
-            <dt>Philosophy</dt>
-            <dd>Interpretive fidelity: as intelligence is downgraded for lower tiers, it must keep the core meaning of the original source narrative.</dd>
-          </div>
         </dl>
       </div>
 
@@ -2633,24 +2688,66 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
     </section>
 
     <!-- ---------- first sketches ---------- -->
-    <section class="bf-sec">
+    <section class="bf-sec" id="mx-sketch">
       <h2 class="bf-center">First Sketches</h2>
-      <div class="bf-three" style="margin-top: var(--f-title-gap)">
-        <div>
-          <span class="mx-num" aria-hidden="true">01</span>
-          <h3>Tier Comparison</h3>
-          <p>A side-by-side screen where AI compares two tiers and surfaces where meaning or content has shifted.</p>
+      <p class="bf-lede bf-center">Three early directions, each aimed at a pain point from first-round research. Pick a concept, then step through its sketches.</p>
+      <div class="sk">
+        <div class="sk-tabs" role="tablist" aria-label="Sketch concepts"><button type="button" role="tab" class="sk-tab" id="sk-t-c1" aria-controls="sk-p-c1" aria-selected="true" tabindex="0"><span class="sk-tab-n" aria-hidden="true">01</span><span class="sk-tab-name">Tier Comparison</span></button><button type="button" role="tab" class="sk-tab" id="sk-t-c2" aria-controls="sk-p-c2" aria-selected="false" tabindex="-1"><span class="sk-tab-n" aria-hidden="true">02</span><span class="sk-tab-name">Report Web</span></button><button type="button" role="tab" class="sk-tab" id="sk-t-c3" aria-controls="sk-p-c3" aria-selected="false" tabindex="-1"><span class="sk-tab-n" aria-hidden="true">03</span><span class="sk-tab-name">Initiative Groups</span></button></div>
+      <div class="sk-panel" role="tabpanel" id="sk-p-c1" aria-labelledby="sk-t-c1">
+        <div class="sk-copy">
+          <p class="mx-pain"><span>Pain point</span>Keeping analytical intent consistent across tiers, and not being able to see the edits that were made.</p>
+          <p class="sk-idea"><span>Concept</span>A comparison screen where AI runs a two-sided check (two tiers, two report versions, or two separate reports) and surfaces where meaning or content has shifted.</p>
+          <ol class="sk-picks" aria-label="Sketches for Tier Comparison"><li><button type="button" class="sk-pick" data-i="0" aria-pressed="true"><img src="images/merlin/sk-c1-1.webp" alt="" width="1400" height="993" loading="lazy" decoding="async"><span class="sk-pick-n" aria-hidden="true">1</span><span class="sk-pick-name">Two tiers, side by side</span></button></li><li><button type="button" class="sk-pick" data-i="1" aria-pressed="false"><img src="images/merlin/sk-c1-2.webp" alt="" width="1400" height="993" loading="lazy" decoding="async"><span class="sk-pick-n" aria-hidden="true">2</span><span class="sk-pick-name">Report first, checks beside it</span></button></li><li><button type="button" class="sk-pick" data-i="2" aria-pressed="false"><img src="images/merlin/sk-c1-3.webp" alt="" width="1400" height="951" loading="lazy" decoding="async"><span class="sk-pick-n" aria-hidden="true">3</span><span class="sk-pick-name">A confidence score through the report</span></button></li></ol>
         </div>
-        <div>
-          <span class="mx-num" aria-hidden="true">02</span>
-          <h3>Report Web</h3>
-          <p>A node-based view where analysts see incoming reports, rearrange them by priority, and manage needed communication.</p>
+        <div class="sk-stage">
+          <figure class="sk-shot" data-i="0">
+            <div class="sk-img"><img src="images/merlin/sk-c1-1.webp" alt="Hand-drawn sketch: Two tiers, side by side" width="1400" height="993" loading="lazy" decoding="async"></div>
+            <figcaption><p class="sk-cap-h"><span class="sk-cap-n">Sketch 1 of 3</span>Two tiers, side by side</p><p class="sk-cap">AI compares two tiers on top; below, a workspace gives AI suggestions based on what is being compared.</p></figcaption>
+          </figure><figure class="sk-shot" data-i="1" hidden>
+            <div class="sk-img"><img src="images/merlin/sk-c1-2.webp" alt="Hand-drawn sketch: Report first, checks beside it with sticky notes" width="1400" height="993" loading="lazy" decoding="async"><span class="sk-pin" style="left:7.0%;top:58.4%" aria-hidden="true">1</span></div>
+            <figcaption><p class="sk-cap-h"><span class="sk-cap-n">Sketch 2 of 3</span>Report first, checks beside it</p><p class="sk-cap">The main report stays on the left, with the comparison top right and AI below. AI checks analytical intent, source links, and classification, and the analyst verifies each one.</p><p class="sk-notes-h">Sticky notes</p><ol class="sk-notes"><li><span class="sk-note-n" aria-hidden="true">1</span>Highlighted sections populate here.</li></ol></figcaption>
+          </figure><figure class="sk-shot" data-i="2" hidden>
+            <div class="sk-img"><img src="images/merlin/sk-c1-3.webp" alt="Hand-drawn sketch: A confidence score through the report with sticky notes" width="1400" height="951" loading="lazy" decoding="async"><span class="sk-pin" style="left:93.1%;top:50.0%" aria-hidden="true">1</span></div>
+            <figcaption><p class="sk-cap-h"><span class="sk-cap-n">Sketch 3 of 3</span>A confidence score through the report</p><p class="sk-cap">A confidence score, based on classification and sources, runs through the report. The analyst verifies changes until it is green or they are satisfied. AI tags analytical intent per section and line so it can be compared across tiers.</p><p class="sk-notes-h">Sticky notes</p><ol class="sk-notes"><li><span class="sk-note-n" aria-hidden="true">1</span>Control of AI output.</li></ol></figcaption>
+          </figure>
         </div>
-        <div>
-          <span class="mx-num" aria-hidden="true">03</span>
-          <h3>Initiative Groups</h3>
-          <p>Related reports grouped under one initiative, with AI connecting them so relevant policy and standards appear in context.</p>
+      </div><div class="sk-panel" role="tabpanel" id="sk-p-c2" aria-labelledby="sk-t-c2" hidden>
+        <div class="sk-copy">
+          <p class="mx-pain"><span>Pain point</span>Keeping track of where each report stands, and the communication it still needs.</p>
+          <p class="sk-idea"><span>Concept</span>A node-based report web for receiving reports and following up: analysts see what comes in, rearrange it by priority, and manage the communication each report needs.</p>
+          <ol class="sk-picks" aria-label="Sketches for Report Web"><li><button type="button" class="sk-pick" data-i="0" aria-pressed="true"><img src="images/merlin/sk-c2-1.webp" alt="" width="1400" height="949" loading="lazy" decoding="async"><span class="sk-pick-n" aria-hidden="true">1</span><span class="sk-pick-name">A free-form workspace</span></button></li><li><button type="button" class="sk-pick" data-i="1" aria-pressed="false"><img src="images/merlin/sk-c2-2.webp" alt="" width="1400" height="926" loading="lazy" decoding="async"><span class="sk-pick-n" aria-hidden="true">2</span><span class="sk-pick-name">Arranged by priority</span></button></li><li><button type="button" class="sk-pick" data-i="2" aria-pressed="false"><img src="images/merlin/sk-c2-3.webp" alt="" width="1400" height="927" loading="lazy" decoding="async"><span class="sk-pick-n" aria-hidden="true">3</span><span class="sk-pick-name">Reports that share</span></button></li></ol>
         </div>
+        <div class="sk-stage">
+          <figure class="sk-shot" data-i="0">
+            <div class="sk-img"><img src="images/merlin/sk-c2-1.webp" alt="Hand-drawn sketch: A free-form workspace with sticky notes" width="1400" height="949" loading="lazy" decoding="async"><span class="sk-pin" style="left:6.6%;top:44.1%" aria-hidden="true">1</span><span class="sk-pin" style="left:6.6%;top:90.2%" aria-hidden="true">2</span><span class="sk-pin" style="left:93.4%;top:9.7%" aria-hidden="true">3</span></div>
+            <figcaption><p class="sk-cap-h"><span class="sk-cap-n">Sketch 1 of 3</span>A free-form workspace</p><p class="sk-cap">Analysts arrange reports into their own hierarchy. AI color-codes by deadline and priority (analysts can too), and populates the board as new reports arrive so the next steps can start.</p><p class="sk-notes-h">Sticky notes</p><ol class="sk-notes"><li><span class="sk-note-n" aria-hidden="true">1</span>Reports that are continuing from past days.</li><li><span class="sk-note-n" aria-hidden="true">2</span>The area is based on the day, but the date and range can be controlled.</li><li><span class="sk-note-n" aria-hidden="true">3</span>Tool area where notes, design tools, and groupings can be made.</li></ol></figcaption>
+          </figure><figure class="sk-shot" data-i="1" hidden>
+            <div class="sk-img"><img src="images/merlin/sk-c2-2.webp" alt="Hand-drawn sketch: Arranged by priority with sticky notes" width="1400" height="926" loading="lazy" decoding="async"><span class="sk-pin" style="left:93.5%;top:63.1%" aria-hidden="true">1</span></div>
+            <figcaption><p class="sk-cap-h"><span class="sk-cap-n">Sketch 2 of 3</span>Arranged by priority</p><p class="sk-cap">The workspace rearranges by the selected priority. AI detects how complete each report is and suggests next steps, such as a needed corroboration, an analysis suggestion, or readiness to disseminate.</p><p class="sk-notes-h">Sticky notes</p><ol class="sk-notes"><li><span class="sk-note-n" aria-hidden="true">1</span>Auto workspace rearrangement buttons.</li></ol></figcaption>
+          </figure><figure class="sk-shot" data-i="2" hidden>
+            <div class="sk-img"><img src="images/merlin/sk-c2-3.webp" alt="Hand-drawn sketch: Reports that share with sticky notes" width="1400" height="927" loading="lazy" decoding="async"><span class="sk-pin" style="left:93.5%;top:17.7%" aria-hidden="true">1</span></div>
+            <figcaption><p class="sk-cap-h"><span class="sk-cap-n">Sketch 3 of 3</span>Reports that share</p><p class="sk-cap">Grouped reports share information such as customers, sources, and similar content: a Hunch-like workspace where parameters on outflowing boxes generate new information.</p><p class="sk-notes-h">Sticky notes</p><ol class="sk-notes"><li><span class="sk-note-n" aria-hidden="true">1</span>Use this system to understand the path a report went through. Assumes prior AI is being worked with, and this model is used between tiers.</li></ol></figcaption>
+          </figure>
+        </div>
+      </div><div class="sk-panel" role="tabpanel" id="sk-p-c3" aria-labelledby="sk-t-c3" hidden>
+        <div class="sk-copy">
+          <p class="mx-pain"><span>Pain point</span>Following policy and analytical standards takes a high cognitive load and leans on the releaser&rsquo;s experience, because policy information is not centralized.</p>
+          <p class="sk-idea"><span>Concept</span>Related reports are grouped under one initiative, and AI connects them so relevant policy and standards appear in context.</p>
+          <ol class="sk-picks" aria-label="Sketches for Initiative Groups"><li><button type="button" class="sk-pick" data-i="0" aria-pressed="true"><img src="images/merlin/sk-c3-1.webp" alt="" width="1400" height="993" loading="lazy" decoding="async"><span class="sk-pick-n" aria-hidden="true">1</span><span class="sk-pick-name">Policy query and simulation</span></button></li><li><button type="button" class="sk-pick" data-i="1" aria-pressed="false"><img src="images/merlin/sk-c3-2.webp" alt="" width="1400" height="992" loading="lazy" decoding="async"><span class="sk-pick-n" aria-hidden="true">2</span><span class="sk-pick-name">Simulation inside the report</span></button></li><li><button type="button" class="sk-pick" data-i="2" aria-pressed="false"><img src="images/merlin/sk-c3-3.webp" alt="" width="1400" height="993" loading="lazy" decoding="async"><span class="sk-pick-n" aria-hidden="true">3</span><span class="sk-pick-name">Simulated readers</span></button></li></ol>
+        </div>
+        <div class="sk-stage">
+          <figure class="sk-shot" data-i="0">
+            <div class="sk-img"><img src="images/merlin/sk-c3-1.webp" alt="Hand-drawn sketch: Policy query and simulation" width="1400" height="993" loading="lazy" decoding="async"></div>
+            <figcaption><p class="sk-cap-h"><span class="sk-cap-n">Sketch 1 of 3</span>Policy query and simulation</p><p class="sk-cap">Analysts query policy guidelines and apply them to the tiers in a simulation mode, showing how the tiers and dissemination would change.</p></figcaption>
+          </figure><figure class="sk-shot" data-i="1" hidden>
+            <div class="sk-img"><img src="images/merlin/sk-c3-2.webp" alt="Hand-drawn sketch: Simulation inside the report" width="1400" height="992" loading="lazy" decoding="async"></div>
+            <figcaption><p class="sk-cap-h"><span class="sk-cap-n">Sketch 2 of 3</span>Simulation inside the report</p><p class="sk-cap">Changing the classification generates new wording and updates the customers. Annotations can be added from the simulation, and wording adjusted.</p></figcaption>
+          </figure><figure class="sk-shot" data-i="2" hidden>
+            <div class="sk-img"><img src="images/merlin/sk-c3-3.webp" alt="Hand-drawn sketch: Simulated readers" width="1400" height="993" loading="lazy" decoding="async"></div>
+            <figcaption><p class="sk-cap-h"><span class="sk-cap-n">Sketch 3 of 3</span>Simulated readers</p><p class="sk-cap">The reporter enters a reader&rsquo;s context and background. AI highlights passages that may be too classified for that perspective and clearance, and simulates how that person might interpret the report.</p></figcaption>
+          </figure>
+        </div>
+      </div>
       </div>
 
       <div class="bf-statement">
@@ -4523,6 +4620,33 @@ window.__motion = (function () {
       frame.scrollTop = drag.t - (e.clientY - drag.y);
     });
     window.addEventListener('pointerup', () => { drag = null; frame.style.cursor = ''; });
+  })();
+</script>
+<script>
+  /* first sketches: concept tabs + sketch picker */
+  (() => {
+    const root = document.getElementById('mx-sketch'); if (!root) return;
+    const tabs = [...root.querySelectorAll('.sk-tab')];
+    const show = (t, focus) => {
+      tabs.forEach(b => { const on = b === t; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1;
+        document.getElementById(b.getAttribute('aria-controls')).hidden = !on; });
+      if (focus) t.focus();
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => show(t));
+      t.addEventListener('keydown', ev => {
+        const k = ev.key, n = tabs.length;
+        const j = k === 'ArrowRight' || k === 'ArrowDown' ? (i + 1) % n : k === 'ArrowLeft' || k === 'ArrowUp' ? (i - 1 + n) % n : k === 'Home' ? 0 : k === 'End' ? n - 1 : -1;
+        if (j < 0) return; ev.preventDefault(); show(tabs[j], true);
+      });
+    });
+    root.querySelectorAll('.sk-panel').forEach(p => {
+      const picks = [...p.querySelectorAll('.sk-pick')], shots = [...p.querySelectorAll('.sk-shot')];
+      picks.forEach(b => b.addEventListener('click', () => {
+        picks.forEach(x => x.setAttribute('aria-pressed', x === b));
+        shots.forEach(s => s.hidden = s.dataset.i !== b.dataset.i);
+      }));
+    });
   })();
 </script>
 <script>
