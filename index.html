@@ -1424,6 +1424,27 @@
     .mx-aisha-facts > div { grid-template-columns: minmax(0, 1fr); }
     .mx-aisha-facts dt { padding-top: 0; }
   }
+  /* final deliverables: four showcases, each answering a pain point */
+  .mx-show-block { margin-top: clamp(56px, 7vw, 104px); }
+  .mx-show-block:first-of-type { margin-top: clamp(32px, 4vw, 56px); }
+  .mx-show-head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 64px); align-items: start; }
+  #view-merlin .mx-show-head p { max-width: none; margin: 0; }
+  #view-merlin p.mx-show-n { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  :is(#view-merlin) .bf-sec h3.mx-show-title { margin: 8px 0 0; font-family: var(--font-display); font-weight: 700; font-size: var(--t-h2); line-height: 1.15; letter-spacing: var(--ls-tight); color: var(--p-ink); text-wrap: balance; }
+  #view-merlin p.mx-pain { margin-top: clamp(16px, 2vw, 22px); padding-left: 16px; border-left: 3px solid var(--p-rule); font-size: var(--t-small); line-height: 1.55; color: var(--p-muted); }
+  .mx-pain span { display: block; margin-bottom: 4px; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  #view-merlin .mx-chaps { list-style: none; margin: 0; padding: 0; max-width: none; border-top: 1px solid var(--p-rule); }
+  #view-merlin .mx-chaps li { max-width: none; margin: 0; border-bottom: 1px solid var(--p-rule); }
+  .mx-chap { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; width: 100%; padding: 14px 12px 14px 10px; border-left: 3px solid transparent; transition: background-color 200ms ease, border-color 200ms ease; }
+  .mx-chap:hover { background: color-mix(in srgb, var(--p-accent) 5%, var(--paper)); }
+  .mx-chap:focus-visible { outline: 2px solid var(--p-accent); outline-offset: -2px; }
+  .mx-chap.is-on { border-left-color: var(--p-accent); background: var(--p-highlight); }
+  .mx-chap-n { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--p-rule); font-family: var(--font-label); font-weight: var(--w-label); font-size: 12px; color: var(--p-accent); background: var(--paper); }
+  .mx-chap.is-on .mx-chap-n { background: var(--p-accent); border-color: var(--p-accent); color: #fff; }
+  .mx-chap-name { display: block; font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
+  .mx-chap-text { display: block; margin-top: 4px; font-size: var(--t-small); line-height: 1.5; color: var(--p-ink); }
+  .mx-show { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; margin-top: clamp(20px, 2.6vw, 32px); border-radius: 12px; background: var(--p-highlight); outline: 1px solid var(--p-rule); outline-offset: -1px; }
+  @media (max-width: 860px) { .mx-show-head { grid-template-columns: minmax(0, 1fr); } }
   /* user flow: scan the spine, zoom the board, read the stage */
   .fl { margin-top: clamp(28px, 4vw, 52px); }
   .fl-spine { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(8px, 1vw, 14px); }
@@ -2695,76 +2716,76 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
     <!-- ---------- final deliverables ---------- -->
     <section class="bf-sec" id="mx-features">
       <h2 class="bf-center">Final Deliverables</h2>
-      <p class="bf-lede bf-center">The final prototype, feature by feature.</p>
+      <p class="bf-lede bf-center">Four moments in Aisha’s day, each answering a pain point from our research.</p>
 
-      <div class="bf-proj mx-feature">
-        <h3 class="bf-feature-sub">Customizable Workspace</h3>
-        <p>Reporters can query the AI to create semantic tags that reorganize the workspace around their current focus. Quick-sort buttons instantly regroup reports by priority, the feature analysts valued most.</p>
-        <video class="bf-autoplay mx-clip" src="images/merlin/m-customizable-workspace.mp4" poster="images/merlin/m-customizable-workspace.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="The workspace regrouping report cards by AI-generated semantic tags and priority."></video>
+      <div class="mx-show-block" id="mx-show-workspace">
+        <div class="mx-show-head">
+          <div class="mx-show-intro">
+            <p class="mx-show-n">01</p>
+            <h3 class="mx-show-title">A workspace built around her focus</h3>
+            <p class="mx-pain"><span>Pain point</span>There’s no individualized prioritization or personal workflow, and outside-agency coordination isn’t integrated: Aisha starts it by hand and watches for email replies.</p>
+          </div>
+          <ol class="mx-chaps" aria-label="Features in this video. Select one to jump to it.">
+              <li><button type="button" class="mx-chap" data-t="0" aria-current="false"><span class="mx-chap-n">1</span><span class="mx-chap-body"><span class="mx-chap-name">Semantic Tags</span><span class="mx-chap-text">Reporters ask the AI to create tags that regroup the workspace around their current focus; quick-sort buttons regroup by priority.</span></span></button></li>
+              <li><button type="button" class="mx-chap" data-t="10.68" aria-current="false"><span class="mx-chap-n">2</span><span class="mx-chap-body"><span class="mx-chap-name">Smart Tasks</span><span class="mx-chap-text">One click turns a report into a task list, each task linking straight to where the work needs to be done.</span></span></button></li>
+              <li><button type="button" class="mx-chap" data-t="15.8" aria-current="false"><span class="mx-chap-n">3</span><span class="mx-chap-body"><span class="mx-chap-name">Integrated Coordination</span><span class="mx-chap-text">The AI drafts coordination requests that reporters edit and send, and approval status is tracked on each report.</span></span></button></li>
+          </ol>
+        </div>
+        <video class="bf-autoplay mx-show" poster="images/merlin/m-show-workspace.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="Merlin workspace: the reporter asks the AI to filter reports by topic, generates tasks from a report with one click, then reviews and sends an AI-drafted coordination request and checks its approval status on the report card.">
+          <source src="images/merlin/m-show-workspace.webm" type="video/webm">
+          <source src="images/merlin/m-show-workspace.mp4" type="video/mp4">
+        </video>
       </div>
-
-      <div class="mx-pair">
-        <div class="mx-feature">
-          <h3 class="bf-feature-sub">Smart Tasks</h3>
-          <p>With one click, the AI generates a task list from the report, each with a quick link that takes the reporter straight to where the work needs to be done.</p>
-          <video class="bf-autoplay mx-clip" src="images/merlin/m-smart-tasks.mp4" poster="images/merlin/m-smart-tasks.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="The AI generating a task list with quick links on a report."></video>
+      <div class="mx-show-block" id="mx-show-nodes">
+        <div class="mx-show-head">
+          <div class="mx-show-intro">
+            <p class="mx-show-n">02</p>
+            <h3 class="mx-show-title">Every report in context</h3>
+            <p class="mx-pain"><span>Pain point</span>There’s no way to see the changes and edits made between revisions, or how a report connects to the rest of the initiative.</p>
+          </div>
+          <ol class="mx-chaps" aria-label="Features in this video. Select one to jump to it.">
+              <li><button type="button" class="mx-chap" data-t="0" aria-current="false"><span class="mx-chap-n">1</span><span class="mx-chap-body"><span class="mx-chap-name">Local Node View</span><span class="mx-chap-text">Every action, edit, and coordination on a report appears as a timeline, so its full history reads at a glance.</span></span></button></li>
+              <li><button type="button" class="mx-chap" data-t="5.55" aria-current="false"><span class="mx-chap-n">2</span><span class="mx-chap-body"><span class="mx-chap-name">Global Node View</span><span class="mx-chap-text">Zooming out shows how the report connects across the initiative, surfacing overlapping intelligence, customers, and policies before release.</span></span></button></li>
+          </ol>
         </div>
-        <div class="mx-feature">
-          <h3 class="bf-feature-sub">Integrated Coordination</h3>
-          <p>Correspondence and approvals live inside the system. The AI drafts coordination requests that reporters edit and send, with approval status tracked on each report.</p>
-          <video class="bf-autoplay mx-clip" src="images/merlin/m-integrated-coordination.mp4" poster="images/merlin/m-integrated-coordination.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="Drafting and sending a coordination request from inside the report."></video>
-        </div>
+        <video class="bf-autoplay mx-show" poster="images/merlin/m-show-nodes.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="Node view: a report’s history unfolds as a timeline of actions, edits, and coordination, then the view zooms out to show how the report connects to related reports through shared sources, customers, and policies.">
+          <source src="images/merlin/m-show-nodes.webm" type="video/webm">
+          <source src="images/merlin/m-show-nodes.mp4" type="video/mp4">
+        </video>
       </div>
-
-      <div class="mx-pair">
-        <div class="mx-feature">
-          <h3 class="bf-feature-sub">Local Node View</h3>
-          <p>Every action, edit, and coordination on a report appears as a timeline, so reporters can trace its full history at a glance.</p>
-          <video class="bf-autoplay mx-clip" src="images/merlin/m-local-nodes-view.mp4" poster="images/merlin/m-local-nodes-view.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="A report's history laid out as a node timeline."></video>
+      <div class="mx-show-block" id="mx-show-review">
+        <div class="mx-show-head">
+          <div class="mx-show-intro">
+            <p class="mx-show-n">03</p>
+            <h3 class="mx-show-title">Review with reasoning</h3>
+            <p class="mx-pain"><span>Pain point</span>Holding a report to policy and analytical standards carries a high cognitive load and leans on experience, because policy information isn’t centralized.</p>
+          </div>
+          <ol class="mx-chaps" aria-label="Features in this video. Select one to jump to it.">
+              <li><button type="button" class="mx-chap" data-t="0" aria-current="false"><span class="mx-chap-n">1</span><span class="mx-chap-body"><span class="mx-chap-name">AI Review Flags</span><span class="mx-chap-text">The AI flags passages based on the customers receiving each tier. It can suggest changes, but her reasoning is required, creating a record and future training data.</span></span></button></li>
+              <li><button type="button" class="mx-chap" data-t="14.82" aria-current="false"><span class="mx-chap-n">2</span><span class="mx-chap-body"><span class="mx-chap-name">Margin Annotations</span><span class="mx-chap-text">When a report returns, other editors’ annotations wait in the margin for the releaser to confirm, with each change shown in the document.</span></span></button></li>
+          </ol>
         </div>
-        <div class="mx-feature">
-          <h3 class="bf-feature-sub">Global Node View</h3>
-          <p>Zooming out shows how a report connects across the wider initiative, surfacing overlapping intelligence, customers, and policies before release.</p>
-          <video class="bf-autoplay mx-clip" src="images/merlin/m-global-node-view.mp4" poster="images/merlin/m-global-node-view.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="A web of connected reports across an initiative."></video>
-        </div>
+        <video class="bf-autoplay mx-show" poster="images/merlin/m-show-review.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="Review: the AI flags a passage that is misaligned with its audience, recommends a revision, and asks the reporter to record her reasoning before accepting it; then an editor’s annotation in the margin is confirmed.">
+          <source src="images/merlin/m-show-review.webm" type="video/webm">
+          <source src="images/merlin/m-show-review.mp4" type="video/mp4">
+        </video>
       </div>
-
-      <div class="bf-proj mx-feature">
-        <h3 class="bf-feature-sub">Two-Monitor Workspace</h3>
-        <p>From our research, we found that a two-monitor workstation was common practice for intelligence reporters, so Merlin is designed to span both screens.</p>
-        <video class="bf-autoplay mx-clip" src="images/merlin/m-double-workspace.mp4" poster="images/merlin/m-double-workspace.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="Merlin spread across a two-monitor setup."></video>
-      </div>
-
-      <div class="bf-proj mx-feature">
-        <h3 class="bf-feature-sub">AI Review Flags</h3>
-        <p>AI flags call out areas for review based on the customers receiving the report, so each tier is tailored to its audience. The AI can make changes, but reporter reasoning is required, creating a record and future training data.</p>
-        <video class="bf-autoplay mx-clip" src="images/merlin/m-ai-check.mp4" poster="images/merlin/m-ai-check.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="An AI review flag opening in the margin of a report, asking the reporter for reasoning."></video>
-      </div>
-
-      <div class="mx-pair">
-        <div class="mx-feature">
-          <h3 class="bf-feature-sub">Multi-Tier View</h3>
-          <p>Tiers sit side by side with differences highlighted. Hovering a highlight in one tier lights up the matching content in the other.</p>
-          <video class="bf-autoplay mx-clip" src="images/merlin/m-multi-tier-w-highlighting.mp4" poster="images/merlin/m-multi-tier-w-highlighting.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="Two tiers side by side with linked highlights."></video>
+      <div class="mx-show-block" id="mx-show-tiers">
+        <div class="mx-show-head">
+          <div class="mx-show-intro">
+            <p class="mx-show-n">04</p>
+            <h3 class="mx-show-title">Tiers side by side</h3>
+            <p class="mx-pain"><span>Pain point</span>Aisha continuously cross-references draft language against the raw sources to make sure the original analytical intent survives every tier.</p>
+          </div>
+          <ol class="mx-chaps" aria-label="Features in this video. Select one to jump to it.">
+              <li><button type="button" class="mx-chap" data-t="0" aria-current="false"><span class="mx-chap-n">1</span><span class="mx-chap-body"><span class="mx-chap-name">Multi-Tier View</span><span class="mx-chap-text">Tiers sit side by side with differences highlighted. Hovering a highlight in one tier lights up the matching content in the other.</span></span></button></li>
+              <li><button type="button" class="mx-chap" data-t="11.55" aria-current="false"><span class="mx-chap-n">2</span><span class="mx-chap-body"><span class="mx-chap-name">AI Tier Comparison</span><span class="mx-chap-text">Querying the AI auto-scrolls the tiers to related content, and the chat summarizes how the wording was sanitized at each level.</span></span></button></li>
+          </ol>
         </div>
-        <div class="mx-feature">
-          <h3 class="bf-feature-sub">AI Tier Comparison</h3>
-          <p>Querying the AI auto-scrolls the tiers to related content, and the chat summarizes how the wording was sanitized at each level.</p>
-          <video class="bf-autoplay mx-clip" src="images/merlin/m-thre-tier-comparison.mp4" poster="images/merlin/m-thre-tier-comparison.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="Three tiers scrolling together as the AI explains the sanitization."></video>
-        </div>
-      </div>
-
-      <div class="mx-pair">
-        <div class="mx-feature">
-          <h3 class="bf-feature-sub">Margin Edits</h3>
-          <p>When a report returns, other editors&rsquo; annotations are memorialized in the margin for the releaser to confirm, and each change is visualized in the document.</p>
-          <video class="bf-autoplay mx-clip" src="images/merlin/m-margin-edits.mp4" poster="images/merlin/m-margin-edits.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="Editor comments pinned in the margin beside tracked changes."></video>
-        </div>
-        <div class="mx-feature">
-          <h3 class="bf-feature-sub">Final Checklist</h3>
-          <p>The releaser&rsquo;s last confirmation before dissemination: verifying that every suggested edit and customer requirement has been satisfied.</p>
-          <video class="bf-autoplay mx-clip" src="images/merlin/m-checklist.mp4" poster="images/merlin/m-checklist.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="The final release checklist being completed."></video>
-        </div>
+        <video class="bf-autoplay mx-show" poster="images/merlin/m-show-tiers.jpg" width="1280" height="720" muted loop playsinline preload="metadata" disablepictureinpicture aria-label="Tier comparison: two tiers sit side by side with differences highlighted, hovering a highlight lights up the matching text in the other tier, then a third tier opens and the AI summarizes how the wording was sanitized at each level.">
+          <source src="images/merlin/m-show-tiers.webm" type="video/webm">
+          <source src="images/merlin/m-show-tiers.mp4" type="video/mp4">
+        </video>
       </div>
     </section>
 
@@ -4535,6 +4556,18 @@ window.__motion = (function () {
 
     view.classList.add('no-ease'); fitAll(); requestAnimationFrame(() => view.classList.remove('no-ease'));
     new ResizeObserver(() => { view.classList.add('no-ease'); select(cur); requestAnimationFrame(() => view.classList.remove('no-ease')); }).observe(view);
+  })();
+</script>
+<script>
+  /* final deliverables: chapter list jumps the showcase video and tracks where it is */
+  (() => {
+    document.querySelectorAll('.mx-show-block').forEach(b => {
+      const v = b.querySelector('video'), chs = [...b.querySelectorAll('.mx-chap')], ts = chs.map(c => +c.dataset.t);
+      const mark = () => { let i = 0; ts.forEach((t, k) => { if (v.currentTime >= t - 0.05) i = k; });
+        chs.forEach((c, k) => { c.classList.toggle('is-on', k === i); c.setAttribute('aria-current', k === i ? 'step' : 'false'); }); };
+      chs.forEach(c => c.addEventListener('click', () => { v.currentTime = +c.dataset.t; mark(); v.play().catch(() => {}); }));
+      v.addEventListener('timeupdate', mark); mark();
+    });
   })();
 </script>
 </body></html>
