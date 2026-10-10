@@ -1572,14 +1572,14 @@
      and design opportunities. Process chips highlight one cognitive process
      across every scenario. */
   /* journey map folds away until asked for */
-  .uj-toggle { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; margin-top: clamp(20px, 2.4vw, 32px); padding: 18px 20px 18px 22px; --uj-line: color-mix(in srgb, var(--p-accent) 62%, #fff); border: 2px solid var(--uj-line); border-top-width: 4px; border-radius: 4px 4px 12px 12px; background: var(--p-highlight); box-shadow: 0 2px 0 color-mix(in srgb, var(--p-accent) 22%, transparent); transition: background-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; }
-  .uj-toggle:hover { background: color-mix(in srgb, var(--p-accent) 14%, var(--paper)); box-shadow: 0 4px 0 color-mix(in srgb, var(--p-accent) 26%, transparent); transform: translateY(-1px); border-color: color-mix(in srgb, var(--p-accent) 78%, #fff); }
+  .uj-toggle { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; margin-top: clamp(20px, 2.4vw, 32px); padding: 18px 20px 18px 22px; border: 4px solid var(--p-accent); border-radius: 12px; background: color-mix(in srgb, var(--p-accent) 7%, #fff); box-shadow: 0 2px 0 color-mix(in srgb, var(--p-accent) 22%, transparent); transition: background-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; }
+  .uj-toggle:hover { background: color-mix(in srgb, var(--p-accent) 12%, #fff); box-shadow: 0 4px 0 color-mix(in srgb, var(--p-accent) 26%, transparent); transform: translateY(-1px); }
   .uj-toggle:active { transform: translateY(1px); box-shadow: 0 1px 0 color-mix(in srgb, var(--p-accent) 40%, transparent); }
   .uj-toggle:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 3px; }
   .uj-toggle-text { display: grid; gap: 2px; }
   .uj-toggle-title { font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
   .uj-toggle-sub { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
-  .uj-toggle-icon { flex: none; box-sizing: content-box; padding: 7px; border-radius: 50%; background: color-mix(in srgb, var(--p-accent) 80%, #fff); color: #fff; transition: transform 300ms ease; }
+  .uj-toggle-icon { flex: none; box-sizing: content-box; padding: 7px; border-radius: 50%; background: var(--p-accent); color: #fff; transition: transform 300ms ease; }
   .uj-toggle[aria-expanded="true"] .uj-toggle-icon { transform: rotate(180deg); }
   #view-merlin p.mx-uj-hint { margin-top: 12px; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
   .uj-fold { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 450ms cubic-bezier(.22,.8,.24,1); }
