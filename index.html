@@ -4503,6 +4503,8 @@ window.__motion = (function () {
       c.addEventListener('click', pick);
       c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
     });
+    /* closing the fold by hand clears any selected process */
+    root.ujClear = () => { if (proc) { proc = null; paint(); } };
 
     /* scenario selector */
     const steps = root.querySelector('.uj-steps');
@@ -4724,7 +4726,10 @@ window.__motion = (function () {
       sub.textContent = open ? 'Close the interactive journey map' : 'Open the interactive journey map';
     };
     fold.ujOpen = () => set(true);
-    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true'; set(open);
+      const uj = document.getElementById('uj'); if (!open && uj && uj.ujClear) uj.ujClear();
+    });
     document.querySelectorAll('.mx-proc[data-p]').forEach(c => {
       c.addEventListener('click', () => set(true));
       c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') set(true); });
