@@ -392,10 +392,14 @@
     font-size: clamp(1.25rem, 2.1vw, 1.7rem); line-height: 1.38; letter-spacing: -0.005em;
     color: var(--p-ink); max-width: 40ch; margin: 0 auto; text-wrap: balance;
   }
-  :is(#view-butterfly, #view-merlin) .bf-statement p.bf-statement-note {
-    font-family: var(--font-body); font-weight: 400; font-size: var(--t-small); line-height: 1.6; letter-spacing: 0;
-    color: var(--p-muted); max-width: 56ch; margin: 0 auto clamp(16px, 2vw, 24px);
+  /* research rounds: the statement's details sit under a hairline, same strip as the hero meta */
+  .bf-statement .mx-round {
+    position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 5fr); gap: clamp(20px, 3vw, 40px);
+    max-width: 720px; margin: clamp(24px, 3vw, 36px) auto 0; padding-bottom: 0; border-bottom: 0; text-align: left;
+    border-top-color: color-mix(in srgb, var(--p-accent) 22%, transparent);
   }
+  .bf-statement .mx-round dd { color: var(--p-ink); }
+  @media (max-width: 560px) { .bf-statement .mx-round { grid-template-columns: minmax(0, 1fr); gap: 14px; } }
   .bf-band {
     margin-top: clamp(40px, 6vw, 84px); background: var(--p-band); color: var(--p-band-ink);
     border-radius: clamp(20px, 2.4vw, 32px); padding: clamp(28px, 5vw, 64px); text-align: center;
@@ -2735,8 +2739,11 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
 
       <div class="bf-statement">
         <h2 class="bf-feature-sub bf-statement-label">User Interviews</h2>
-        <p class="bf-statement-note">We set out to clarify our understanding of the reporter workflow and check our first concepts for alignment. Concept 01, Tier Comparison, drew strong positive feedback.</p>
         <p>Report releasers are recipient focused and will <span class="bf-hmw">always choose accuracy over efficiency.</span></p>
+        <dl class="bf-meta mx-round">
+          <div><dt>Rounds</dt><dd>One</dd></div>
+          <div><dt>Focus</dt><dd>Clarify the reporter workflow and check our first concepts for alignment. Concept 01, Tier Comparison, drew strong positive feedback.</dd></div>
+        </dl>
       </div>
     </section>
 
@@ -2829,8 +2836,11 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
 
       <div class="bf-statement">
         <h2 class="bf-feature-sub bf-statement-label">Iterative Usability Testing</h2>
-        <p class="bf-statement-note">Three rounds of concept and usability testing.</p>
         <p>Give reporters <span class="bf-hmw">choices</span> in how they navigate and review their documents, and <span class="bf-hmw">control over complexity</span> through progressive disclosure.</p>
+        <dl class="bf-meta mx-round">
+          <div><dt>Rounds</dt><dd>Three</dd></div>
+          <div><dt>Focus</dt><dd>Concept validation and usability testing.</dd></div>
+        </dl>
       </div>
     </section>
 
