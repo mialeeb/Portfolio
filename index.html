@@ -1533,20 +1533,34 @@
   #view-merlin .fl-lane p { margin: 0 0 10px; }
   .fl-k { display: block; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); margin-bottom: 2px; }
 
-  .fl-v1 { margin: clamp(36px, 5vw, 64px) 0 0; display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: clamp(16px, 2.4vw, 36px); align-items: center; }
-  .fl-v1 img { grid-column: 2; grid-row: 1; width: 100%; height: auto; border: 1px solid var(--p-rule); border-radius: 10px; background: #fff; }
-  .fl-v1 figcaption { grid-column: 1; grid-row: 1; font-size: var(--t-small); line-height: 1.55; color: var(--p-muted); }
-  .fl-v1 figcaption b { display: block; color: var(--p-ink); font-family: var(--font-label); font-weight: var(--w-label); letter-spacing: var(--ls-label); font-size: var(--t-label-sm); margin-bottom: 4px; }
 
+  /* task flow: the actions alone, in order */
+  .tf { margin-top: clamp(28px, 3.4vw, 44px); }
+  :is(#view-merlin) .bf-sec h3.tf-title { margin: 0; font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
+  #view-merlin p.tf-sub { margin: 4px 0 0; max-width: none; font-size: var(--t-small); color: var(--p-muted); }
+  #view-merlin .tf-row { list-style: none; margin: 16px 0 0; padding: clamp(14px, 1.6vw, 20px); max-width: none; display: grid; grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr) 28px minmax(0, 1fr) 28px minmax(0, 1fr); align-items: stretch; background: var(--p-highlight); border-radius: 14px; }
+  #view-merlin .tf-row > li { max-width: none; margin: 0; font-size: inherit; }
+  .tf-stage { background: var(--paper); border: 1px solid var(--p-rule); border-radius: 10px; padding: 16px 16px 18px; }
+  #view-merlin p.tf-head { margin: 0 0 12px; max-width: none; display: flex; gap: 8px; align-items: baseline; font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
+  .tf-head span { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  #view-merlin .tf-acts { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; max-width: none; }
+  #view-merlin .tf-acts li { margin: 0; max-width: none; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--p-rule); background: color-mix(in srgb, var(--p-accent) 5%, #fff); font-size: var(--t-small); line-height: 1.35; color: var(--p-ink); }
+  .tf-arrow { position: relative; }
+  .tf-arrow::before { content: ""; position: absolute; left: 6px; right: 8px; top: 50%; height: 2px; background: var(--p-accent); }
+  .tf-arrow::after { content: ""; position: absolute; right: 6px; top: calc(50% - 5px); width: 8px; height: 8px; border-top: 2px solid var(--p-accent); border-right: 2px solid var(--p-accent); transform: rotate(45deg); }
+  @media (max-width: 900px) {
+    #view-merlin .tf-row { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
+    .tf-arrow { height: 26px; }
+    .tf-arrow::before { left: calc(50% - 1px); right: auto; top: 4px; bottom: 6px; width: 2px; height: auto; }
+    .tf-arrow::after { right: auto; left: calc(50% - 5px); top: auto; bottom: 6px; transform: rotate(135deg); }
+  }
   @media (max-width: 1100px) { .fl-spine { grid-template-columns: repeat(3, minmax(0, 1fr)); } .fl-keys { grid-template-columns: minmax(0, 1fr); } }
   @media (max-width: 700px) {
     .fl-spine { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .fl-goal-note { margin-left: 0; flex-basis: 100%; }
     .fl-view { aspect-ratio: 4 / 3; }
     .fl-cols, .fl-keys, .fl-key-2 { grid-template-columns: minmax(0, 1fr); }
-    .fl-v1 { grid-template-columns: minmax(0, 1fr); }
-    .fl-v1 img, .fl-v1 figcaption { grid-column: 1; grid-row: auto; }
-  }
+      }
   @media (prefers-reduced-motion: reduce) { .fl-world, .fl-n, .fl-wires path { transition: none; } }
   /* six cognitive processes */
   .mx-processes {
@@ -2565,9 +2579,8 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
       </div>
 
       <div class="bf-proj">
-        <h2 class="mx-uj-title">User Journey Map</h2>
+        <h2 class="mx-uj-title">Interactive User Journey Map</h2>
         <p>From our data, I isolated six daily cognitive processes that Aisha&rsquo;s work demands, and color-coded every step, touchpoint, and design opportunity in the map by the process it draws on.</p>
-        <p class="mx-uj-hint">Select a block or a scenario to explore it.</p>
         <div class="mx-processes">
           <div class="mx-proc" data-p="urg" role="button" tabindex="0" aria-pressed="false" style="--c:#dd4362"><h3>Urgency Triage</h3><p>Dynamically prioritizing tasks by deadline proximity, mission impact, and workflow under time pressure.</p><span>5&nbsp;phases &middot; 4&nbsp;touchpoints &middot; 2&nbsp;opportunities</span></div>
           <div class="mx-proc" data-p="val" role="button" tabindex="0" aria-pressed="false" style="--c:#e36727"><h3>Analytical Validation</h3><p>Verifying that analytic claims reflect the source data and that intended scope stays consistent across report tiers.</p><span>3&nbsp;phases &middot; 5&nbsp;touchpoints &middot; 2&nbsp;opportunities</span></div>
@@ -2648,7 +2661,7 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
 
     <!-- ---------- user flow ---------- -->
     <section class="bf-sec" id="mx-flow">
-      <h2 class="bf-center">Mapping the User Flow</h2>
+      <h2 class="bf-center">System Mapping</h2>
       <p class="bf-lede bf-center">We mapped Aisha&rsquo;s path through the new workspace, layering her goals, her actions, the interface, and where AI steps in.</p>
 
       <div class="fl">
@@ -2687,6 +2700,12 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
             </button></li>
         </ol>
 
+        <div class="tf">
+          <h3 class="tf-title">Task flow</h3>
+          <p class="tf-sub">The core actions Aisha takes, in order.</p>
+          <ol class="tf-row" aria-label="Task flow"><li class="tf-stage"><p class="tf-head"><span>01</span>Orient</p><ul class="tf-acts"><li>Opens main workspace</li><li>Chooses where to focus</li><li>Sorts by urgency</li><li>Filters by signal type</li></ul></li><li class="tf-arrow" aria-hidden="true"></li><li class="tf-stage"><p class="tf-head"><span>02</span>Coordinate</p><ul class="tf-acts"><li>Sends report for coordination</li></ul></li><li class="tf-arrow" aria-hidden="true"></li><li class="tf-stage"><p class="tf-head"><span>03</span>Review</p><ul class="tf-acts"><li>Previews report on hover</li><li>Opens report</li><li>Annotates</li><li>Highlights and queries AI</li><li>Compares to other reports</li></ul></li><li class="tf-arrow" aria-hidden="true"></li><li class="tf-stage"><p class="tf-head"><span>04</span>Release</p><ul class="tf-acts"><li>Receives revisions back</li><li>Reopens report</li><li>Ready to disseminate</li><li>Submits</li></ul></li></ol>
+        </div>
+
         <div class="fl-view" tabindex="0" role="group" aria-roledescription="zoomable board" aria-label="Full user flow board. Select a stage above to zoom in. Arrow keys pan, plus and minus zoom, 0 resets." aria-describedby="fl-detail">
           <div class="fl-world" style="width:3120px;height:1470px" aria-hidden="true">
             <svg class="fl-wires" viewBox="0 0 3120 1470" width="3120" height="1470" aria-hidden="true"><defs><marker id="fl-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M1,1 L9,5 L1,9" fill="none" stroke="#8a90ab" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><path d="M276.2,162.4 V146.4 H341.2 V130.4" data-s="goals"/><path d="M276.2,162.4 V146.4 H211.2 V130.4" data-s="goals"/><path d="M81.2,162.4 V146.4 H81.2 V130.4" data-s="goals"/><path d="M81.2,162.4 V146.4 H341.2 V130.4" data-s="goals"/><path d="M81.2,162.4 V146.4 H471.2 V130.4" data-s="goals"/><path d="M471.2,162.4 V146.4 H471.2 V130.4" data-s="jud goals"/><path d="M954.9,199.2 V180.8 H954.9 V162.4" data-s="auth"/><path d="M373.7,312.8 V282.4 H276.2 V252.0" data-s="vig goals"/><path d="M81.2,312.8 V282.4 H471.2 V252.0" data-s="goals"/><path d="M81.2,312.8 V282.4 H81.2 V252.0" data-s="urg goals"/><path d="M81.2,312.8 V282.4 H276.2 V252.0" data-s="goals"/><path d="M373.7,312.8 V282.4 H471.2 V252.0" data-s="goals"/><path d="M806.9,312.8 V241.8 H910.9"/><path d="M954.9,312.8 V298.6 H954.9 V284.3"/><path d="M424.9,357.6 H590.3 V357.6 H755.7"/><path d="M858.1,357.6 H880.9 V357.6 H903.7"/><path d="M1006.1,357.6 H1028.9 V357.6 H1051.7" data-s="vig"/><path d="M954.9,402.4 V416.6 H954.9 V430.9"/><path d="M749.3,487.9 H806.9 V402.4"/><path d="M1006.1,475.7 H1028.9 V475.7 H1051.7" data-s="exp"/><path d="M414.9,493.6 V448.0 H373.7 V402.4" data-s="vig"/><path d="M414.9,493.6 V448.0 H81.2 V402.4"/><path d="M624.5,538.5 H642.9 V487.9 H661.3" data-s="urg"/><path d="M293.3,538.5 H328.5 V538.4 H363.7" data-s="vig"/><path d="M466.1,538.4 H501.3 V538.5 H536.5"/><path d="M624.5,538.5 H642.9 V589.0 H661.3" data-s="urg"/><path d="M1544.5,552.8 H1569.3 V552.8 H1594.1"/><path d="M1696.5,552.8 H1712.5 V552.8 H1728.5"/><path d="M414.9,583.2 V627.6 H306.1 V672.0"/><path d="M414.9,583.2 V627.6 H464.5 V672.0" data-s="vig"/><path d="M749.3,589.0 H881.4 V672.0"/><path d="M1371.7,716.9 H1406.9 V552.8 H1442.1" data-s="vig"/><path d="M2332.5,674.8 V654.6 H2332.5 V634.5"/><path d="M2742.1,674.8 V654.6 H2742.1 V634.5" data-s="auth"/><path d="M1371.7,716.9 H1406.9 V676.3 H1442.1"/><path d="M1544.5,676.3 H1569.3 V678.6 H1594.1" data-s="val"/><path d="M646.4,716.8 H738.3 V716.8 H830.2" data-s="vig"/><path d="M932.6,716.8 H960.6 V714.5 H988.6" data-s="vig"/><path d="M1076.6,714.5 H1100.9 V716.8 H1125.3" data-s="vig"/><path d="M515.7,716.8 H529.9 V716.8 H544.0" data-s="vig"/><path d="M1227.7,716.8 H1255.7 V716.9 H1283.7" data-s="vig"/><path d="M2793.3,719.6 H2815.7 V717.4 H2838.1" data-s="auth"/><path d="M2926.1,717.4 H2948.5 V719.6 H2970.9"/><path d="M1956.5,721.9 H1978.9 V719.6 H2001.3"/><path d="M2103.7,719.6 H2126.1 V721.9 H2148.5"/><path d="M2236.5,721.9 H2258.9 V719.6 H2281.3"/><path d="M2383.7,719.6 H2406.1 V721.9 H2428.5"/><path d="M2516.5,721.9 H2530.1 V719.6 H2543.7" data-s="auth"/><path d="M2646.1,719.6 H2668.5 V719.6 H2690.9" data-s="auth"/><path d="M646.4,716.8 H663.8 V768.8 H681.2" data-s="vig"/><path d="M1371.7,716.9 H1406.9 V792.3 H1442.1"/><path d="M595.2,761.6 V769.6 H595.2 V777.6"/><path d="M2594.9,764.4 V779.5 H2594.9 V794.5"/><path d="M1176.5,761.6 V779.6 H1176.5 V797.6"/><path d="M595.2,761.6 V866.4 H681.2" data-s="vig"/><path d="M1442.1,792.3 H1409.8 V915.8 H1377.4" data-s="val"/><path d="M1544.5,792.3 H1561.2 V915.8 H1577.8" data-s="val"/><path d="M1544.5,792.3 H1802.1 V871.0"/><path d="M464.5,761.6 V829.6 H464.5 V897.6"/><path d="M1275.0,915.8 H1127.8 V987.0" data-s="val"/><path d="M1326.2,960.6 V973.8 H1270.2 V987.0" data-s="val"/><path d="M1326.2,960.6 V973.8 H1399.8 V987.0" data-s="val"/><path d="M1629.0,960.6 V973.8 H1629.0 V987.0" data-s="val"/><path d="M1802.1,960.6 V973.8 H1802.1 V987.0" data-s="exp"/><path d="M464.5,987.2 V1007.2 H358.9 V1027.2" data-s="urg"/><path d="M464.5,987.2 V1007.2 H464.5 V1027.2"/><path d="M464.5,987.2 V1007.2 H570.1 V1027.2"/><path d="M1853.3,1031.8 H1873.3 V1031.8 H1893.3" data-s="exp"/><path d="M1270.2,1076.6 V1089.8 H1160.2 V1103.0" data-s="val"/><path d="M1270.2,1076.6 V1089.8 H1304.2 V1103.0" data-s="val"/><path d="M1399.8,1076.6 V1089.8 H1430.6 V1103.0" data-s="val"/><path d="M1629.0,1076.6 V1089.8 H1629.0 V1103.0" data-s="val"/><path d="M1802.1,1076.6 V1089.8 H1802.1 V1103.0" data-s="exp"/><path d="M358.9,1115.2 V1124.8 H358.9 V1134.4" data-s="urg"/><path d="M1160.2,1188.1 V1206.1 H1160.2 V1224.1"/><path d="M1304.2,1188.1 V1206.1 H1304.2 V1224.1" data-s="val"/><path d="M1430.6,1188.1 V1206.1 H1430.6 V1224.1" data-s="val"/><path d="M1629.0,1188.1 V1206.1 H1629.0 V1224.1" data-s="val"/><path d="M1802.1,1188.1 V1206.1 H1802.1 V1224.1" data-s="exp"/><path d="M1853.3,1268.9 H1873.3 V1268.9 H1893.3" data-s="exp"/><path d="M1160.2,1313.7 V1326.9 H1160.2 V1340.1"/></svg>
@@ -2704,10 +2723,6 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
         </div>
       </div>
 
-      <figure class="fl-v1">
-        <img src="images/merlin/task-flow-v1.webp" width="2004" height="400" loading="lazy" decoding="async" alt="The first-pass task flow: a single row of sticky notes moving from triaging reports by tag, to coordination, opening and querying a report, annotating, revisions, and dissemination.">
-        <figcaption><b>Where it started.</b> Our first pass was a linear task flow of the same journey. The user flow above layers in Aisha&rsquo;s goals, the interface, and AI.</figcaption>
-      </figure>
     </section>
 
     <!-- ---------- mockups ---------- -->
