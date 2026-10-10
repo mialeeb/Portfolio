@@ -1572,14 +1572,16 @@
      and design opportunities. Process chips highlight one cognitive process
      across every scenario. */
   /* journey map folds away until asked for */
-  .uj-toggle { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; margin-top: clamp(20px, 2.4vw, 32px); padding: 16px 20px; border: 1px solid var(--p-rule); border-radius: 10px; background: var(--paper); transition: background-color 200ms ease, border-color 200ms ease; }
-  .uj-toggle:hover { border-color: var(--p-accent); background: color-mix(in srgb, var(--p-accent) 5%, var(--paper)); }
+  .uj-toggle { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; margin-top: clamp(20px, 2.4vw, 32px); padding: 18px 20px 18px 22px; border: 2px solid var(--p-accent); border-radius: 12px; background: var(--p-highlight); box-shadow: 0 2px 0 color-mix(in srgb, var(--p-accent) 35%, transparent); transition: background-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; }
+  .uj-toggle:hover { background: color-mix(in srgb, var(--p-accent) 14%, var(--paper)); box-shadow: 0 4px 0 color-mix(in srgb, var(--p-accent) 40%, transparent); transform: translateY(-1px); }
+  .uj-toggle:active { transform: translateY(1px); box-shadow: 0 1px 0 color-mix(in srgb, var(--p-accent) 40%, transparent); }
   .uj-toggle:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 3px; }
   .uj-toggle-text { display: grid; gap: 2px; }
   .uj-toggle-title { font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
   .uj-toggle-sub { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
-  .uj-toggle-icon { flex: none; color: var(--p-accent); transition: transform 300ms ease; }
+  .uj-toggle-icon { flex: none; box-sizing: content-box; padding: 7px; border-radius: 50%; background: var(--p-accent); color: #fff; transition: transform 300ms ease; }
   .uj-toggle[aria-expanded="true"] .uj-toggle-icon { transform: rotate(180deg); }
+  #view-merlin p.mx-uj-hint { margin-top: 12px; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
   .uj-fold { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 450ms cubic-bezier(.22,.8,.24,1); }
   .uj-fold.is-open { grid-template-rows: 1fr; }
   .uj-fold-inner { min-height: 0; overflow: hidden; }
@@ -2565,6 +2567,7 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
       <div class="bf-proj">
         <h2 class="mx-uj-title">User Journey Map</h2>
         <p>From our data, I isolated six daily cognitive processes that Aisha&rsquo;s work demands, and color-coded every step, touchpoint, and design opportunity in the map by the process it draws on.</p>
+        <p class="mx-uj-hint">Select a block or a scenario to explore it.</p>
         <div class="mx-processes">
           <div class="mx-proc" data-p="urg" role="button" tabindex="0" aria-pressed="false" style="--c:#dd4362"><h3>Urgency Triage</h3><p>Dynamically prioritizing tasks by deadline proximity, mission impact, and workflow under time pressure.</p><span>5&nbsp;phases &middot; 4&nbsp;touchpoints &middot; 2&nbsp;opportunities</span></div>
           <div class="mx-proc" data-p="val" role="button" tabindex="0" aria-pressed="false" style="--c:#e36727"><h3>Analytical Validation</h3><p>Verifying that analytic claims reflect the source data and that intended scope stays consistent across report tiers.</p><span>3&nbsp;phases &middot; 5&nbsp;touchpoints &middot; 2&nbsp;opportunities</span></div>
@@ -2580,7 +2583,6 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
         <div class="uj-fold" id="uj-fold" inert>
           <div class="uj-fold-inner">
             <div class="uj" id="uj">
-              <p class="uj-hint">Each block is one step in Aisha&rsquo;s day, colored by the cognitive process it draws on. Select a block or a scenario to explore it.</p>
               <div class="uj-filter" role="group" aria-label="Select a cognitive process to highlight across the journey">
                 <span class="uj-filter-label">Select a process</span>
               </div>
