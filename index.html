@@ -1432,6 +1432,12 @@
     .mx-aisha-facts > div { grid-template-columns: minmax(0, 1fr); }
     .mx-aisha-facts dt { padding-top: 0; }
   }
+  /* wireframes: reuses the sketch tabs; segment eyebrow + short captions */
+  #view-merlin p.wf-intro { max-width: 68ch; margin: 0; font-size: var(--t-small); line-height: 1.55; color: var(--p-ink); }
+  #view-merlin #mx-wireframes .sk-stage { margin-top: clamp(16px, 2vw, 24px); }
+  #view-merlin #mx-wireframes .sk-shot p.wf-seg { margin: 0 0 10px; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  #view-merlin #mx-wireframes .sk-shot p.wf-cap { margin: 0; font-family: var(--font-label); font-weight: 600; font-size: var(--t-small); line-height: 1.4; color: var(--p-ink); }
+  #view-merlin #mx-wireframes .sk-shot figcaption { margin-top: 12px; }
   /* first sketches: concept tabs, sketch picker, pinned sticky notes */
   .sk { margin-top: var(--f-title-gap); }
   .sk-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(8px, 1.4vw, 16px); }
@@ -2814,23 +2820,60 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
     </section>
 
     <!-- ---------- mockups ---------- -->
-    <section class="bf-sec">
-      <h2 class="bf-center">Building the Proposed Task Analysis</h2>
-      <p class="bf-lede bf-center">Using our proposed task analysis, we broke the dashboard into three segments and began creating software mockups.</p>
-      <div class="bf-row three" style="margin-top: clamp(28px, 4vw, 52px)">
-        <div class="ph" style="--ar: 4 / 3">Segment 1 &middot; 5 frames &mdash; Customer management</div>
-        <div class="ph" style="--ar: 4 / 3">Segment 2 &middot; 11 frames &mdash; Report analysis</div>
-        <div class="ph" style="--ar: 4 / 3">Segment 3 &middot; 3 frames &mdash; Annotation feedback</div>
-      </div>
-
-      <div class="bf-proj">
-        <h3 class="bf-feature-sub">Mid-Fidelity Mockups</h3>
-        <p>Each team member brought their variations into mid-fidelity to share with the analysts.</p>
-        <div class="bf-row four" style="margin-top: clamp(20px, 2.4vw, 32px)">
-          <div class="ph" style="--ar: 16 / 10">Expanded report with AI summary</div>
-          <div class="ph" style="--ar: 16 / 10">Reports on a deadline timeline</div>
-          <div class="ph" style="--ar: 16 / 10">Drafting a coordination request</div>
-          <div class="ph" style="--ar: 16 / 10">AI flags a wording change</div>
+    <section class="bf-sec" id="mx-wireframes">
+      <h2 class="bf-center">Wireframes</h2>
+      <p class="bf-lede bf-center">Using our proposed task analysis, we broke the dashboard into three segments and took them from hand-drawn sketches to mid-fidelity screens.</p>
+      <div class="sk">
+        <div class="sk-tabs" role="tablist" aria-label="Wireframe fidelity"><button type="button" role="tab" class="sk-tab" id="wf-t-hand" aria-controls="wf-p-hand" aria-selected="false" tabindex="-1"><span class="sk-tab-n" aria-hidden="true">01</span><span class="sk-tab-name">Hand-drawn</span></button><button type="button" role="tab" class="sk-tab" id="wf-t-lofi" aria-controls="wf-p-lofi" aria-selected="true" tabindex="0"><span class="sk-tab-n" aria-hidden="true">02</span><span class="sk-tab-name">Low fidelity</span></button><button type="button" role="tab" class="sk-tab" id="wf-t-midfi" aria-controls="wf-p-midfi" aria-selected="false" tabindex="-1"><span class="sk-tab-n" aria-hidden="true">03</span><span class="sk-tab-name">Mid fidelity</span></button></div>
+        <div class="sk-panel" role="tabpanel" id="wf-p-hand" aria-labelledby="wf-t-hand" hidden>
+          <p class="wf-intro">Quick hand-drawn layouts for each segment.</p>
+          <div class="sk-stage">
+            <div class="ph" style="--ar: 4 / 3">Hand-drawn &middot; Customer Management</div>
+            <div class="ph" style="--ar: 4 / 3">Hand-drawn &middot; Report Analysis</div>
+            <div class="ph" style="--ar: 4 / 3">Hand-drawn &middot; Annotation Feedback</div>
+          </div>
+        </div>
+        <div class="sk-panel" role="tabpanel" id="wf-p-lofi" aria-labelledby="wf-t-lofi">
+          <p class="wf-intro">The first software mockups, one set of frames per segment.</p>
+          <div class="sk-stage">
+          <figure class="sk-shot">
+            <p class="wf-seg">Segment 1 · 5 frames</p>
+            <div class="sk-img"><img src="images/merlin/wf-lofi-1.webp" alt="Low-fidelity wireframe for customer management" width="433" height="316" loading="lazy" decoding="async"></div>
+            <figcaption><p class="sk-cap-h">Customer Management</p></figcaption>
+          </figure><figure class="sk-shot">
+            <p class="wf-seg">Segment 2 · 11 frames</p>
+            <div class="sk-img"><img src="images/merlin/wf-lofi-2.webp" alt="Low-fidelity wireframe for report analysis" width="431" height="316" loading="lazy" decoding="async"></div>
+            <figcaption><p class="sk-cap-h">Report Analysis</p></figcaption>
+          </figure><figure class="sk-shot">
+            <p class="wf-seg">Segment 3 · 3 frames</p>
+            <div class="sk-img"><img src="images/merlin/wf-lofi-3.webp" alt="Low-fidelity wireframe for annotation feedback" width="432" height="317" loading="lazy" decoding="async"></div>
+            <figcaption><p class="sk-cap-h">Annotation Feedback</p></figcaption>
+          </figure>
+          </div>
+        </div>
+        <div class="sk-panel" role="tabpanel" id="wf-p-midfi" aria-labelledby="wf-t-midfi" hidden>
+          <p class="wf-intro">Each team member brought their variations into mid-fidelity to share with the analysts.</p>
+          <div class="sk-stage">
+          <figure class="sk-shot">
+            <div class="sk-img"><img src="images/merlin/wf-midfi-1.webp" alt="Mid-fidelity screen: reports on a deadline timeline" width="427" height="304" loading="lazy" decoding="async"></div>
+            <figcaption><p class="wf-cap">Reports on a deadline timeline</p></figcaption>
+          </figure><figure class="sk-shot">
+            <div class="sk-img"><img src="images/merlin/wf-midfi-2.webp" alt="Mid-fidelity screen: drafting a coordination request" width="427" height="304" loading="lazy" decoding="async"></div>
+            <figcaption><p class="wf-cap">Drafting a coordination request</p></figcaption>
+          </figure><figure class="sk-shot">
+            <div class="sk-img"><img src="images/merlin/wf-midfi-3.webp" alt="Mid-fidelity screen: expanded report with ai summary" width="427" height="304" loading="lazy" decoding="async"></div>
+            <figcaption><p class="wf-cap">Expanded report with AI summary</p></figcaption>
+          </figure><figure class="sk-shot">
+            <div class="sk-img"><img src="images/merlin/wf-midfi-4.webp" alt="Mid-fidelity screen: report view with tier map" width="427" height="304" loading="lazy" decoding="async"></div>
+            <figcaption><p class="wf-cap">Report view with tier map</p></figcaption>
+          </figure><figure class="sk-shot">
+            <div class="sk-img"><img src="images/merlin/wf-midfi-5.webp" alt="Mid-fidelity screen: ai flags a wording change" width="427" height="304" loading="lazy" decoding="async"></div>
+            <figcaption><p class="wf-cap">AI flags a wording change</p></figcaption>
+          </figure><figure class="sk-shot">
+            <div class="sk-img"><img src="images/merlin/wf-midfi-6.webp" alt="Mid-fidelity screen: revisions answering annotations" width="427" height="304" loading="lazy" decoding="async"></div>
+            <figcaption><p class="wf-cap">Revisions answering annotations</p></figcaption>
+          </figure>
+          </div>
         </div>
       </div>
 
@@ -4620,10 +4663,9 @@ window.__motion = (function () {
   })();
 </script>
 <script>
-  /* first sketches: concept tabs + sketch picker */
-  (() => {
-    const root = document.getElementById('mx-sketch'); if (!root) return;
-    const tabs = [...root.querySelectorAll('.sk-tab')];
+  /* tabbed explorers (first sketches, wireframes): concept tabs with arrow-key support */
+  document.querySelectorAll('.sk-tabs').forEach(list => {
+    const tabs = [...list.querySelectorAll('.sk-tab')];
     const show = (t, focus) => {
       tabs.forEach(b => { const on = b === t; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1;
         document.getElementById(b.getAttribute('aria-controls')).hidden = !on; });
@@ -4637,7 +4679,7 @@ window.__motion = (function () {
         if (j < 0) return; ev.preventDefault(); show(tabs[j], true);
       });
     });
-  })();
+  });
 </script>
 <script>
   /* user flow explorer: stage buttons zoom the board and swap the readable panel */
