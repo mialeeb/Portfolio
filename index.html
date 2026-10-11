@@ -1432,6 +1432,58 @@
     .mx-aisha-facts > div { grid-template-columns: minmax(0, 1fr); }
     .mx-aisha-facts dt { padding-top: 0; }
   }
+  /* persona: where Aisha sits in the reporting pipeline */
+  .mx-pipe { --g: clamp(18px, 2.4vw, 34px); margin-top: clamp(44px, 6vw, 80px); padding: clamp(24px, 4vw, 52px); border-radius: clamp(20px, 2.4vw, 32px);
+    background: radial-gradient(70% 140% at 100% 0%, color-mix(in srgb, var(--p-accent) 10%, transparent), transparent 60%), var(--p-highlight); }
+  .mx-pipe-head { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(12px, 3vw, 48px); align-items: baseline; }
+  :is(#view-merlin) .bf-sec h3.mx-pipe-kicker { margin: 0; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  #view-merlin p.mx-pipe-lede { margin: 0; max-width: 46ch; font-family: var(--font-display); font-weight: 500; font-size: clamp(1.15rem, 1.8vw, 1.45rem); line-height: 1.35; letter-spacing: -0.005em; color: var(--p-ink); text-wrap: balance; }
+  #view-merlin .mx-pipe-track { list-style: none; position: relative; margin: clamp(28px, 3.4vw, 44px) 0 0; padding: 0; max-width: none;
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) auto; gap: var(--g); align-items: stretch; }
+  #view-merlin .mx-pipe-track li { max-width: none; margin: 0; }
+  /* the hand-off line behind the cards, with a report travelling along it */
+  .mx-pipe-track::before { content: ""; position: absolute; left: 24px; right: 40px; top: 44px; height: 2px; background: color-mix(in srgb, var(--p-accent) 28%, transparent); }
+  .mx-pipe-track::after { content: ""; position: absolute; top: 39px; left: 24px; width: 12px; height: 12px; border-radius: 50%; background: var(--p-accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--p-accent) 18%, transparent); animation: mx-pipe-run 7s cubic-bezier(.6, 0, .4, 1) infinite; }
+  @keyframes mx-pipe-run { 0% { left: 24px; opacity: 0; } 6% { opacity: 1; } 90% { opacity: 1; } 100% { left: calc(100% - 40px); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .mx-pipe-track::after { display: none; } }
+  .mx-pipe-step { position: relative; z-index: 1; display: grid; align-content: start; gap: 4px; padding: 18px 18px 20px; border-radius: 16px; background: #fff;
+    border: 1px solid color-mix(in srgb, var(--p-accent) 16%, var(--p-rule)); }
+  /* chevron between cards */
+  .mx-pipe-step::after { content: ""; position: absolute; top: 40px; right: calc(var(--g) / -2 - 5px); width: 9px; height: 9px; z-index: 2;
+    border-top: 2px solid var(--p-accent); border-right: 2px solid var(--p-accent); transform: rotate(45deg); }
+  .mx-pipe-av { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; margin-bottom: 10px; border-radius: 50%;
+    background: var(--paper); border: 2px solid color-mix(in srgb, var(--p-accent) 45%, var(--p-rule)); font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; color: var(--p-accent); }
+  .mx-pipe-name { font-family: var(--font-display); font-weight: 700; font-size: var(--f-sub); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
+  .mx-pipe-name em { display: block; font-style: normal; font-weight: 500; color: var(--p-accent); }
+  .mx-pipe-step.is-her::after { top: 48px; }
+  .mx-pipe-role { margin-top: 6px; }
+  .mx-pipe-role { font-size: var(--t-small); line-height: 1.4; color: var(--p-muted); }
+  .mx-pipe-step.is-her { background: var(--p-accent); border-color: var(--p-accent); transform: translateY(-8px); box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--p-accent) 70%, transparent); }
+  .mx-pipe-step.is-her .mx-pipe-av { background: #fff; border-color: #fff; color: var(--p-accent); }
+  .mx-pipe-step.is-her .mx-pipe-name, .mx-pipe-step.is-her .mx-pipe-name em, .mx-pipe-step.is-her .mx-pipe-role { color: #fff; }
+  .mx-pipe-step.is-her .mx-pipe-name em { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .mx-pipe-tag { position: absolute; top: 14px; right: 14px; padding: 4px 10px; border-radius: 999px; background: #fff; color: var(--p-accent);
+    font-family: var(--font-label); font-weight: var(--w-label); font-size: 11px; letter-spacing: var(--ls-label); }
+  .mx-pipe-end { position: relative; z-index: 1; display: grid; justify-items: center; align-content: start; gap: 8px; padding-top: 24px; color: var(--p-accent);
+    font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); }
+  .mx-pipe-end svg { box-sizing: content-box; padding: 9px; border-radius: 50%; background: var(--paper); border: 2px dashed color-mix(in srgb, var(--p-accent) 45%, transparent); }
+  @media (max-width: 1040px) {
+    .mx-pipe-head { grid-template-columns: minmax(0, 1fr); }
+    #view-merlin .mx-pipe-track { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .mx-pipe-track::before { left: 43px; right: auto; top: 30px; bottom: 30px; width: 2px; height: auto; }
+    .mx-pipe-track::after { display: none; }
+    .mx-pipe-step { grid-template-columns: 52px minmax(0, 1fr); column-gap: 16px; align-items: center; padding: 14px 16px; }
+    .mx-pipe-av { grid-row: span 2; margin: 0; }
+    .mx-pipe-step::after { top: auto; bottom: -12px; right: auto; left: 39px; transform: rotate(135deg); }
+    .mx-pipe-step.is-her { transform: none; }
+    .mx-pipe-name em { display: inline; }
+    .mx-pipe-role { margin-top: 0; }
+    .mx-pipe-step.is-her::after { top: auto; }
+    .mx-pipe-tag { position: static; grid-column: 2; justify-self: start; order: 3; margin-top: 6px; }
+    .mx-pipe-end { grid-auto-flow: column; justify-content: start; align-items: center; padding: 0 0 0 16px; }
+    .mx-pipe-end svg { transform: rotate(90deg); }
+  }
   /* wireframes: reuses the sketch tabs; segment eyebrow + short captions */
   #view-merlin p.wf-intro { max-width: 68ch; margin: 0; font-size: var(--t-small); line-height: 1.55; color: var(--p-ink); }
   #view-merlin #mx-wireframes .sk-stage { margin-top: clamp(16px, 2vw, 24px); }
@@ -2627,6 +2679,20 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
             <dd>The excitement of delivering high-value intelligence that customers can act on, and the chance to teach junior reporters how to keep analytic integrity while protecting sensitive sources.</dd>
           </div>
         </dl>
+      </div>
+
+      <div class="mx-pipe">
+        <div class="mx-pipe-head">
+          <h3 class="mx-pipe-kicker" id="mx-pipe-h">Where she sits</h3>
+          <p class="mx-pipe-lede">Every report passes through four people before it reaches its customers. Aisha makes the final check before sign-off.</p>
+        </div>
+        <ol class="mx-pipe-track" aria-labelledby="mx-pipe-h">
+          <li class="mx-pipe-step"><span class="mx-pipe-av" aria-hidden="true">J</span><span class="mx-pipe-name">Jordan <em>drafts</em></span><span class="mx-pipe-role">Drafter</span></li>
+          <li class="mx-pipe-step"><span class="mx-pipe-av" aria-hidden="true">M</span><span class="mx-pipe-name">Marcus <em>edits</em></span><span class="mx-pipe-role">Analytic editor</span></li>
+          <li class="mx-pipe-step is-her"><span class="mx-pipe-tag">Our persona</span><span class="mx-pipe-av" aria-hidden="true">A</span><span class="mx-pipe-name">Aisha <em>releases</em></span><span class="mx-pipe-role">Senior report releaser</span></li>
+          <li class="mx-pipe-step"><span class="mx-pipe-av" aria-hidden="true">R</span><span class="mx-pipe-name">Raymond <em>signs off</em></span><span class="mx-pipe-role">Senior reporting authority</span></li>
+          <li class="mx-pipe-end"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 12h13M12 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Customers</span></li>
+        </ol>
       </div>
 
       <div class="bf-proj">
