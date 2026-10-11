@@ -1391,99 +1391,60 @@
     line-height: 1; letter-spacing: -0.02em; color: var(--p-accent); align-self: end;
   }
   .bf-band .mx-num { color: #8fa2ff; }
-  /* persona card */
-  .mx-persona {
-    margin-top: clamp(24px, 3vw, 40px); background: var(--p-highlight); border-radius: clamp(20px, 2.4vw, 32px);
-    padding: clamp(24px, 4vw, 52px); display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 2fr);
-    gap: clamp(20px, 4vw, 56px); align-items: start;
+  /* persona: editorial, wide and short. Identity + stance up top, the reporting
+     chain as a typographic strip, then the three facts side by side */
+  .mx-ps { --ps-gap: clamp(20px, 3vw, 44px); }
+  .mx-ps-top { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 3fr); gap: var(--ps-gap); align-items: end;
+    padding-bottom: clamp(22px, 2.6vw, 32px); border-bottom: 2px solid var(--p-ink); }
+  #view-merlin .mx-ps p { max-width: none; margin: 0; }
+  #view-merlin p.mx-ps-kicker { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  :is(#view-merlin) .bf-sec h2.mx-ps-name { margin: 8px 0 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(3rem, 7vw, 5.6rem); line-height: 0.92; letter-spacing: -0.035em; color: var(--p-ink); }
+  #view-merlin p.mx-ps-role { margin-top: 12px; font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-muted); }
+  .mx-ps-quote { margin: 0; padding-left: 0.5em; }
+  .mx-ps-quote p::before { content: "\201C"; margin-left: -0.5em; display: inline-block; width: 0.5em; color: var(--p-accent); }
+  .mx-ps-quote p::after { content: "\201D"; color: var(--p-accent); }
+  #view-merlin .mx-ps-quote p { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.3rem, 2.2vw, 1.85rem); line-height: 1.25; letter-spacing: -0.012em; color: var(--p-ink); text-wrap: balance; }
+  .mx-ps-stats { margin: 0; display: grid; gap: 12px; }
+  .mx-ps-stats > div { display: grid; grid-template-columns: 2.2ch minmax(0, 1fr); gap: 12px; align-items: baseline; }
+  .mx-ps-stats dt { font-family: var(--font-display); font-weight: 700; font-size: var(--t-h2); line-height: 1; letter-spacing: var(--ls-tight); color: var(--p-accent); }
+  .mx-ps-stats dd { margin: 0; font-size: var(--t-small); line-height: 1.35; color: var(--p-muted); }
+  /* the chain */
+  .mx-ps-chain { padding-block: clamp(18px, 2.2vw, 26px); border-bottom: 1px solid var(--p-rule); }
+  :is(#view-merlin) .bf-sec h3.mx-ps-label { margin: 0 0 14px; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-muted); }
+  #view-merlin .mx-ps-line { list-style: none; margin: 0; padding: 0; max-width: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) auto; }
+  #view-merlin .mx-ps-line li { max-width: none; margin: 0; display: grid; align-content: start; gap: 4px; padding: 14px clamp(14px, 1.6vw, 22px) 16px; border-left: 1px solid var(--p-rule); }
+  #view-merlin .mx-ps-line li:first-child { border-left: 0; padding-left: 0; }
+  .mx-ps-n { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-muted); }
+  .mx-ps-n b { margin-left: 8px; font-weight: var(--w-label); color: var(--p-accent); }
+  .mx-ps-who { font-family: var(--font-display); font-weight: 700; font-size: var(--f-sub); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
+  .mx-ps-who em { font-style: normal; font-weight: 500; color: var(--p-accent); }
+  .mx-ps-what { font-size: var(--t-small); line-height: 1.4; color: var(--p-muted); }
+  #view-merlin .mx-ps-line li.is-her { background: var(--p-highlight); border-left: 0; box-shadow: inset 0 4px 0 var(--p-accent); border-radius: 0 0 10px 10px; }
+  #view-merlin .mx-ps-line li.is-her + li { border-left: 0; }
+  .mx-ps-line .is-her .mx-ps-n { color: var(--p-accent); }
+  .mx-ps-line .is-her .mx-ps-what { color: var(--p-ink); }
+  #view-merlin .mx-ps-line li.mx-ps-out { align-content: center; border-left: 0; padding-right: 0; }
+  .mx-ps-out .mx-ps-n { font-size: 1.4rem; color: var(--p-accent); letter-spacing: 0; }
+  .mx-ps-out .mx-ps-who { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  /* the facts */
+  .mx-ps-facts { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ps-gap); padding-top: clamp(22px, 2.6vw, 32px); }
+  .mx-ps-facts dt { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); margin-bottom: 8px; }
+  .mx-ps-facts dd { margin: 0; font-size: var(--t-small); line-height: 1.6; color: var(--p-ink); }
+  @media (max-width: 1100px) {
+    .mx-ps-top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .mx-ps-stats { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
-  .mx-persona-id { display: flex; gap: 16px; align-items: center; }
-  .mx-avatar {
-    flex: none; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center;
-    background: var(--p-band); color: var(--p-band-ink);
-    font-family: var(--font-display); font-weight: 700; font-size: 1.6rem;
+  @media (max-width: 760px) {
+    .mx-ps-top { grid-template-columns: minmax(0, 1fr); align-items: start; }
+    .mx-ps-stats > div { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+    #view-merlin .mx-ps-line { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #view-merlin .mx-ps-line li { border-left: 0; padding-left: 0; border-top: 1px solid var(--p-rule); }
+    #view-merlin .mx-ps-line li:nth-child(even) { padding-left: 14px; }
+    #view-merlin .mx-ps-line li.is-her { padding-left: 14px; border-top: 0; }
+    #view-merlin .mx-ps-line li.mx-ps-out { grid-column: 1 / -1; grid-template-columns: auto auto; justify-content: start; gap: 10px; align-items: center; }
+    .mx-ps-facts { grid-template-columns: minmax(0, 1fr); }
   }
-  .mx-persona .bf-feature-sub { margin-bottom: 6px; }
-  #view-merlin p.mx-role { margin: 0; font-size: var(--t-small); color: var(--p-muted); }
-  .mx-persona-body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
-  #view-merlin .mx-persona-body p { margin: 0; }
-  /* persona: editorial, unboxed. Name and stance on the left, facts as
-     hairline rows on the right */
-  .mx-aisha { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
-  #view-merlin .mx-aisha p { max-width: none; margin: 0; }
-  .mx-aisha-kicker { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent) !important; }
-  :is(#view-merlin) .bf-sec h2.mx-aisha-name { margin: 10px 0 0; font-family: var(--font-display); font-weight: 700; font-size: var(--t-h1); line-height: 1; letter-spacing: var(--ls-tight); color: var(--p-ink); }
-  #view-merlin p.mx-aisha-role { margin-top: 12px; font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); color: var(--p-muted); }
-  #view-merlin p.mx-aisha-motto { margin-top: clamp(24px, 3vw, 36px); padding-left: 18px; border-left: 3px solid var(--p-accent); font-size: var(--f-lede); line-height: 1.5; color: var(--p-ink); text-wrap: balance; }
-  .mx-aisha-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: clamp(28px, 3.4vw, 44px) 0 0; padding-top: 20px; border-top: 1px solid var(--p-rule); }
-  .mx-aisha-stats dt { font-family: var(--font-display); font-weight: 700; font-size: var(--t-h2); line-height: 1; letter-spacing: var(--ls-tight); color: var(--p-accent); }
-  .mx-aisha-stats dd { margin: 8px 0 0; font-size: var(--t-small); line-height: 1.4; color: var(--p-muted); }
-  .mx-aisha-facts { margin: 0; border-top: 1px solid var(--p-rule); }
-  .mx-aisha-facts > div { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); gap: 8px 24px; padding: clamp(18px, 2.2vw, 26px) 0; border-bottom: 1px solid var(--p-rule); }
-  .mx-aisha-facts dt { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); padding-top: 4px; }
-  .mx-aisha-facts dd { margin: 0; font-size: var(--t-body); line-height: var(--lh-body); color: var(--p-ink); }
-  @media (max-width: 860px) {
-    .mx-aisha { grid-template-columns: minmax(0, 1fr); }
-  }
-  @media (min-width: 861px) {
-    .mx-aisha-id { position: sticky; top: 96px; }
-  }
-  @media (max-width: 1180px) {
-    .mx-aisha-facts > div { grid-template-columns: minmax(0, 1fr); }
-    .mx-aisha-facts dt { padding-top: 0; }
-  }
-  /* persona: where Aisha sits in the reporting pipeline */
-  .mx-pipe { --g: clamp(18px, 2.4vw, 34px); margin-top: clamp(44px, 6vw, 80px); padding: clamp(24px, 4vw, 52px); border-radius: clamp(20px, 2.4vw, 32px);
-    background: radial-gradient(70% 140% at 100% 0%, color-mix(in srgb, var(--p-accent) 10%, transparent), transparent 60%), var(--p-highlight); }
-  .mx-pipe-head { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(12px, 3vw, 48px); align-items: baseline; }
-  :is(#view-merlin) .bf-sec h3.mx-pipe-kicker { margin: 0; font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
-  #view-merlin p.mx-pipe-lede { margin: 0; max-width: 46ch; font-family: var(--font-display); font-weight: 500; font-size: clamp(1.15rem, 1.8vw, 1.45rem); line-height: 1.35; letter-spacing: -0.005em; color: var(--p-ink); text-wrap: balance; }
-  #view-merlin .mx-pipe-track { list-style: none; position: relative; margin: clamp(28px, 3.4vw, 44px) 0 0; padding: 0; max-width: none;
-    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) auto; gap: var(--g); align-items: stretch; }
-  #view-merlin .mx-pipe-track li { max-width: none; margin: 0; }
-  /* the hand-off line behind the cards, with a report travelling along it */
-  .mx-pipe-track::before { content: ""; position: absolute; left: 24px; right: 40px; top: 44px; height: 2px; background: color-mix(in srgb, var(--p-accent) 28%, transparent); }
-  .mx-pipe-track::after { content: ""; position: absolute; top: 39px; left: 24px; width: 12px; height: 12px; border-radius: 50%; background: var(--p-accent);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--p-accent) 18%, transparent); animation: mx-pipe-run 7s cubic-bezier(.6, 0, .4, 1) infinite; }
-  @keyframes mx-pipe-run { 0% { left: 24px; opacity: 0; } 6% { opacity: 1; } 90% { opacity: 1; } 100% { left: calc(100% - 40px); opacity: 0; } }
-  @media (prefers-reduced-motion: reduce) { .mx-pipe-track::after { display: none; } }
-  .mx-pipe-step { position: relative; z-index: 1; display: grid; align-content: start; gap: 4px; padding: 18px 18px 20px; border-radius: 16px; background: #fff;
-    border: 1px solid color-mix(in srgb, var(--p-accent) 16%, var(--p-rule)); }
-  /* chevron between cards */
-  .mx-pipe-step::after { content: ""; position: absolute; top: 40px; right: calc(var(--g) / -2 - 5px); width: 9px; height: 9px; z-index: 2;
-    border-top: 2px solid var(--p-accent); border-right: 2px solid var(--p-accent); transform: rotate(45deg); }
-  .mx-pipe-av { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; margin-bottom: 10px; border-radius: 50%;
-    background: var(--paper); border: 2px solid color-mix(in srgb, var(--p-accent) 45%, var(--p-rule)); font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; color: var(--p-accent); }
-  .mx-pipe-name { font-family: var(--font-display); font-weight: 700; font-size: var(--f-sub); letter-spacing: var(--f-sub-track); color: var(--p-ink); }
-  .mx-pipe-name em { display: block; font-style: normal; font-weight: 500; color: var(--p-accent); }
-  .mx-pipe-step.is-her::after { top: 48px; }
-  .mx-pipe-role { margin-top: 6px; }
-  .mx-pipe-role { font-size: var(--t-small); line-height: 1.4; color: var(--p-muted); }
-  .mx-pipe-step.is-her { background: var(--p-accent); border-color: var(--p-accent); transform: translateY(-8px); box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--p-accent) 70%, transparent); }
-  .mx-pipe-step.is-her .mx-pipe-av { background: #fff; border-color: #fff; color: var(--p-accent); }
-  .mx-pipe-step.is-her .mx-pipe-name, .mx-pipe-step.is-her .mx-pipe-name em, .mx-pipe-step.is-her .mx-pipe-role { color: #fff; }
-  .mx-pipe-step.is-her .mx-pipe-name em { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
-  .mx-pipe-tag { position: absolute; top: 14px; right: 14px; padding: 4px 10px; border-radius: 999px; background: #fff; color: var(--p-accent);
-    font-family: var(--font-label); font-weight: var(--w-label); font-size: 11px; letter-spacing: var(--ls-label); }
-  .mx-pipe-end { position: relative; z-index: 1; display: grid; justify-items: center; align-content: start; gap: 8px; padding-top: 24px; color: var(--p-accent);
-    font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); }
-  .mx-pipe-end svg { box-sizing: content-box; padding: 9px; border-radius: 50%; background: var(--paper); border: 2px dashed color-mix(in srgb, var(--p-accent) 45%, transparent); }
-  @media (max-width: 1040px) {
-    .mx-pipe-head { grid-template-columns: minmax(0, 1fr); }
-    #view-merlin .mx-pipe-track { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-    .mx-pipe-track::before { left: 43px; right: auto; top: 30px; bottom: 30px; width: 2px; height: auto; }
-    .mx-pipe-track::after { display: none; }
-    .mx-pipe-step { grid-template-columns: 52px minmax(0, 1fr); column-gap: 16px; align-items: center; padding: 14px 16px; }
-    .mx-pipe-av { grid-row: span 2; margin: 0; }
-    .mx-pipe-step::after { top: auto; bottom: -12px; right: auto; left: 39px; transform: rotate(135deg); }
-    .mx-pipe-step.is-her { transform: none; }
-    .mx-pipe-name em { display: inline; }
-    .mx-pipe-role { margin-top: 0; }
-    .mx-pipe-step.is-her::after { top: auto; }
-    .mx-pipe-tag { position: static; grid-column: 2; justify-self: start; order: 3; margin-top: 6px; }
-    .mx-pipe-end { grid-auto-flow: column; justify-content: start; align-items: center; padding: 0 0 0 16px; }
-    .mx-pipe-end svg { transform: rotate(90deg); }
-  }
+
   /* wireframes: reuses the sketch tabs; segment eyebrow + short captions */
   #view-merlin p.wf-intro { max-width: 68ch; margin: 0; font-size: var(--t-small); line-height: 1.55; color: var(--p-ink); }
   #view-merlin #mx-wireframes .sk-stage { margin-top: clamp(16px, 2vw, 24px); }
@@ -1851,7 +1812,7 @@
   .mx-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); margin-top: clamp(40px, 6vw, 84px); align-items: start; }
   .mx-pair .mx-feature { display: grid; grid-template-rows: auto 1fr auto; }
   @media (max-width: 860px) {
-    .mx-persona, .mx-persona-body, .mx-pair { grid-template-columns: minmax(0, 1fr); }
+    .mx-pair { grid-template-columns: minmax(0, 1fr); }
     .mx-processes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 520px) { .mx-processes { grid-template-columns: minmax(0, 1fr); } }
@@ -2653,19 +2614,33 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
 
     <!-- ---------- persona ---------- -->
     <section class="bf-sec">
-      <div class="mx-aisha">
-        <div class="mx-aisha-id">
-          <p class="mx-aisha-kicker">Persona</p>
-          <h2 class="mx-aisha-name">Aisha</h2>
-          <p class="mx-aisha-role">Senior Report Releaser</p>
-          <p class="mx-aisha-motto">Quality first. Accuracy and analytic integrity always beat speed.</p>
-          <dl class="mx-aisha-stats">
+      <div class="mx-ps">
+        <header class="mx-ps-top">
+          <div class="mx-ps-id">
+            <p class="mx-ps-kicker">Persona</p>
+            <h2 class="mx-ps-name">Aisha</h2>
+            <p class="mx-ps-role">Senior Report Releaser</p>
+          </div>
+          <blockquote class="mx-ps-quote"><p>Quality first. Accuracy and analytic integrity always beat speed.</p></blockquote>
+          <dl class="mx-ps-stats">
             <div><dt>8</dt><dd>years in intelligence</dd></div>
             <div><dt>3</dt><dd>years as release authority</dd></div>
             <div><dt>5</dt><dd>classification tiers per report</dd></div>
           </dl>
+        </header>
+
+        <div class="mx-ps-chain">
+          <h3 class="mx-ps-label" id="mx-ps-chain-h">Where she sits: every report passes through four people before it reaches its customers</h3>
+          <ol class="mx-ps-line" aria-labelledby="mx-ps-chain-h">
+            <li><span class="mx-ps-n">01</span><span class="mx-ps-who">Jordan <em>drafts</em></span><span class="mx-ps-what">Drafter</span></li>
+            <li><span class="mx-ps-n">02</span><span class="mx-ps-who">Marcus <em>edits</em></span><span class="mx-ps-what">Analytic editor</span></li>
+            <li class="is-her"><span class="mx-ps-n">03 <b>Our persona</b></span><span class="mx-ps-who">Aisha <em>releases</em></span><span class="mx-ps-what">Final check on classification, policy, and audience</span></li>
+            <li><span class="mx-ps-n">04</span><span class="mx-ps-who">Raymond <em>signs off</em></span><span class="mx-ps-what">Senior reporting authority</span></li>
+            <li class="mx-ps-out"><span class="mx-ps-n" aria-hidden="true">&rarr;</span><span class="mx-ps-who">Customers</span></li>
+          </ol>
         </div>
-        <dl class="mx-aisha-facts">
+
+        <dl class="mx-ps-facts">
           <div>
             <dt>About</dt>
             <dd>Aisha is the final checkpoint before a report goes out: the &ldquo;final sanity check&rdquo; that it is accurate, properly classified, and meets the intelligence needs of its customers.</dd>
@@ -2679,20 +2654,6 @@ M2097 1513 c-5 -6 -5 -6 -5 -12 0 -15 15 -15 23 -1 3 7 3 10 -1 14 -6 6 -10 6
             <dd>The excitement of delivering high-value intelligence that customers can act on, and the chance to teach junior reporters how to keep analytic integrity while protecting sensitive sources.</dd>
           </div>
         </dl>
-      </div>
-
-      <div class="mx-pipe">
-        <div class="mx-pipe-head">
-          <h3 class="mx-pipe-kicker" id="mx-pipe-h">Where she sits</h3>
-          <p class="mx-pipe-lede">Every report passes through four people before it reaches its customers. Aisha makes the final check before sign-off.</p>
-        </div>
-        <ol class="mx-pipe-track" aria-labelledby="mx-pipe-h">
-          <li class="mx-pipe-step"><span class="mx-pipe-av" aria-hidden="true">J</span><span class="mx-pipe-name">Jordan <em>drafts</em></span><span class="mx-pipe-role">Drafter</span></li>
-          <li class="mx-pipe-step"><span class="mx-pipe-av" aria-hidden="true">M</span><span class="mx-pipe-name">Marcus <em>edits</em></span><span class="mx-pipe-role">Analytic editor</span></li>
-          <li class="mx-pipe-step is-her"><span class="mx-pipe-tag">Our persona</span><span class="mx-pipe-av" aria-hidden="true">A</span><span class="mx-pipe-name">Aisha <em>releases</em></span><span class="mx-pipe-role">Senior report releaser</span></li>
-          <li class="mx-pipe-step"><span class="mx-pipe-av" aria-hidden="true">R</span><span class="mx-pipe-name">Raymond <em>signs off</em></span><span class="mx-pipe-role">Senior reporting authority</span></li>
-          <li class="mx-pipe-end"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 12h13M12 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Customers</span></li>
-        </ol>
       </div>
 
       <div class="bf-proj">
