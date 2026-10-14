@@ -79,7 +79,7 @@
     --orchid: #a051a8;
     --plum:   #2b1533;
     --teal:   #0b6a64;   /* homepage nav bar */
-    --gold-pale: #fcefbf; /* homepage hero + wordmark: a softer gold */
+    --gold-hero: #fadc84; /* homepage hero + wordmark: the gold, a hair lighter */
     --plum-mid: #6d2f75; /* the readable dark plum on gold */
     --paper:  #faf9f6;
     --rule:   #e6e1e6;
@@ -129,7 +129,7 @@
   }
   .nav-mark {
     display: grid; place-items: center; flex: none; height: 46px; padding-inline: 18px; border-radius: 14px; white-space: nowrap;
-    background: var(--gold-pale); color: var(--plum); text-decoration: none;
+    background: var(--gold-hero); color: var(--plum); text-decoration: none;
     font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em;
   }
   .nav-links { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; justify-content: flex-end; }
@@ -811,34 +811,15 @@
     .motion, .motion-knob, .motion-track { transition: none; }
   }
 
-  /* ---------- ticker ---------- */
-  .ticker {
-    position: relative;
-    overflow: hidden;
-    margin-top: clamp(14px, 1.8vw, 24px);
-    /* deep enough that a shoved character isn't clipped by the strip */
-    padding-block: clamp(18px, 2.2vw, 28px);
-    /* the strip is masked, not cut: letters fade out at both ends instead
-       of being chopped mid-stroke */
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-    touch-action: pan-y;
+  /* ---------- skills ---------- */
+  /* skills: still chips under the hero */
+  .skills { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: clamp(18px, 2.2vw, 28px) 0 0; padding: 0; }
+  .skills li {
+    padding: 8px 15px; border-radius: 999px; border: 1.5px solid color-mix(in srgb, var(--plum-mid) 30%, transparent);
+    background: #fff; color: var(--plum-mid);
+    font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: 0.02em; line-height: 1.2;
   }
-  .ticker-track {
-    display: flex;
-    width: max-content;
-    white-space: pre;
-    will-change: transform;
-    font-family: var(--font-label); font-weight: var(--w-label);
-    font-size: var(--t-label);
-    font-weight: 500;
-    letter-spacing: var(--ls-label);
-    color: #6d2f75;          /* 8.6:1 on paper */
-  }
-  .ticker-track span {
-    display: inline-block;
-    will-change: transform;
-  }
+  .skills li.is-tool { background: var(--gold-hero); border-color: transparent; color: var(--plum); }
 
   .hero {
     position: relative;
@@ -846,8 +827,8 @@
     /* a soft pool of light top-left and a warmer corner bottom-right, so the gold has depth */
     background:
       radial-gradient(110% 90% at 0% 0%, color-mix(in srgb, #fff 42%, transparent), transparent 55%),
-      radial-gradient(80% 90% at 100% 100%, color-mix(in srgb, #f0c25a 30%, transparent), transparent 60%),
-      var(--gold-pale);
+      radial-gradient(80% 90% at 100% 100%, color-mix(in srgb, #e8a93a 34%, transparent), transparent 60%),
+      var(--gold-hero);
     color: var(--orchid);
     /* rounder than it was: a tight 24px corner forces the ring into a turn
        sharp enough that the caps collide. The ring reads its radius off this
@@ -1855,13 +1836,11 @@
     </div>
   </header>
 
-  <!-- ticker: the skills line, straight and level. Characters are split so
-       the cursor can shove them around; the reading copy is in the sr-only
-       line above it. EDIT the list in TICKER_ITEMS. -->
-  <p class="sr-only" id="tickerSR"></p>
-  <div class="ticker" id="ticker" aria-hidden="true">
-    <div class="ticker-track" id="tickerTrack"></div>
-  </div>
+  <!-- skills and tools as still chips: methods first, then tools (filled) -->
+  <ul class="skills" aria-label="Skills and tools">
+    <li>UX Research</li><li>User Testing</li><li>Usability Testing</li><li>Prototyping</li><li>Interaction Design</li><li>Journey Mapping</li><li>Information Architecture</li><li>Data Coding</li>
+    <li class="is-tool">Figma</li><li class="is-tool">Adobe Suite</li><li class="is-tool">Spline</li><li class="is-tool">Claude</li><li class="is-tool">Cursor</li>
+  </ul>
 
   <!-- ============ WORK — one scrolling rail per project ============ -->
   <!-- Each project is a horizontal rail: a title card first, then cards of
@@ -3337,7 +3316,7 @@ window.__motion = (function () {
     if (document.hidden) gen++; else play();
   });
 
-  function remeasure() { calibrate(); buildTicker(); }
+  function remeasure() { calibrate(); }
 
   let resizeTimer;
   window.addEventListener('resize', () => {
@@ -3350,7 +3329,6 @@ window.__motion = (function () {
     buildAll();
     remeasure();
     play();
-    requestAnimationFrame(frame);
     // cheap insurance: if a face landed after the first pass, re-measure.
     // calibrate() is idempotent and doesn't disturb the running sequence.
     setTimeout(remeasure, 600);
@@ -3418,133 +3396,6 @@ window.__motion = (function () {
     fly.querySelectorAll('.wing').forEach((g) => g.setAttribute('transform', flap));
   }
 
-  /* ===================== ticker =====================
-     A straight line of skills sliding left to right, and characters that
-     shove out of the way of the cursor. Two motions on the same element:
-     the strip's own travel (one transform on the track) and each
-     character's own displacement (one transform per character, and only
-     for the handful near the pointer).
-     EDIT ME: this array is the ticker's content.
-     ========================================================= */
-  const TICKER_ITEMS = [
-    'UX Research', 'Usability Testing', 'Interaction Design',
-    'Information Architecture', 'Prototyping', 'Design Systems',
-    'Figma', 'Adobe Illustrator', 'After Effects',
-    'Qualitative Coding', 'Accessibility / WCAG', 'HTML + CSS'
-  ];
-  const TICKER_SEP = '   \u00b7   ';
-
-  const SPEED = 26;      // px per second — a slow read, not a stock ticker
-  const RADIUS = 110;    // how close the cursor has to get
-  const PUSH = 34;       // how far a character is shoved at point blank
-  const EASE = 0.14;     // how fast it drifts back once the cursor leaves
-
-  const ticker = document.getElementById('ticker');
-  const track = document.getElementById('tickerTrack');
-
-  (function tickerSR() {
-    const sr = document.getElementById('tickerSR');
-    if (sr) sr.textContent = 'Skills and tools: ' + TICKER_ITEMS.join(', ') + '.';
-  })();
-
-  let chars = [];        // { el, bx, by, ox, oy, tx, ty, wobble }
-  let unit = 0;          // width of one pass through the list
-  let offset = 0;        // the strip's own travel
-  let px = -9999, py = -9999;
-  const still = () => window.__motion.calm;
-
-  function buildTicker() {
-    if (!ticker || !track) return;
-    track.innerHTML = '';
-    chars = [];
-
-    const unitStr = TICKER_ITEMS.join(TICKER_SEP) + TICKER_SEP;
-    /* measure one pass, then lay down enough passes to cover the strip
-       plus one spare — sliding back by exactly one pass is then invisible */
-    const probe = document.createElement('span');
-    probe.style.cssText = 'position:absolute;visibility:hidden;white-space:pre';
-    probe.textContent = unitStr;
-    track.appendChild(probe);
-    unit = probe.getBoundingClientRect().width;
-    track.removeChild(probe);
-    if (!unit) return;
-
-    const need = Math.min(6, Math.ceil(ticker.clientWidth / unit) + 1);
-    const full = unitStr.repeat(need);
-    const frag = document.createDocumentFragment();
-    for (const ch of full) {
-      const el = document.createElement('span');
-      el.textContent = ch;
-      frag.appendChild(el);
-      chars.push({ el: el, bx: 0, by: 0, ox: 0, oy: 0, tx: 0, ty: 0,
-                   wobble: (Math.random() - 0.5) * 1.6 });
-    }
-    track.appendChild(frag);
-    cachePositions();
-  }
-
-  /* character positions inside the track never change once laid out, so
-     they're measured once rather than every frame */
-  function cachePositions() {
-    if (!chars.length) return;
-    const base = track.getBoundingClientRect();
-    chars.forEach((c) => {
-      const r = c.el.getBoundingClientRect();
-      c.bx = r.left - base.left + r.width / 2;
-      c.by = r.top - base.top + r.height / 2;
-    });
-  }
-
-  let last = 0;
-  function frame(now) {
-    const dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
-    last = now;
-
-    if (!still()) {
-      offset -= SPEED * dt;
-      if (unit && offset <= -unit) offset += unit;   // one pass back = no change
-      track.style.transform = 'translateX(' + offset.toFixed(2) + 'px)';
-    }
-
-    const live = px > -9000 && !still();
-    for (let i = 0; i < chars.length; i++) {
-      const c = chars[i];
-      if (live) {
-        const dx = c.bx + offset - px;
-        const dy = c.by - py;
-        const d2 = dx * dx + dy * dy;
-        if (d2 < RADIUS * RADIUS) {
-          const d = Math.sqrt(d2) || 0.001;
-          const fall = 1 - d / RADIUS;
-          const f = fall * fall * PUSH;
-          c.tx = (dx / d) * f;
-          /* vertical is damped — the strip is only so tall, and a character
-             that leaves it gets clipped rather than scattered */
-          c.ty = (dy / d) * f * 0.55 + c.wobble * f * 0.4;
-        } else { c.tx = 0; c.ty = 0; }
-      } else { c.tx = 0; c.ty = 0; }
-
-      c.ox += (c.tx - c.ox) * EASE;
-      c.oy += (c.ty - c.oy) * EASE;
-      if (Math.abs(c.ox) < 0.05 && Math.abs(c.oy) < 0.05) {
-        if (c.el.style.transform) { c.el.style.transform = ''; c.ox = 0; c.oy = 0; }
-      } else {
-        c.el.style.transform = 'translate(' + c.ox.toFixed(2) + 'px,' + c.oy.toFixed(2) + 'px)';
-      }
-    }
-    moveFly(now);
-    requestAnimationFrame(frame);
-  }
-
-  if (ticker) {
-    ticker.addEventListener('pointermove', (e) => {
-      const r = ticker.getBoundingClientRect();
-      px = e.clientX - r.left;
-      py = e.clientY - r.top;
-    });
-    ticker.addEventListener('pointerleave', () => { px = -9999; py = -9999; });
-  }
-
   /* the router needs to stop the reel while the hero is off screen */
   window.__heroReel = {
     play: function () { if (S) play(); },
@@ -3553,7 +3404,7 @@ window.__motion = (function () {
       gen++;
       if (S) { setBeat(BEATS[0], false); revealTag(); }
     },
-    ring: buildTicker          // re-measure after the view is visible again
+    ring: remeasure            // re-measure after the view is visible again
   };
 
   window.__motion.onChange(function (calm) {
