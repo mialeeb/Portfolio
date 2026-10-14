@@ -815,8 +815,8 @@
   /* skills: still chips under the hero */
   .skills { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: clamp(18px, 2.2vw, 28px) 0 0; padding: 0; }
   .skills li {
-    padding: 8px 15px; border-radius: 999px; border: 1.5px solid transparent;
-    background: var(--teal); color: var(--paper);   /* methods: the nav's teal */
+    padding: 8px 15px; border-radius: 999px; border: 1.5px solid color-mix(in srgb, var(--teal) 35%, transparent);
+    background: #fff; color: var(--teal);   /* methods: outlined in the nav's teal */
     font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: 0.02em; line-height: 1.2;
   }
   .skills li.is-tool { background: var(--gold-hero); border-color: transparent; color: var(--plum); }
