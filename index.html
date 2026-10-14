@@ -45,6 +45,8 @@
     --t-body:    clamp(17px, 1.25vw, 18px);
     --t-small:   max(14.5px, 0.93rem);           /* captions, card copy */
     --t-label:   max(15px, 0.86rem);             /* mono labels */
+    --f-sub: 20px;  --f-sub-weight: 700;  --f-sub-track: 0.02em;   /* case-study sub-heading, shared */
+    --t-statement: clamp(1.25rem, 2.1vw, 1.7rem);  /* case-study statement/quote line */
     --t-label-sm: 14px;
     --t-label-xs: 14px;
 
@@ -130,14 +132,14 @@
   .nav-mark {
     display: grid; place-items: center; flex: none; height: 46px; padding-inline: 18px; border-radius: 14px; white-space: nowrap;
     background: var(--gold-hero); color: var(--plum); text-decoration: none;
-    font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em;
+    font-family: var(--font-display); font-weight: var(--f-sub-weight); font-size: var(--f-sub); letter-spacing: var(--f-sub-track);   /* case-study sub-heading */
   }
   .nav-links { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; justify-content: flex-end; }
   .nav-links a {
     display: inline-flex; align-items: center; gap: 9px;
     min-height: 46px; padding-inline: 16px 18px;   /* 44px+ touch target */
     border-radius: 14px; text-decoration: none;
-    font-family: var(--font-display); font-weight: 500; font-size: 1.02rem; letter-spacing: -0.005em;
+    font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label); letter-spacing: var(--ls-label);   /* case-study label style */
     color: color-mix(in srgb, var(--paper) 86%, transparent);
     transition: background-color 180ms ease, color 180ms ease;
   }
@@ -817,7 +819,7 @@
   .skills li {
     padding: 8px 15px; border-radius: 999px; border: 1.5px solid color-mix(in srgb, var(--teal) 35%, transparent);
     background: #fff; color: var(--teal);   /* methods: outlined in the nav's teal */
-    font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: 0.02em; line-height: 1.2;
+    font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); line-height: 1.2;
   }
   .skills li.is-tool { background: var(--gold-hero); border-color: transparent; color: var(--plum); }
 
@@ -983,8 +985,8 @@
   /* ---- small link tiles ---- */
   .tile.link { justify-content: space-between; }
   .link-label {
-    font-family: var(--font-display);
-    font-weight: var(--w-head); font-size: var(--t-h4);
+    font-family: var(--font-label);
+    font-weight: var(--w-label); font-size: var(--t-label); letter-spacing: var(--ls-label);
   }
   .tile.link .arrow { align-self: flex-end; font-size: 1.4rem; line-height: 1; }
   .tile.link:hover { background: var(--gold); border-color: var(--gold); color: #6d2f75; }
@@ -1003,7 +1005,7 @@
   .tile.project .kind, .tile.now .kind { margin-bottom: auto; }
   .tile.project .title {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: var(--w-display);
     font-size: var(--t-h2);
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -1016,7 +1018,7 @@
   }
   .tile.project .cta {
     margin-top: 6px;
-    font-size: var(--t-small); font-weight: 600;
+    font-family: var(--font-label); font-size: var(--t-label); font-weight: var(--w-label); letter-spacing: var(--ls-label);
     display: inline-flex; align-items: center; gap: 7px;
   }
   /* a soft shape so the big tile isn't a flat rectangle — decorative */
@@ -1042,33 +1044,32 @@
   }
   .tile.quote p {
     margin: 0;
-    font-family: var(--font-display);
-    font-size: var(--t-h3);
-    line-height: 1.22;
-    letter-spacing: -0.01em;
+    font-family: var(--font-display); font-weight: 500;
+    font-size: var(--t-statement);    /* case-study statement line */
+    line-height: 1.38;
+    letter-spacing: -0.005em;
     text-wrap: balance;
   }
-  .tile.quote em { font-style: italic; font-weight: 400; opacity: 0.72; font-size: 0.85em; }
+  .tile.quote em { font-style: italic; font-weight: 400; }
   .tile.quote cite {
     font-family: var(--font-label); font-weight: var(--w-label);
     font-style: normal;
     font-size: var(--t-label-sm); letter-spacing: var(--ls-label);
-    opacity: 0.8;
   }
 
   /* ---- stats ---- */
   .tile.stat { justify-content: flex-end; gap: 6px; }
   .tile.stat .figure {
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(2.6rem, 5vw, 4rem);
+    font-weight: var(--w-display);
+    font-size: var(--t-h1);
     line-height: 0.9;
-    letter-spacing: -0.03em;
+    letter-spacing: var(--ls-tight);
     color: var(--orchid);
   }
   .tile.stat .label {
     font-family: var(--font-label); font-weight: var(--w-label);
-    font-size: var(--t-label-sm); letter-spacing: 0.1em;
+    font-size: var(--t-label-sm); letter-spacing: var(--ls-label);
     color: var(--muted);
   }
   .tile.stat.alt .figure { color: #187b25; }
@@ -1113,7 +1114,7 @@
     border: 1px solid var(--rule);
     background: var(--paper);
     color: var(--plum);
-    font-size: var(--t-body); line-height: 1;
+    font-family: var(--font-label); font-size: var(--t-body); line-height: 1;
     cursor: pointer;
   }
   .rail-btn:hover:not(:disabled) { background: var(--gold); border-color: var(--gold); color: #6d2f75; }
@@ -1178,14 +1179,14 @@
   @media (prefers-reduced-motion: reduce) { .card.title:hover { transform: none; } }
   .c-title {
     font-family: var(--font-display);
-    font-weight: 600;
-    font-size: clamp(1.9rem, 4vw, 3rem);
+    font-weight: var(--w-display);
+    font-size: var(--t-h1);           /* same as case-study page titles */
     line-height: 1.02;
-    letter-spacing: -0.025em;
+    letter-spacing: var(--ls-tight);
   }
-  .c-blurb { font-size: var(--t-small); line-height: 1.5; opacity: 0.9; }
+  .c-blurb { font-size: var(--t-small); line-height: 1.5; }
   .card .cta {
-    margin-top: 4px; font-size: var(--t-small); font-weight: 600;
+    margin-top: 4px; font-family: var(--font-label); font-size: var(--t-label); font-weight: var(--w-label); letter-spacing: var(--ls-label);
     display: inline-flex; align-items: center; gap: 7px;
   }
   .card .arrow { transition: transform 320ms ease; }
@@ -1199,10 +1200,9 @@
   /* ---- research question ---- */
   .card.q p {
     margin: 0;
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    line-height: 1.22;
-    letter-spacing: -0.01em;
+    font-family: var(--font-body); font-weight: var(--w-body);
+    font-size: var(--t-body);         /* case-study body */
+    line-height: 1.45;
     text-wrap: balance;
   }
   .card.q em { font-style: italic; color: var(--muted); font-weight: 400; }
@@ -1242,8 +1242,8 @@
   .card.stat { justify-content: flex-end; gap: 6px; }
   .card.stat .figure {
     font-family: var(--font-display);
-    font-weight: 700; font-size: clamp(2.4rem, 4vw, 3.4rem);
-    line-height: 0.9; letter-spacing: -0.03em; color: var(--orchid);
+    font-weight: var(--w-display); font-size: var(--t-h1);
+    line-height: 0.9; letter-spacing: var(--ls-tight); color: var(--orchid);
   }
   .card.stat .label {
     font-family: var(--font-label); font-weight: var(--w-label);
@@ -1279,8 +1279,8 @@
   @media (prefers-reduced-motion: reduce) { #p-butterfly a.card:not(.title):hover { transform: none; } }
   /* the two statements share one text style, set once */
   .card.bf-problem-card .bf-pc-block p {
-    font-family: var(--font-display); font-size: var(--t-h4); font-weight: 500;
-    line-height: 1.22; letter-spacing: -0.01em; font-kerning: normal; text-wrap: pretty;
+    font-family: var(--font-body); font-size: var(--t-body); font-weight: var(--w-body);
+    line-height: 1.35; font-kerning: normal; text-wrap: pretty;
   }
   /* problem statement and principle: two boxes stacked in one card slot,
      together exactly as tall as the cards beside them */
@@ -1289,14 +1289,14 @@
     width: clamp(230px, 29vw, 330px); height: clamp(260px, 32vw, 400px);
     display: flex; flex-direction: column; gap: clamp(10px, 1.1vw, 16px);
   }
-  .bf-pc-stack .card.bf-problem-card { height: auto; flex: 1 1 0; min-height: 0; justify-content: center; }
+  .bf-pc-stack .card.bf-problem-card { height: auto; flex: 1 1 0; min-height: 0; justify-content: center; padding-block: 14px; }
   /* narrower screens: a wider slot and slightly smaller type so each
      statement still fits its half-height box */
   @media (max-width: 1279px) {
     .bf-pc-stack { width: clamp(280px, 32vw, 330px); }
     .bf-pc-stack .card.bf-problem-card { padding: 14px 18px; }
     .bf-pc-stack .bf-pc-block { gap: 8px; }
-    .card.bf-problem-card .bf-pc-block p { font-size: clamp(15px, 1.5vw, 17px); line-height: 1.25; }
+    .card.bf-problem-card .bf-pc-block p { font-size: var(--t-small); line-height: 1.35; }
   }
   @media (max-width: 640px) {
     .bf-pc-stack { width: 300px; }
@@ -1304,7 +1304,7 @@
     .bf-pc-stack .bf-pc-block { gap: 6px; }
     .card.bf-problem-card .bf-pc-block p { line-height: 1.2; }
   }
-  .bf-pc-block { display: grid; gap: 12px; }
+  .bf-pc-block { display: grid; gap: 8px; }
   .bf-pc-block .c-kind { margin: 0; }
   .card.shot img.bf-pos-right { object-position: 88% 50%; }
   /* by-the-numbers card */
@@ -1314,11 +1314,11 @@
   .bf-stats dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; column-gap: 12px; row-gap: 10px; align-items: baseline; }
   .bf-stats dl > div { display: contents; }
   .bf-stats dt {
-    font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 3.2vw, 2.6rem);
+    font-family: var(--font-display); font-weight: var(--w-display); font-size: var(--t-h2);
     line-height: 0.9; letter-spacing: 0; color: var(--rail-accent);
     text-align: right; font-variant-numeric: tabular-nums;
   }
-  .bf-stats dd { margin: 0; font-size: var(--t-small); line-height: 1.3; color: var(--plum); }
+  .bf-stats dd { margin: 0; font-size: var(--t-small); line-height: 1.45; color: var(--plum); }
   .card.quote {
     background: var(--gold); border-color: transparent; color: #6d2f75;
     justify-content: center;
@@ -1329,13 +1329,13 @@
   }
   .card.quote p {
     margin: 0;
-    font-family: var(--font-display);
-    font-size: var(--t-h4); line-height: 1.22;
+    font-family: var(--font-body); font-weight: var(--w-body);
+    font-size: var(--t-body); line-height: 1.45;
   }
-  .card.quote em { font-style: italic; opacity: 0.75; }
+  .card.quote em { font-style: italic; }
   .card.quote cite {
     font-family: var(--font-label); font-weight: var(--w-label); font-style: normal;
-    font-size: var(--t-label-sm); letter-spacing: var(--ls-label); opacity: 0.8;
+    font-size: var(--t-label-sm); letter-spacing: var(--ls-label);
   }
 
   [hidden] { display: none !important; }
