@@ -78,6 +78,8 @@
     --gold:   #f9d877;
     --orchid: #a051a8;
     --plum:   #2b1533;
+    --teal:   #0b6a64;   /* homepage nav bar */
+    --plum-mid: #6d2f75; /* the readable dark plum on gold */
     --paper:  #faf9f6;
     --rule:   #e6e1e6;
     --muted:  #5d5266;
@@ -116,13 +118,13 @@
   a { color: inherit; }
 
   /* ---------- nav ---------- */
-  /* a dark plum bar: monogram on the left, icon + label links, the current
+  /* a deep teal bar: wordmark on the left, icon + label links, the current
      page held in a lighter pill */
   .nav {
     display: flex; align-items: center; gap: clamp(8px, 1.4vw, 16px);
     margin-block: 18px 22px; padding: 7px;
-    background: var(--plum); border: 1px solid color-mix(in srgb, var(--paper) 14%, transparent);
-    border-radius: 20px; box-shadow: 0 10px 30px -18px color-mix(in srgb, var(--plum) 80%, transparent);
+    background: var(--teal); border: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
+    border-radius: 20px; box-shadow: 0 10px 30px -18px color-mix(in srgb, var(--teal) 85%, transparent);
   }
   .nav-mark {
     display: grid; place-items: center; flex: none; height: 46px; padding-inline: 18px; border-radius: 14px; white-space: nowrap;
@@ -135,7 +137,7 @@
     min-height: 46px; padding-inline: 16px 18px;   /* 44px+ touch target */
     border-radius: 14px; text-decoration: none;
     font-family: var(--font-display); font-weight: 500; font-size: 1.02rem; letter-spacing: -0.005em;
-    color: color-mix(in srgb, var(--paper) 78%, transparent);
+    color: color-mix(in srgb, var(--paper) 86%, transparent);
     transition: background-color 180ms ease, color 180ms ease;
   }
   .nav-ic { flex: none; opacity: 0.9; }
@@ -177,7 +179,7 @@
        ending in the system's display face, extra-bold in the reel's orchid */
     font-family: 'Syne', var(--font-display); font-weight: 500;
     font-size: clamp(1.9rem, 3.3vw, 3.05rem); line-height: 1.08; letter-spacing: -0.02em;
-    color: var(--plum); text-wrap: pretty;
+    color: var(--plum-mid); text-wrap: pretty;
   }
   .hero-statement em { display: block; font-style: normal; font-family: var(--font-display); font-weight: 800; letter-spacing: -0.03em; color: var(--orchid); }   /* large text holds 3:1 on gold */
   @media (max-width: 860px) {
