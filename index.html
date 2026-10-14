@@ -79,6 +79,7 @@
     --orchid: #a051a8;
     --plum:   #2b1533;
     --teal:   #0b6a64;   /* homepage nav bar */
+    --gold-pale: #fcefbf; /* homepage hero + wordmark: a softer gold */
     --plum-mid: #6d2f75; /* the readable dark plum on gold */
     --paper:  #faf9f6;
     --rule:   #e6e1e6;
@@ -128,7 +129,7 @@
   }
   .nav-mark {
     display: grid; place-items: center; flex: none; height: 46px; padding-inline: 18px; border-radius: 14px; white-space: nowrap;
-    background: var(--gold); color: var(--plum); text-decoration: none;
+    background: var(--gold-pale); color: var(--plum); text-decoration: none;
     font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em;
   }
   .nav-links { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; justify-content: flex-end; }
@@ -845,8 +846,8 @@
     /* a soft pool of light top-left and a warmer corner bottom-right, so the gold has depth */
     background:
       radial-gradient(110% 90% at 0% 0%, color-mix(in srgb, #fff 42%, transparent), transparent 55%),
-      radial-gradient(80% 90% at 100% 100%, color-mix(in srgb, #e8a93a 38%, transparent), transparent 60%),
-      var(--gold);
+      radial-gradient(80% 90% at 100% 100%, color-mix(in srgb, #f0c25a 30%, transparent), transparent 60%),
+      var(--gold-pale);
     color: var(--orchid);
     /* rounder than it was: a tight 24px corner forces the ring into a turn
        sharp enough that the caps collide. The ring reads its radius off this
