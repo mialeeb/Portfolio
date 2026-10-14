@@ -815,8 +815,8 @@
   /* skills: still chips under the hero */
   .skills { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: clamp(18px, 2.2vw, 28px) 0 0; padding: 0; }
   .skills li {
-    padding: 8px 15px; border-radius: 999px; border: 1.5px solid color-mix(in srgb, var(--plum-mid) 30%, transparent);
-    background: #fff; color: var(--plum-mid);
+    padding: 8px 15px; border-radius: 999px; border: 1.5px solid transparent;
+    background: var(--teal); color: var(--paper);   /* methods: the nav's teal */
     font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: 0.02em; line-height: 1.2;
   }
   .skills li.is-tool { background: var(--gold-hero); border-color: transparent; color: var(--plum); }
@@ -1836,10 +1836,10 @@
     </div>
   </header>
 
-  <!-- skills and tools as still chips: methods first, then tools (filled) -->
+  <!-- skills and tools as still chips: methods in teal, then tools in gold -->
   <ul class="skills" aria-label="Skills and tools">
     <li>Prototyping</li><li>UX Research</li><li>User Testing</li><li>Usability Testing</li><li>Interaction Design</li><li>Information Architecture</li><li>Data Coding</li>
-    <li class="is-tool">Figma</li><li class="is-tool">Adobe Suite</li><li class="is-tool">Spline</li><li class="is-tool">Claude</li><li class="is-tool">Cursor</li>
+    <li class="is-tool">Claude</li><li class="is-tool">Cursor</li><li class="is-tool">Figma</li><li class="is-tool">Adobe Suite</li><li class="is-tool">Spline</li>
   </ul>
 
   <!-- ============ WORK — one scrolling rail per project ============ -->
