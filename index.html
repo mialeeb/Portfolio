@@ -5,7 +5,7 @@
      first paint. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Barlow+Condensed:wght@600&family=Big+Shoulders+Display:wght@600&family=Instrument+Serif:ital@0;1&family=Kalam:wght@700&family=Manrope:wght@400;500;600;700&family=Michroma&family=Outfit:wght@700&family=Poiret+One&family=Red+Hat+Display:wght@400;500;600;700;800&family=Syne:wght@800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Barlow+Condensed:wght@600&family=Big+Shoulders+Display:wght@600&family=Instrument+Serif:ital@0;1&family=Kalam:wght@700&family=Manrope:wght@400;500;600;700&family=Michroma&family=Outfit:wght@700&family=Poiret+One&family=Red+Hat+Display:wght@400;500;600;700;800&family=Syne:wght@500;800&display=swap">
 <style>
   /* ============================================================
      Mia Biehler — portfolio homepage
@@ -173,13 +173,13 @@
     background: linear-gradient(transparent, color-mix(in srgb, var(--orchid) 70%, transparent) 18%, color-mix(in srgb, var(--orchid) 70%, transparent) 82%, transparent); }
   .hero-statement {
     margin: 0; max-width: 20ch;
-    /* the system's display face, pushed to both ends of its weight range:
-       a regular lead, then the reel's orchid in extra-bold */
-    font-family: var(--font-display); font-weight: 400;
-    font-size: clamp(2rem, 3.6vw, 3.3rem); line-height: 1.06; letter-spacing: -0.03em;
+    /* lead in Syne (one of the reel's faces) at a calm medium weight; the
+       ending in the system's display face, extra-bold in the reel's orchid */
+    font-family: 'Syne', var(--font-display); font-weight: 500;
+    font-size: clamp(1.9rem, 3.3vw, 3.05rem); line-height: 1.08; letter-spacing: -0.02em;
     color: var(--plum); text-wrap: pretty;
   }
-  .hero-statement em { display: block; font-style: normal; font-weight: 800; color: var(--orchid); }   /* large text holds 3:1 on gold */
+  .hero-statement em { display: block; font-style: normal; font-family: var(--font-display); font-weight: 800; letter-spacing: -0.03em; color: var(--orchid); }   /* large text holds 3:1 on gold */
   @media (max-width: 860px) {
     .hero-grid { grid-template-columns: minmax(0, 1fr); min-height: 0; gap: clamp(20px, 5vw, 32px); }
     .hero-rule { justify-self: center; align-self: auto; width: 64px; height: 2px; }
