@@ -1111,6 +1111,16 @@
      The scroller is focusable so it can be driven from the keyboard
      (WCAG 2.1.1); arrows are 44px targets.
      ============================================================ */
+  /* project groups: one discipline line above the rows it covers */
+  .work-group {
+    margin: 0 0 clamp(14px, 1.6vw, 20px);
+    font-family: var(--font-display); font-weight: var(--f-sub-weight); font-size: var(--f-sub); letter-spacing: var(--f-sub-track);
+    color: var(--plum); text-wrap: balance;
+  }
+  .work-group .wg-dot { color: var(--orchid); margin-inline: 0.35em; }
+  .work-group:not(:first-child) { margin-top: clamp(52px, 6.5vw, 88px); }
+  .work-group + .proj { margin-top: 0; }
+  .proj-name { color: var(--plum-mid); }
   .proj { margin-top: clamp(30px, 4vw, 54px); }
   .proj:first-of-type { margin-top: 0; }
   .rail-head {
@@ -2012,10 +2022,156 @@
        <div class="card ..."> into the rail — nothing else needs changing.
        Everything marked PLACEHOLDER is yours to replace. -->
   <section class="section" id="work">
+    <h2 class="work-group">UX/UI <span class="wg-dot" aria-hidden="true">&middot;</span> UX Research <span class="wg-dot" aria-hidden="true">&middot;</span> Interaction Design <span class="wg-dot" aria-hidden="true">&middot;</span> AI</h2>
+    <!-- ---------- Multi-tier drafting (Phase 2 RA work) ---------- -->
+    <article class="proj" id="p-tiered">
+      <div class="rail-head">
+        <p class="eyebrow proj-name">Multi-tier drafting</p>
+        <div class="rail-nav">
+          <button type="button" class="rail-btn" data-dir="-1" aria-label="Scroll Multi-tier drafting left">&larr;</button>
+          <button type="button" class="rail-btn" data-dir="1" aria-label="Scroll Multi-tier drafting right">&rarr;</button>
+        </div>
+      </div>
+      <div class="rail" role="region" tabindex="0" aria-label="Multi-tier drafting — scrollable cards">
+        <a class="card title" href="#tiered" style="--proj:#7b1fa2; --ink:#fdf7fe">
+          <span class="art" aria-hidden="true"></span>
+          <span class="c-title">Multi-Tier Drafting</span>
+          <span class="c-blurb">A future-facing proposal where one chat drafts, checks and edits a report at three classification tiers.</span>
+          <span class="cta">See more <span class="arrow" aria-hidden="true">&rarr;</span></span>
+        </a>
+
+        <a class="card q md" href="#tiered" tabindex="-1">
+          <span class="c-kind">Principle</span>
+          <p>The AI is the author. The reporter is the editor. The chat is where the two meet.</p>
+        </a>
+
+        <a class="card proto lg" href="#tiered" tabindex="-1">
+          <span class="c-kind">Prototype</span>
+          <div class="frame">Clip 1 &mdash; Bundle Chat generating Class Z, step by step</div>
+        </a>
+
+        <a class="card note md" href="#tiered" tabindex="-1">
+          <span class="c-kind">Principle</span>
+          <p>Colour says who did it. <strong>Blue</strong> is the reporter&rsquo;s input. <strong>Purple</strong> is the AI&rsquo;s work.</p>
+        </a>
+
+        <a class="card proto md" href="#tiered" tabindex="-1">
+          <span class="c-kind">Prototype</span>
+          <div class="frame">Tone sliders &mdash; wording and confidence</div>
+        </a>
+
+        <a class="card stat sm" href="#tiered" tabindex="-1">
+          <dl>
+            <div><dt>3</dt><dd>classification tiers</dd></div>
+            <div><dt>3</dt><dd>scenario clips</dd></div>
+            <div><dt>6</dt><dd>@agents</dd></div>
+            <div><dt>95</dt><dd>prototype screens so far</dd></div>
+          </dl>
+        </a>
+      </div>
+    </article>
+    <!-- ---------- Merlin ---------- -->
+    <article class="proj" id="p-merlin">
+      <div class="rail-head">
+        <p class="eyebrow proj-name">Merlin</p>
+        <div class="rail-nav">
+          <button type="button" class="rail-btn" data-dir="-1" aria-label="Scroll Merlin left">&larr;</button>
+          <button type="button" class="rail-btn" data-dir="1" aria-label="Scroll Merlin right">&rarr;</button>
+        </div>
+      </div>
+      <div class="rail" role="region" tabindex="0" aria-label="Merlin — scrollable cards">
+        <a class="card title" href="#merlin" style="--proj:#101a42; --ink:#eef1fb">
+          <span class="art" aria-hidden="true"></span>
+          <span class="c-title">Merlin</span>
+          <span class="c-blurb">AI-augmented intelligence report management — drafting, review, and an agent that reads it once you're done.</span>
+          <span class="cta">See more <span class="arrow" aria-hidden="true">&rarr;</span></span>
+        </a>
+
+        <div class="card q md">
+          <span class="c-kind">Research question</span>
+          <p>How much should a machine be allowed to say about someone else's writing — and when?</p>
+        </div>
+
+        <div class="card proto lg">
+          <span class="c-kind">Prototype</span>
+          <div class="frame">Flow 2 — tier view with the attached document map</div>
+        </div>
+
+        <div class="card note sm">
+          <span class="c-kind">Principle</span>
+          <p>The auto-check runs <strong>after</strong> drafting, not during it. A system that interrupts a half-formed thought teaches people to write around it.</p>
+        </div>
+
+        <div class="card proto md">
+          <span class="c-kind">Prototype</span>
+          <div class="frame">Alert, active — inline in the text</div>
+        </div>
+
+        <div class="card proto md">
+          <span class="c-kind">Prototype</span>
+          <div class="frame">Alert, inactive — still held in the map</div>
+        </div>
+
+        <div class="card q md">
+          <span class="c-kind">Research question</span>
+          <p>What does a reporter need to see to decide, versus to triage?</p>
+        </div>
+
+        <div class="card quote md">
+          <span class="mark" aria-hidden="true">&rdquo;</span>
+          <p><em>PLACEHOLDER</em> — a line from a stakeholder or a reporter.</p>
+          <cite>Role, context</cite>
+        </div>
+      </div>
+    </article>
+    <!-- ---------- Agentic workflows ---------- -->
+    <article class="proj" id="p-agentic">
+      <div class="rail-head">
+        <p class="eyebrow proj-name">Agentic workflows</p>
+        <div class="rail-nav">
+          <button type="button" class="rail-btn" data-dir="-1" aria-label="Scroll Agentic workflows left">&larr;</button>
+          <button type="button" class="rail-btn" data-dir="1" aria-label="Scroll Agentic workflows right">&rarr;</button>
+        </div>
+      </div>
+      <div class="rail" role="region" tabindex="0" aria-label="Agentic workflows — scrollable cards">
+        <a class="card title" href="#agentic" style="--proj:#f94500; --ink:#2b1533">
+          <span class="art" aria-hidden="true"></span>
+          <span class="c-title">Agentic workflows</span>
+          <span class="c-blurb">Mapping how AI agents are reshaping the way product teams actually work.</span>
+          <span class="cta">See more <span class="arrow" aria-hidden="true">&rarr;</span></span>
+        </a>
+
+        <a class="card q md" href="#agentic" tabindex="-1">
+          <span class="c-kind">Point of view</span>
+          <p>Engineers who write specs with AI need to connect the conversation behind each spec to how it did in production.</p>
+        </a>
+
+        <a class="card proto lg" href="#agentic" tabindex="-1">
+          <span class="c-kind">Research</span>
+          <div class="frame">Stakeholder map &mdash; centered on high-quality AI output</div>
+        </a>
+
+        <a class="card note md" href="#agentic" tabindex="-1">
+          <span class="c-kind">Finding</span>
+          <p>Checking AI output is everywhere and invisible. Organizations measure <strong>AI use</strong>, not the verification that makes it safe.</p>
+        </a>
+
+        <a class="card stat sm" href="#agentic" tabindex="-1">
+          <span class="figure">10</span>
+          <span class="label">Interviews</span>
+        </a>
+
+        <a class="card proto md" href="#agentic" tabindex="-1">
+          <span class="c-kind">Prototype</span>
+          <div class="frame">Team-lead monthly spec review</div>
+        </a>
+      </div>
+    </article>
+    <h2 class="work-group">Interactive exhibition</h2>
     <!-- ---------- Butterfly exhibition ---------- -->
     <article class="proj" id="p-butterfly">
       <div class="rail-head">
-        <p class="eyebrow">Interactive exhibition design</p>
+        <p class="eyebrow proj-name">Your Butterfly Companion</p>
         <div class="rail-nav">
           <button type="button" class="rail-btn" data-dir="-1" aria-label="Scroll Butterfly exhibition left">&larr;</button>
           <button type="button" class="rail-btn" data-dir="1" aria-label="Scroll Butterfly exhibition right">&rarr;</button>
@@ -2075,150 +2231,6 @@
             <div><dt>1</dt><dd>butterfly per visitor</dd></div>
             <div><dt>3</dt><dd>weeks to design</dd></div>
           </dl>
-        </a>
-      </div>
-    </article>
-    <!-- ---------- Merlin ---------- -->
-    <article class="proj" id="p-merlin">
-      <div class="rail-head">
-        <p class="eyebrow">Interaction design</p>
-        <div class="rail-nav">
-          <button type="button" class="rail-btn" data-dir="-1" aria-label="Scroll Merlin left">&larr;</button>
-          <button type="button" class="rail-btn" data-dir="1" aria-label="Scroll Merlin right">&rarr;</button>
-        </div>
-      </div>
-      <div class="rail" role="region" tabindex="0" aria-label="Merlin — scrollable cards">
-        <a class="card title" href="#merlin" style="--proj:#101a42; --ink:#eef1fb">
-          <span class="art" aria-hidden="true"></span>
-          <span class="c-title">Merlin</span>
-          <span class="c-blurb">AI-augmented intelligence report management — drafting, review, and an agent that reads it once you're done.</span>
-          <span class="cta">See more <span class="arrow" aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <div class="card q md">
-          <span class="c-kind">Research question</span>
-          <p>How much should a machine be allowed to say about someone else's writing — and when?</p>
-        </div>
-
-        <div class="card proto lg">
-          <span class="c-kind">Prototype</span>
-          <div class="frame">Flow 2 — tier view with the attached document map</div>
-        </div>
-
-        <div class="card note sm">
-          <span class="c-kind">Principle</span>
-          <p>The auto-check runs <strong>after</strong> drafting, not during it. A system that interrupts a half-formed thought teaches people to write around it.</p>
-        </div>
-
-        <div class="card proto md">
-          <span class="c-kind">Prototype</span>
-          <div class="frame">Alert, active — inline in the text</div>
-        </div>
-
-        <div class="card proto md">
-          <span class="c-kind">Prototype</span>
-          <div class="frame">Alert, inactive — still held in the map</div>
-        </div>
-
-        <div class="card q md">
-          <span class="c-kind">Research question</span>
-          <p>What does a reporter need to see to decide, versus to triage?</p>
-        </div>
-
-        <div class="card quote md">
-          <span class="mark" aria-hidden="true">&rdquo;</span>
-          <p><em>PLACEHOLDER</em> — a line from a stakeholder or a reporter.</p>
-          <cite>Role, context</cite>
-        </div>
-      </div>
-    </article>
-    <!-- ---------- Multi-tier drafting (Phase 2 RA work) ---------- -->
-    <article class="proj" id="p-tiered">
-      <div class="rail-head">
-        <p class="eyebrow">Interaction design &middot; Prototyping</p>
-        <div class="rail-nav">
-          <button type="button" class="rail-btn" data-dir="-1" aria-label="Scroll Multi-tier drafting left">&larr;</button>
-          <button type="button" class="rail-btn" data-dir="1" aria-label="Scroll Multi-tier drafting right">&rarr;</button>
-        </div>
-      </div>
-      <div class="rail" role="region" tabindex="0" aria-label="Multi-tier drafting — scrollable cards">
-        <a class="card title" href="#tiered" style="--proj:#7b1fa2; --ink:#fdf7fe">
-          <span class="art" aria-hidden="true"></span>
-          <span class="c-title">Multi-Tier Drafting</span>
-          <span class="c-blurb">A future-facing proposal where one chat drafts, checks and edits a report at three classification tiers.</span>
-          <span class="cta">See more <span class="arrow" aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a class="card q md" href="#tiered" tabindex="-1">
-          <span class="c-kind">Principle</span>
-          <p>The AI is the author. The reporter is the editor. The chat is where the two meet.</p>
-        </a>
-
-        <a class="card proto lg" href="#tiered" tabindex="-1">
-          <span class="c-kind">Prototype</span>
-          <div class="frame">Clip 1 &mdash; Bundle Chat generating Class Z, step by step</div>
-        </a>
-
-        <a class="card note md" href="#tiered" tabindex="-1">
-          <span class="c-kind">Principle</span>
-          <p>Colour says who did it. <strong>Blue</strong> is the reporter&rsquo;s input. <strong>Purple</strong> is the AI&rsquo;s work.</p>
-        </a>
-
-        <a class="card proto md" href="#tiered" tabindex="-1">
-          <span class="c-kind">Prototype</span>
-          <div class="frame">Tone sliders &mdash; wording and confidence</div>
-        </a>
-
-        <a class="card stat sm" href="#tiered" tabindex="-1">
-          <dl>
-            <div><dt>3</dt><dd>classification tiers</dd></div>
-            <div><dt>3</dt><dd>scenario clips</dd></div>
-            <div><dt>6</dt><dd>@agents</dd></div>
-            <div><dt>95</dt><dd>prototype screens so far</dd></div>
-          </dl>
-        </a>
-      </div>
-    </article>
-    <!-- ---------- Agentic workflows ---------- -->
-    <article class="proj" id="p-agentic">
-      <div class="rail-head">
-        <p class="eyebrow">Studio research</p>
-        <div class="rail-nav">
-          <button type="button" class="rail-btn" data-dir="-1" aria-label="Scroll Agentic workflows left">&larr;</button>
-          <button type="button" class="rail-btn" data-dir="1" aria-label="Scroll Agentic workflows right">&rarr;</button>
-        </div>
-      </div>
-      <div class="rail" role="region" tabindex="0" aria-label="Agentic workflows — scrollable cards">
-        <a class="card title" href="#agentic" style="--proj:#f94500; --ink:#2b1533">
-          <span class="art" aria-hidden="true"></span>
-          <span class="c-title">Agentic workflows</span>
-          <span class="c-blurb">Mapping how AI agents are reshaping the way product teams actually work.</span>
-          <span class="cta">See more <span class="arrow" aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a class="card q md" href="#agentic" tabindex="-1">
-          <span class="c-kind">Point of view</span>
-          <p>Engineers who write specs with AI need to connect the conversation behind each spec to how it did in production.</p>
-        </a>
-
-        <a class="card proto lg" href="#agentic" tabindex="-1">
-          <span class="c-kind">Research</span>
-          <div class="frame">Stakeholder map &mdash; centered on high-quality AI output</div>
-        </a>
-
-        <a class="card note md" href="#agentic" tabindex="-1">
-          <span class="c-kind">Finding</span>
-          <p>Checking AI output is everywhere and invisible. Organizations measure <strong>AI use</strong>, not the verification that makes it safe.</p>
-        </a>
-
-        <a class="card stat sm" href="#agentic" tabindex="-1">
-          <span class="figure">10</span>
-          <span class="label">Interviews</span>
-        </a>
-
-        <a class="card proto md" href="#agentic" tabindex="-1">
-          <span class="c-kind">Prototype</span>
-          <div class="frame">Team-lead monthly spec review</div>
         </a>
       </div>
     </article>
