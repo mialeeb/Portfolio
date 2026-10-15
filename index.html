@@ -185,10 +185,12 @@
     font-size: clamp(1.9rem, 3.3vw, 3.05rem); line-height: 1.08; letter-spacing: -0.02em;
     color: var(--plum-mid); text-wrap: pretty;
   }
-  /* portrait sits above the statement, left-aligned with it: a face beside the words */
-  .hero-side { display: grid; gap: clamp(16px, 1.8vw, 24px); justify-items: start; min-width: 0; }
+  /* portrait to the right of the statement, on its midline, so the right side carries the same weight as the reel */
+  .hero-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: clamp(18px, 2.4vw, 36px); min-width: 0; }
+  #view-home .hero-grid { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.35fr); }   /* the right side holds statement + portrait, so it gets more room */
+  #view-home .hero-side .hero-statement { font-size: clamp(1.7rem, 2.65vw, 2.65rem); max-width: 17ch; }
   .hero-portrait {
-    width: clamp(84px, 8vw, 120px); height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; display: block;
+    width: clamp(96px, 9.5vw, 140px); height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; display: block;
     border: 4px solid color-mix(in srgb, #fff 85%, transparent);
     box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--orchid) 45%, transparent), 0 14px 30px -16px color-mix(in srgb, var(--plum) 70%, transparent);
   }
@@ -197,7 +199,10 @@
     .hero-grid { grid-template-columns: minmax(0, 1fr); min-height: 0; gap: clamp(20px, 5vw, 32px); }
     .hero-rule { justify-self: center; align-self: auto; width: 64px; height: 2px; }
     .hero-statement { text-align: center; justify-self: center; }
-    .hero-side { justify-items: center; }
+    .hero-side { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+    .hero-portrait { order: -1; width: clamp(84px, 24vw, 112px); }
+    #view-home .hero-grid { grid-template-columns: minmax(0, 1fr); }
+    #view-home .hero-side .hero-statement { font-size: clamp(1.7rem, 6.4vw, 2.4rem); max-width: 20ch; }
     #view-home .hero { --display: clamp(1.6rem, 8vw, 2.6rem); padding-top: clamp(64px, 16vw, 84px); }   /* clear the Motion switch; large enough to hold 3:1 on gold */
   }
 
@@ -1851,8 +1856,8 @@
       <span class="hero-rule" aria-hidden="true"></span>
       <!-- DRAFT statement: Mia is still writing this one -->
       <div class="hero-side">
-        <img class="hero-portrait" src="images/mia-headshot.webp" width="400" height="400" alt="Mia Biehler" decoding="async">
         <p class="hero-statement">User experience designer and researcher, <em>shaping how people think alongside AI.</em></p>
+        <img class="hero-portrait" src="images/mia-headshot.webp" width="400" height="400" alt="Mia Biehler" decoding="async">
       </div>
     </div>
   </header>
