@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Mia Biehler</title>
 <!-- One stylesheet for all twelve faces, with the connection opened early.
      Four @import rules used to load one after another, which held up the
@@ -58,7 +58,7 @@
 
     /* ===================== project palettes =====================
        Every case study sets its own colours by overriding these six
-       tokens on its view (see :is(#view-butterfly, #view-merlin)). The defaults below are
+       tokens on its view (see :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered)). The defaults below are
        the site's own palette, so anything that doesn't override still
        looks right. Sampled from the project's own work, not invented.
        ===================================================== */
@@ -260,7 +260,7 @@
     color: var(--p-ink);
     padding-bottom: clamp(40px, 6vw, 80px);
   }
-  :is(#view-butterfly, #view-merlin) .bf-top {
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-top {
     display: flex; justify-content: space-between; align-items: center;
     padding-block: clamp(18px, 2.4vw, 30px);
   }
@@ -275,9 +275,9 @@
     font-family: var(--font-display);
     font-size: var(--t-h2); line-height: 1.15; letter-spacing: var(--ls-tight); margin: 0 0 14px;
   }
-  :is(#view-butterfly, #view-merlin) p { font-size: var(--t-body); line-height: var(--lh-body); max-width: 68ch; margin: 0 0 16px; color: var(--p-muted); }
-  :is(#view-butterfly, #view-merlin) p.bf-lede { font-size: var(--f-lede); color: var(--p-ink); }   /* one intro size on the page */
-  :is(#view-butterfly, #view-merlin) .bf-band p.bf-lede { color: var(--p-band-ink); }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) p { font-size: var(--t-body); line-height: var(--lh-body); max-width: 68ch; margin: 0 0 16px; color: var(--p-muted); }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) p.bf-lede { font-size: var(--f-lede); color: var(--p-ink); }   /* one intro size on the page */
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-band p.bf-lede { color: var(--p-band-ink); }
 
   /* ---------- hero: one column, then a meta strip ---------- */
   .bf-hero { padding-block: clamp(20px, 3vw, 40px) clamp(20px, 2.6vw, 34px); }
@@ -360,8 +360,8 @@
   .bf-icon { width: 44px; height: 44px; border-radius: 50%; background: var(--p-surface); border: 1px dashed var(--p-surface-line); }
   /* the paragraph that carries the source: centred under the three columns,
      with the author-date mention linked to the paper */
-  :is(#view-butterfly, #view-merlin) .bf-center { text-align: center; margin-inline: auto; text-wrap: balance; }
-  :is(#view-butterfly, #view-merlin) .bf-source {
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-center { text-align: center; margin-inline: auto; text-wrap: balance; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-source {
     margin: clamp(30px, 4vw, 52px) auto 0; max-width: 78ch; text-align: center;
   }
   .bf-source a {
@@ -382,7 +382,7 @@
   }
   /* short accent rule under the label */
   /* the label is a section heading, same as "Museum Visit" */
-  :is(#view-butterfly, #view-merlin) .bf-statement h2.bf-statement-label {
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-statement h2.bf-statement-label {
     font-family: var(--font-display); font-size: var(--t-h2);
     line-height: 1.15; letter-spacing: var(--ls-tight);
     color: var(--p-ink); margin: 0 0 clamp(18px, 2vw, 26px);
@@ -397,7 +397,7 @@
     line-height: 1.15; letter-spacing: var(--ls-tight);
     color: var(--p-ink); margin: 0 0 14px;
   }
-  :is(#view-butterfly, #view-merlin) .bf-statement p {
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-statement p {
     position: relative; font-family: var(--font-display); font-weight: 500;
     font-size: clamp(1.25rem, 2.1vw, 1.7rem); line-height: 1.38; letter-spacing: -0.005em;
     color: var(--p-ink); max-width: 40ch; margin: 0 auto; text-wrap: balance;
@@ -414,11 +414,11 @@
     margin-top: clamp(40px, 6vw, 84px); background: var(--p-band); color: var(--p-band-ink);
     border-radius: clamp(20px, 2.4vw, 32px); padding: clamp(28px, 5vw, 64px); text-align: center;
   }
-  :is(#view-butterfly, #view-merlin) .bf-band h2, :is(#view-butterfly, #view-merlin) .bf-band h3 { color: var(--p-band-ink); }
-  :is(#view-butterfly, #view-merlin) .bf-band p { color: color-mix(in srgb, var(--p-band-ink) 86%, transparent); margin-inline: auto; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-band h2, :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-band h3 { color: var(--p-band-ink); }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-band p { color: color-mix(in srgb, var(--p-band-ink) 86%, transparent); margin-inline: auto; }
   /* band intros run wider and balance their lines, so the last line is
      never a single stranded word */
-  :is(#view-butterfly, #view-merlin) .bf-band > p { max-width: 58em; text-wrap: balance; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-band > p { max-width: 58em; text-wrap: balance; }
   .bf-band .bf-icon { background: color-mix(in srgb, var(--p-band-ink) 12%, transparent); border-color: color-mix(in srgb, var(--p-band-ink) 34%, transparent); margin-inline: auto; }
   /* clips pause on click */
   video.bf-autoplay, video.bf-play-once { cursor: pointer; }
@@ -465,7 +465,7 @@
   .bf-caption h3 { font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight); letter-spacing: var(--f-sub-track); margin: 0 0 6px; }
   .bf-caption p { margin-bottom: 14px; }
 
-  :is(#view-butterfly, #view-merlin) ul { margin: 0 0 16px; padding-left: 1.1em; color: var(--p-muted); }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) ul { margin: 0 0 16px; padding-left: 1.1em; color: var(--p-muted); }
 
   /* ---------- software logos ----------
      Kept in the page's orange, #EE5A2B (Spline keeps its darker #D44026
@@ -482,13 +482,13 @@
 
   /* ---------- immersive projections ---------- */
   .bf-proj { margin-top: clamp(40px, 6vw, 84px); }
-  :is(#view-butterfly, #view-merlin) .bf-proj > p { max-width: none; margin: 0; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-proj > p { max-width: none; margin: 0; }
   .bf-proj > .bf-row { margin-top: clamp(20px, 2.4vw, 32px); }
   /* a personalized experience: intro above the stations band, media
      tight below it */
   .bf-personal-intro { margin-bottom: 0; }
   .bf-station-media + .bf-band { margin-top: clamp(20px, 2.4vw, 32px); }
-  :is(#view-butterfly, #view-merlin) .bf-personal-intro p { max-width: none; margin: 0; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-personal-intro p { max-width: none; margin: 0; }
   .bf-station-media {
     display: grid; grid-template-columns: minmax(0, 2.008fr) minmax(0, 1.063fr);
     gap: clamp(10px, 1.4vw, 18px); margin-top: clamp(20px, 2.4vw, 32px);   /* same step as text → media everywhere else */
@@ -526,11 +526,11 @@
     margin-top: clamp(48px, 7vw, 100px);
   }
   .bf-wall-sec .bf-wall-title { grid-column: 1 / -1; margin-bottom: clamp(16px, 2vw, 24px); }
-  :is(#view-butterfly, #view-merlin) .bf-wall-copy p { max-width: none; }
-  :is(#view-butterfly, #view-merlin) .bf-wall-copy strong { color: var(--p-ink); font-weight: 700; }
-  :is(#view-butterfly, #view-merlin) .bf-wall-copy ul { margin: 0; }
-  :is(#view-butterfly, #view-merlin) .bf-wall-copy li { font-size: var(--t-body); line-height: var(--lh-body); margin-bottom: 10px; max-width: none; }
-  :is(#view-butterfly, #view-merlin) .bf-wall-copy li:last-child { margin-bottom: 0; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-wall-copy p { max-width: none; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-wall-copy strong { color: var(--p-ink); font-weight: 700; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-wall-copy ul { margin: 0; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-wall-copy li { font-size: var(--t-body); line-height: var(--lh-body); margin-bottom: 10px; max-width: none; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-wall-copy li:last-child { margin-bottom: 0; }
   /* size containment: the panels take the row's height from the copy
      instead of pushing it taller with the videos' own sizes */
   .bf-wall-media {
@@ -567,7 +567,7 @@
   /* below 1100px the copy moves above; the panels keep one shared height */
   @media (max-width: 1100px) {
     .bf-wall-sec { grid-template-columns: minmax(0, 1fr); row-gap: clamp(20px, 3vw, 28px); }
-    :is(#view-butterfly, #view-merlin) .bf-wall-copy { max-width: 62ch; }
+    :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-wall-copy { max-width: 62ch; }
     .bf-wall-media { contain: none; height: clamp(240px, 40vw, 420px); }
   }
   @media (max-width: 520px) {
@@ -583,7 +583,7 @@
      The heading and line start at 15%, clear of the strap. */
   .bf-release { --watch-w: 18.6%; margin-top: clamp(48px, 7vw, 100px); }
   .bf-release-text { margin-left: 15%; position: relative; z-index: 3; }
-  :is(#view-butterfly, #view-merlin) .bf-release-text p { margin: 0; max-width: none; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-release-text p { margin: 0; max-width: none; }
   .bf-release-stage {
     position: relative;
     margin-top: clamp(14px, 1.6vw, 22px);   /* the strap rises beside the heading, as in the Bracelet */
@@ -617,7 +617,7 @@
   }
   .bf-br-text p:first-child { grid-column: 1; }
   .bf-br-text p:last-child  { grid-column: 3; }
-  :is(#view-butterfly, #view-merlin) .bf-br-text p { margin: 0; max-width: none; text-wrap: pretty; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-br-text p { margin: 0; max-width: none; text-wrap: pretty; }
   .bf-br-stage {
     position: relative; aspect-ratio: 10 / 3;
     margin-top: clamp(12px, 1.2vw, 18px);
@@ -673,7 +673,7 @@
   .bf-emergence { --lr-m1: 3.27%; --lr-m2: 6.08%; --lr-m3: 8.74%; }
   .bf-lr-label { display: flex; align-items: center; gap: 18px; }
   .bf-lr-label::after { content: ""; flex: 1; height: 1px; background: var(--p-ink); }
-  :is(#view-butterfly, #view-merlin) .bf-lr-block p { max-width: 50vw; max-width: min(34em, 100%); margin: 0; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-lr-block p { max-width: 50vw; max-width: min(34em, 100%); margin: 0; }
 
   /* ---------- "the idea": text over the rising floor plan ----------
      Arranged by Mia in the Butterfly Layout Tuner (saved at 1440px,
@@ -692,7 +692,7 @@
     grid-column: 1 / -1; grid-row: 1; text-align: center;
     margin-bottom: var(--f-title-gap);
   }
-  :is(#view-butterfly, #view-merlin) p.bf-idea-lede {
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) p.bf-idea-lede {
     grid-column: 1 / -1; grid-row: 2;
     position: relative; z-index: 2;
     max-width: none; margin: 0 13%;
@@ -702,7 +702,7 @@
   }
   /* the fade hangs below the intro without taking up grid space, so the
      copy below can never be pushed up into the intro's text */
-  :is(#view-butterfly, #view-merlin) p.bf-idea-lede::after {
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) p.bf-idea-lede::after {
     content: ""; position: absolute; left: 0; right: 0; top: 100%;
     height: var(--fade);
     background: linear-gradient(to bottom, var(--paper) 40%, transparent);
@@ -717,10 +717,10 @@
      it: on narrow screens, where the copy is taller, the row grows instead
      of the copy climbing into the intro */
   .bf-idea-copy { grid-column: 2; grid-row: 3; align-self: end; margin-top: 32px; max-width: 376px; position: relative; z-index: 3; }
-  :is(#view-butterfly, #view-merlin) .bf-idea-copy p { margin-bottom: var(--f-para-gap); }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-idea-copy p { margin-bottom: var(--f-para-gap); }
   /* the last paragraph drops by its half-leading plus descent (0.47em) so
      its baseline, not its line box, is what sits 19px above the plan's bottom */
-  :is(#view-butterfly, #view-merlin) .bf-idea-copy > :last-child { margin-bottom: calc(19px - 0.47em); }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-idea-copy > :last-child { margin-bottom: calc(19px - 0.47em); }
 
   /* the feature sub-heading, shared */
   .bf-feature-sub {
@@ -728,32 +728,32 @@
     letter-spacing: var(--f-sub-track); line-height: 1.2;
     color: var(--p-ink); margin: 0 0 16px;
   }
-  :is(#view-butterfly, #view-merlin) p.bf-feature-lede { font-size: var(--f-lede); color: var(--p-ink); }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) p.bf-feature-lede { font-size: var(--f-lede); color: var(--p-ink); }
 
   /* ---------- museum visit: photo + copy, centred on each other ---------- */
   .bf-visit { align-items: center; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr); }
   .bf-visit-photo { display: block; width: 100%; height: auto; border-radius: 10px; }
   .bf-sec .bf-visit-copy h2 { margin-bottom: var(--f-title-gap); }
-  :is(#view-butterfly, #view-merlin) .bf-visit-copy p.bf-feature-lede { margin-bottom: 28px; }
-  :is(#view-butterfly, #view-merlin) .bf-visit-copy ul { margin: 0; }
-  :is(#view-butterfly, #view-merlin) .bf-visit-copy li { font-size: var(--t-body); line-height: var(--lh-body); margin-bottom: var(--f-para-gap); max-width: none; }
-  :is(#view-butterfly, #view-merlin) .bf-visit-copy li:last-child { margin-bottom: 0; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-visit-copy p.bf-feature-lede { margin-bottom: 28px; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-visit-copy ul { margin: 0; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-visit-copy li { font-size: var(--t-body); line-height: var(--lh-body); margin-bottom: var(--f-para-gap); max-width: none; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-visit-copy li:last-child { margin-bottom: 0; }
   @media (min-width: 1100px) { .bf-idea-sub { white-space: nowrap; } }
   @media (max-width: 860px) {
     .bf-idea { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
-    .bf-idea > *, .bf-sec .bf-idea-title, :is(#view-butterfly, #view-merlin) p.bf-idea-lede { grid-column: 1; grid-row: auto; }
-    :is(#view-butterfly, #view-merlin) p.bf-idea-lede { margin: 0; padding: 0; background: none; }
-    :is(#view-butterfly, #view-merlin) p.bf-idea-lede::after { display: none; }
+    .bf-idea > *, .bf-sec .bf-idea-title, :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) p.bf-idea-lede { grid-column: 1; grid-row: auto; }
+    :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) p.bf-idea-lede { margin: 0; padding: 0; background: none; }
+    :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) p.bf-idea-lede::after { display: none; }
     .bf-idea-plan { width: min(100%, 520px); margin: clamp(24px, 5vw, 40px) auto 0; }
     .bf-idea-copy { margin-top: clamp(24px, 5vw, 40px); }
   }
-  :is(#view-butterfly, #view-merlin) li { font-size: var(--t-small); line-height: 1.6; margin-bottom: 8px; max-width: 60ch; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) li { font-size: var(--t-small); line-height: 1.6; margin-bottom: 8px; max-width: 60ch; }
 
-  :is(#view-butterfly, #view-merlin) h1:focus { outline: none; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) h1:focus { outline: none; }
 
   .bf-final { text-align: center; padding-block: clamp(40px, 6vw, 84px); }
-  :is(#view-butterfly, #view-merlin) .bf-final-title { font-family: var(--font-display); font-size: var(--t-h2); font-weight: 700; line-height: 1.15; letter-spacing: var(--ls-tight); color: var(--p-ink); margin: 0 0 14px; }
-  .bf-final p, :is(#view-butterfly, #view-merlin) .bf-final p { margin-inline: auto; font-size: var(--f-lede); line-height: 1.6; max-width: 62ch; }
+  :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-final-title { font-family: var(--font-display); font-size: var(--t-h2); font-weight: 700; line-height: 1.15; letter-spacing: var(--ls-tight); color: var(--p-ink); margin: 0 0 14px; }
+  .bf-final p, :is(#view-butterfly, #view-merlin, #view-agentic, #view-tiered) .bf-final p { margin-inline: auto; font-size: var(--f-lede); line-height: 1.6; max-width: 62ch; }
   .bf-next {
     display: block; text-align: center; padding-block: clamp(20px, 3vw, 36px);
     font-family: var(--font-display); font-size: clamp(1.05rem, 2vw, 1.4rem);
@@ -1810,6 +1810,147 @@
   }
   @media (max-width: 520px) { .mx-processes { grid-template-columns: minmax(0, 1fr); } }
 
+  /* ================= Agentic workflows case study =================
+     Orange from the homepage card (#f94500), deepened for type. */
+  #view-agentic {
+    --p-ink: #3d1606;
+    --p-accent: #b83700;            /* 5.4:1 on paper */
+    --p-muted: #5e4438;
+    --p-rule: #eedccf;
+    --p-band: #3d1606;
+    --p-band-ink: #fff4ee;
+    --p-highlight: #fde7dc;
+    --p-surface: #fbeee6;
+    --p-surface-line: #e9c6b2;
+    --p-surface-ink: #8a5a41;
+    --f-title-gap: 21px;
+    --f-lede: clamp(1.2rem, 1.7vw, 1.3125rem);
+    --f-sub: 20px; --f-sub-track: 0.02em; --f-sub-weight: 700;
+    --f-para-gap: 19px;
+    background: var(--paper); color: var(--p-ink);
+    padding-bottom: clamp(40px, 6vw, 80px);
+  }
+  #view-agentic .bf-band .mx-num { color: #ff9a6b; }
+  #view-agentic .bf-hero-img { margin-top: clamp(20px, 3vw, 36px); }
+  #view-agentic .bf-sec h2 { color: var(--p-ink); }
+  #view-agentic .bf-band h2 { color: var(--p-band-ink); }
+  #view-agentic .ag-findings { text-align: left; }
+  #view-agentic .ag-findings > div { justify-items: start; }
+  #view-agentic .ag-findings h3 { color: var(--p-ink); }
+  #view-agentic .ag-maps { align-items: center; }
+  #view-agentic .ag-maps p { max-width: none; }
+
+  /* POV evolution: three steps on a line, the current one filled */
+  .ag-steps { list-style: none; padding: 0; margin: clamp(28px, 4vw, 48px) 0 0; max-width: none;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px); counter-reset: none; }
+  #view-agentic .ag-steps li { max-width: none; margin: 0; padding: clamp(18px, 2vw, 26px);
+    border: 1px solid var(--p-rule); border-radius: 16px; background: #fff; position: relative; }
+  #view-agentic .ag-steps li + li::before { content: "\2192"; position: absolute; left: calc(-1 * clamp(12px, 1.6vw, 20px)); top: 50%;
+    transform: translate(-50%, -50%); color: var(--p-accent); font-weight: 700; font-size: 1.1rem; background: var(--paper); line-height: 1; }
+  #view-agentic .ag-steps li.is-now { background: var(--p-highlight); border-color: color-mix(in srgb, var(--p-accent) 40%, transparent); }
+  .ag-step-n { display: block; margin-bottom: 10px; font-family: var(--font-label); font-weight: var(--w-label);
+    font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  #view-agentic .ag-steps p { margin: 0; max-width: none; font-size: var(--t-small); line-height: 1.6; color: var(--p-ink); }
+  @media (max-width: 860px) {
+    .ag-steps { grid-template-columns: minmax(0, 1fr); }
+    #view-agentic .ag-steps li + li::before { content: "\2193"; left: 50%; top: calc(-1 * clamp(12px, 1.6vw, 20px) / 2); }
+  }
+
+  /* team-lead flow: five numbered screens */
+  .ag-flow { list-style: none; padding: 0; margin: clamp(28px, 4vw, 48px) 0 0; max-width: none;
+    display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(10px, 1.4vw, 18px); }
+  #view-agentic .ag-flow li { max-width: none; margin: 0; display: grid; gap: 10px; align-content: start; }
+  .ag-flow-n { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+    background: var(--p-accent); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+  #view-agentic .ag-flow h3 { margin: 0; font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight);
+    letter-spacing: var(--f-sub-track); line-height: 1.2; color: var(--p-ink); min-height: 2.4em; }
+  @media (max-width: 1000px) { .ag-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 520px) { .ag-flow { grid-template-columns: minmax(0, 1fr); } }
+
+  /* ================= Multi-tier drafting case study =================
+     Purple and blue are the prototype's own: purple marks AI work
+     (#7B1FA2), blue marks the reporter's input (#0B6BCB). */
+  #view-tiered {
+    --p-ink: #2a0f36;
+    --p-accent: #7b1fa2;            /* 7.6:1 on paper */
+    --p-muted: #4f3f57;
+    --p-rule: #e8dcec;
+    --p-band: #2a0f36;
+    --p-band-ink: #f7eff8;
+    --p-highlight: #f7eff8;
+    --p-surface: #f3eaf5;
+    --p-surface-line: #d9c3df;
+    --p-surface-ink: #6a4d75;
+    --tr-human: #0b6bcb;  --tr-human-tint: #e8f1fc;
+    --tr-ai: #7b1fa2;     --tr-ai-tint: #f7eff8;
+    --tr-z: #d86b00; --tr-y: #b71319; --tr-x: #2f5fa8;
+    --f-title-gap: 21px;
+    --f-lede: clamp(1.2rem, 1.7vw, 1.3125rem);
+    --f-sub: 20px; --f-sub-track: 0.02em; --f-sub-weight: 700;
+    --f-para-gap: 19px;
+    background: var(--paper); color: var(--p-ink);
+    padding-bottom: clamp(40px, 6vw, 80px);
+  }
+  #view-tiered .bf-band .mx-num { color: #d9a6e6; }
+  #view-tiered .bf-hero-img { margin-top: clamp(20px, 3vw, 36px); }
+  #view-tiered .bf-sec h2 { color: var(--p-ink); }
+  #view-tiered .bf-band h2 { color: var(--p-band-ink); }
+  #view-tiered .tr-left { text-align: left; }
+  #view-tiered .tr-left > div { justify-items: start; }
+  #view-tiered .tr-left h3 { color: var(--p-ink); }
+
+  /* the bundle: one report, three tiers, each with its audience */
+  .tr-tiers { list-style: none; padding: 0; margin: clamp(28px, 4vw, 48px) 0 0; max-width: none;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 1.4vw, 18px); }
+  #view-tiered .tr-tiers li { max-width: none; margin: 0; padding: clamp(18px, 2vw, 24px); border-radius: 14px;
+    background: #fff; border: 1px solid var(--p-rule); border-top: 6px solid var(--tier); display: grid; gap: 6px; }
+  .tr-tier-name { font-family: var(--font-display); font-weight: 700; font-size: var(--f-sub); color: var(--p-ink); }
+  .tr-tier-aud { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-muted); }
+  #view-tiered .tr-tiers p { margin: 4px 0 0; font-size: var(--t-small); line-height: 1.6; max-width: none; }
+
+  /* who did it: the two-colour rule, shown as the prototype's own chips */
+  .tr-who { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px); margin-top: clamp(24px, 3vw, 36px); }
+  .tr-who > div { border-radius: 16px; padding: clamp(18px, 2vw, 26px); display: grid; gap: 12px; align-content: start; }
+  .tr-who .is-human { background: var(--tr-human-tint); }
+  .tr-who .is-ai { background: var(--tr-ai-tint); }
+  .tr-who h3 { margin: 0; font-family: var(--font-display); font-size: var(--f-sub); font-weight: 700; }
+  .tr-who .is-human h3 { color: var(--tr-human); }
+  .tr-who .is-ai h3 { color: var(--tr-ai); }
+  #view-tiered .tr-who p { margin: 0; max-width: none; font-size: var(--t-small); color: var(--p-ink); }
+  .tr-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tr-chip { display: inline-flex; align-items: center; min-height: 32px; padding: 4px 12px; border-radius: 999px;
+    font-family: var(--font-label); font-weight: 600; font-size: 15px; line-height: 1.3; }
+  .is-human .tr-chip { background: var(--tr-human); color: #fff; }
+  .is-ai .tr-chip { background: #fff; color: var(--tr-ai); border: 1.5px solid var(--tr-ai); }
+
+  /* the three clips */
+  .tr-clips { list-style: none; padding: 0; margin: clamp(28px, 4vw, 48px) 0 0; max-width: none;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 24px); }
+  #view-tiered .tr-clips li { max-width: none; margin: 0; display: grid; gap: 10px; align-content: start; }
+  .tr-clip-n { font-family: var(--font-label); font-weight: var(--w-label); font-size: var(--t-label-sm); letter-spacing: var(--ls-label); color: var(--p-accent); }
+  #view-tiered .tr-clips h3 { margin: 0; font-family: var(--font-display); font-size: var(--f-sub); font-weight: var(--f-sub-weight);
+    letter-spacing: var(--f-sub-track); line-height: 1.2; color: var(--p-ink); }
+  #view-tiered .tr-clips p { margin: 0; max-width: none; font-size: var(--t-small); line-height: 1.6; }
+  .tr-status { justify-self: start; padding: 2px 10px; border-radius: 999px; font-family: var(--font-label); font-weight: 600; font-size: 14px;
+    background: var(--p-highlight); color: var(--p-accent); }
+
+  /* the attribution slider, drawn as a spectrum */
+  .tr-slider { list-style: none; padding: 0; margin: clamp(24px, 3vw, 36px) 0 0; max-width: none; position: relative;
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .tr-slider::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 9px; height: 3px; border-radius: 2px; background: var(--p-surface-line); }
+  #view-tiered .tr-slider li { max-width: none; margin: 0; display: grid; justify-items: center; gap: 8px; text-align: center; position: relative; font-size: var(--t-small); color: var(--p-muted); }
+  .tr-slider li::before { content: ""; width: 21px; height: 21px; border-radius: 50%; background: #fff; border: 3px solid var(--p-surface-line); }
+  #view-tiered .tr-slider li.is-on { color: var(--tr-ai); font-weight: 700; }
+  .tr-slider li.is-on::before { background: var(--tr-ai); border-color: var(--tr-ai); }
+
+  @media (max-width: 860px) {
+    .tr-tiers, .tr-clips, .tr-who { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .tr-slider { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 18px; }
+    .tr-slider::before { display: none; }
+  }
+
 </style>
 
 <div class="shell" id="view-home">
@@ -1991,6 +2132,53 @@
         </div>
       </div>
     </article>
+    <!-- ---------- Multi-tier drafting (Phase 2 RA work) ---------- -->
+    <article class="proj" id="p-tiered">
+      <div class="rail-head">
+        <p class="eyebrow">Interaction design &middot; Prototyping</p>
+        <div class="rail-nav">
+          <button type="button" class="rail-btn" data-dir="-1" aria-label="Scroll Multi-tier drafting left">&larr;</button>
+          <button type="button" class="rail-btn" data-dir="1" aria-label="Scroll Multi-tier drafting right">&rarr;</button>
+        </div>
+      </div>
+      <div class="rail" role="region" tabindex="0" aria-label="Multi-tier drafting — scrollable cards">
+        <a class="card title" href="#tiered" style="--proj:#7b1fa2; --ink:#fdf7fe">
+          <span class="art" aria-hidden="true"></span>
+          <span class="c-title">Multi-Tier Drafting</span>
+          <span class="c-blurb">A future-facing proposal where one chat drafts, checks and edits a report at three classification tiers.</span>
+          <span class="cta">See more <span class="arrow" aria-hidden="true">&rarr;</span></span>
+        </a>
+
+        <a class="card q md" href="#tiered" tabindex="-1">
+          <span class="c-kind">Principle</span>
+          <p>The AI is the author. The reporter is the editor. The chat is where the two meet.</p>
+        </a>
+
+        <a class="card proto lg" href="#tiered" tabindex="-1">
+          <span class="c-kind">Prototype</span>
+          <div class="frame">Clip 1 &mdash; Bundle Chat generating Class Z, step by step</div>
+        </a>
+
+        <a class="card note md" href="#tiered" tabindex="-1">
+          <span class="c-kind">Principle</span>
+          <p>Colour says who did it. <strong>Blue</strong> is the reporter&rsquo;s input. <strong>Purple</strong> is the AI&rsquo;s work.</p>
+        </a>
+
+        <a class="card proto md" href="#tiered" tabindex="-1">
+          <span class="c-kind">Prototype</span>
+          <div class="frame">Tone sliders &mdash; wording and confidence</div>
+        </a>
+
+        <a class="card stat sm" href="#tiered" tabindex="-1">
+          <dl>
+            <div><dt>3</dt><dd>classification tiers</dd></div>
+            <div><dt>3</dt><dd>scenario clips</dd></div>
+            <div><dt>6</dt><dd>@agents</dd></div>
+            <div><dt>95</dt><dd>prototype screens so far</dd></div>
+          </dl>
+        </a>
+      </div>
+    </article>
     <!-- ---------- Agentic workflows ---------- -->
     <article class="proj" id="p-agentic">
       <div class="rail-head">
@@ -2001,32 +2189,37 @@
         </div>
       </div>
       <div class="rail" role="region" tabindex="0" aria-label="Agentic workflows — scrollable cards">
-        <a class="card title" href="#" style="--proj:#f94500; --ink:#2b1533">
+        <a class="card title" href="#agentic" style="--proj:#f94500; --ink:#2b1533">
           <span class="art" aria-hidden="true"></span>
           <span class="c-title">Agentic workflows</span>
           <span class="c-blurb">Mapping how AI agents are reshaping the way product teams actually work.</span>
           <span class="cta">See more <span class="arrow" aria-hidden="true">&rarr;</span></span>
         </a>
 
-        <div class="card q md">
-          <span class="c-kind">Research question</span>
-          <p><em>PLACEHOLDER</em> — the question the studio project was actually chasing.</p>
-        </div>
+        <a class="card q md" href="#agentic" tabindex="-1">
+          <span class="c-kind">Point of view</span>
+          <p>Engineers who write specs with AI need to connect the conversation behind each spec to how it did in production.</p>
+        </a>
 
-        <div class="card proto lg">
+        <a class="card proto lg" href="#agentic" tabindex="-1">
+          <span class="c-kind">Research</span>
+          <div class="frame">Stakeholder map &mdash; centered on high-quality AI output</div>
+        </a>
+
+        <a class="card note md" href="#agentic" tabindex="-1">
+          <span class="c-kind">Finding</span>
+          <p>Checking AI output is everywhere and invisible. Organizations measure <strong>AI use</strong>, not the verification that makes it safe.</p>
+        </a>
+
+        <a class="card stat sm" href="#agentic" tabindex="-1">
+          <span class="figure">10</span>
+          <span class="label">Interviews</span>
+        </a>
+
+        <a class="card proto md" href="#agentic" tabindex="-1">
           <span class="c-kind">Prototype</span>
-          <div class="frame">Ecosystem map</div>
-        </div>
-
-        <div class="card note md">
-          <span class="c-kind">Note</span>
-          <p><em>PLACEHOLDER</em> — what surprised you.</p>
-        </div>
-
-        <div class="card proto md">
-          <span class="c-kind">Process</span>
-          <div class="frame">Sketch, artefact or screen</div>
-        </div>
+          <div class="frame">Team-lead monthly spec review</div>
+        </a>
       </div>
     </article>
   </section>
@@ -2611,7 +2804,382 @@
       <p>This project was a valuable opportunity to work alongside stakeholders, centering their needs and pain points to design a solution that serves not one analyst, but many. Feedback from LAS showed that every releaser works differently, which pushed us toward a customizable workspace that adapts to each user rather than forcing a single workflow. Merlin also challenged me to imagine the future of AI&ndash;human teaming, and to consider how UX design can support human judgment rather than replace it, keeping the releaser accountable for every decision. Moving forward, I want to push my ideas even further and explore how AI can transform the reporting workflow itself, not just speed up the one that exists today.</p>
     </section>
 
+    <a class="bf-next" href="#tiered">Next Project: Multi-Tier Drafting &rarr;</a>
+  </div>
+</div>
+
+<!-- ================================================================
+     MULTI-TIER DRAFTING CASE STUDY  —  #tiered
+     Phase 2 of the LAS research-assistant work. Same bf-* system as
+     the other case studies, in the prototype's own AI purple. Copy is
+     DRAFT, written from the Phase 2 context doc. Every .ph box is an
+     image or video slot: replace the whole <div class="ph">…</div>.
+     ================================================================ -->
+<div id="view-tiered" class="cs-view" hidden>
+  <div class="shell">
+    <div class="bf-top">
+      <a class="bf-back" href="#work">&larr; All work</a>
+      <a class="bf-who" href="#top">Mia Biehler</a>
+    </div>
+
+    <header class="bf-hero">
+      <p class="bf-kicker">Case study</p>
+      <h1>Multi-Tier Drafting:<br />The Chat Is the Spine</h1>
+      <p class="bf-tagline">Interaction Design &nbsp;&middot;&nbsp; Prototyping &nbsp;&middot;&nbsp; Human&ndash;AI Teaming</p>
+      <p class="bf-lede">Intelligence reporters often write one report several times, once for each audience and classification tier. This future-facing proposal imagines that work led from a single chat: the AI drafts every tier, and the reporter steers, checks and edits. We told it as three scenario clips, recorded from Figma prototypes.</p>
+    </header>
+
+    <dl class="bf-meta">
+      <div><dt>Role</dt><dd>Research Assistant &mdash; Interaction Design &amp; Prototyping</dd></div>
+      <div><dt>Team</dt><dd>Helen Armstrong, Matthew Peterson, Willow Ahrens</dd></div>
+      <div><dt>Partner</dt><dd>The Laboratory for Analytic Sciences <!-- PLACEHOLDER: confirm credit line --></dd></div>
+      <div><dt>Year</dt><dd>2026 <!-- PLACEHOLDER: duration --></dd></div>
+      <div><dt>Tools</dt><dd>Figma, Claude</dd></div>
+    </dl>
+
+    <div class="ph bf-hero-img" style="--ar: 2400 / 1100">Hero image &mdash; Bundle Chat beside the Class Y and Class X editors</div>
+
+    <!-- ---------- the idea ---------- -->
+    <section class="bf-sec" id="tr-idea">
+      <div class="bf-statement">
+        <h2 class="bf-feature-sub bf-statement-label">The Idea</h2>
+        <p>The AI is the author and the reporter is the editor. <span class="bf-hmw">Generation, checking, spot edits and the shared history of the report all live in one chat</span>, so the next reporter on the bundle can see what changed and why.</p>
+      </div>
+    </section>
+
+    <!-- ---------- the bundle ---------- -->
+    <section class="bf-sec">
+      <h2 class="bf-center">One Report, Three Tiers</h2>
+      <p class="bf-lede bf-center">A bundle holds one report written for three audiences. Each tier keeps what its readers need to act and drops what they should not see.</p>
+      <ul class="tr-tiers">
+        <li style="--tier: var(--tr-z)">
+          <span class="tr-tier-name">Class Z</span>
+          <span class="tr-tier-aud">Diplomatic officials</span>
+          <p>The fullest version, written for officials supporting peace talks, in policy language they can repeat.</p>
+        </li>
+        <li style="--tier: var(--tr-y)">
+          <span class="tr-tier-name">Class Y</span>
+          <span class="tr-tier-aud">CIA</span>
+          <p>Generated from Class Z. Some sourcing is left out entirely and named entities are generalized.</p>
+        </li>
+        <li style="--tier: var(--tr-x)">
+          <span class="tr-tier-name">Class X</span>
+          <span class="tr-tier-aud">Navy</span>
+          <p>Loses all sourcing but keeps the vessel name and departure window, because the Navy needs them to act.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ---------- principles ---------- -->
+    <section class="bf-sec">
+      <div class="bf-band">
+        <h2>Design Principles</h2>
+        <div class="bf-three" style="margin-top: clamp(28px, 4vw, 52px)">
+          <div>
+            <span class="mx-num" aria-hidden="true">01</span>
+            <h3>Show the Work</h3>
+            <p>Every AI step appears in the chat as it runs and links to the paragraph it is acting on. Agent checks are named, such as @sources or @compliance.</p>
+          </div>
+          <div>
+            <span class="mx-num" aria-hidden="true">02</span>
+            <h3>Options, Not Answers</h3>
+            <p>For judgment calls, the AI offers a slider with live previews in the report. The reporter picks the setting, and the AI applies it.</p>
+          </div>
+          <div>
+            <span class="mx-num" aria-hidden="true">03</span>
+            <h3>Stay in the Bundle</h3>
+            <p>The AI only draws on sources attached to the bundle. Asked about anything outside them, it says so and stops.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- colour = who did it ---------- -->
+    <section class="bf-sec">
+      <div class="bf-two">
+        <div>
+          <h2>Colour Says Who Did It</h2>
+          <p class="bf-lede">When an AI writes most of the text, the reporter needs to see at a glance which changes were theirs.</p>
+          <p>The interface uses one colour for each side of the team. Blue follows the precedent of existing human interactions. Purple marks everything the AI drafts, checks or proposes. Tier colours stay reserved for classification.</p>
+        </div>
+        <div class="tr-who" style="margin-top: 0">
+          <div class="is-human">
+            <h3>Reporter</h3>
+            <p>Chat messages, selected text, Send and Accept.</p>
+            <div class="tr-chips"><span class="tr-chip">Send</span><span class="tr-chip">Accept</span></div>
+          </div>
+          <div class="is-ai">
+            <h3>AI</h3>
+            <p>Steps, agent chips, sliders and the paragraph being written.</p>
+            <div class="tr-chips"><span class="tr-chip">@sources</span><span class="tr-chip">@jargon</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- the clips ---------- -->
+    <section class="bf-sec" id="tr-clips">
+      <h2 class="bf-center">Three Scenario Clips</h2>
+      <p class="bf-lede bf-center">A fictional scenario follows two reporters with the same clearance across two days on one bundle.</p>
+      <ol class="tr-clips">
+        <li>
+          <span class="tr-clip-n">Clip 1 &middot; Ashley</span>
+          <h3>Generate</h3>
+          <div class="ph" style="--ar: 16 / 10">Video &mdash; setup, generation and agent checks for Class Z</div>
+          <p>Ashley sets up the report and the AI writes Class Z paragraph by paragraph. She edits behind it as it writes, and it keeps her changes. Sliders then set how a named official is attributed and how technical the tone is.</p>
+        </li>
+        <li>
+          <span class="tr-clip-n">Clip 2 &middot; Ashley</span>
+          <h3>Spot Edit</h3>
+          <div class="ph" style="--ar: 16 / 10">Video &mdash; inline ask, @sanitization and a cross-tier sync</div>
+          <p>With the chat minimized, Ashley edits Class Y and X in place: an inline ask, agent checks for sanitization and jargon, and an offer to carry a manual change to the matching paragraph in another tier. <!-- PLACEHOLDER: credit line for Willow, who built this clip --></p>
+        </li>
+        <li>
+          <span class="tr-clip-n">Clip 3 &middot; Jeremy</span>
+          <h3>Hand Over</h3>
+          <div class="ph" style="--ar: 16 / 10">Video &mdash; change summary and a compliance sweep across tiers</div>
+          <p>The next morning Jeremy asks what changed and why, jumps to each edit, and runs a compliance check across all three tiers.</p>
+          <span class="tr-status">In progress</span>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ---------- sliders ---------- -->
+    <section class="bf-sec">
+      <div class="bf-two">
+        <div>
+          <h2>Attribution Is a Spectrum</h2>
+          <p class="bf-lede">How much of a named official&rsquo;s role a tier needs is a judgment call, not an on/off switch.</p>
+          <p>Earlier sanitization exercises showed that named individuals need graduated handling across tiers. So the AI offers four stops and previews each one in the affected paragraphs before anything changes. The same pattern sets tone: wording runs from technical to policy, and confidence from direct to hedged.</p>
+          <ol class="tr-slider" aria-label="Attribution stops, with Title only chosen">
+            <li>Name + title</li>
+            <li class="is-on">Title only</li>
+            <li>Role only</li>
+            <li>Omit</li>
+          </ol>
+        </div>
+        <div class="ph" style="--ar: 4 / 3">Slider card in the chat, with dashed previews on Class Z &para;2&ndash;3</div>
+      </div>
+    </section>
+
+    <!-- ---------- learnings ---------- -->
+    <section class="bf-sec">
+      <h2 class="bf-center">What We Learned About Tiers</h2>
+      <div class="bf-three tr-left" style="margin-top: clamp(28px, 4vw, 48px)">
+        <div>
+          <span class="mx-num" aria-hidden="true">01</span>
+          <h3>Supersets, Not Paraphrases</h3>
+          <p>Anything in a lower tier must also exist in every tier above it. A tier is a cut of the report, not a rewrite.</p>
+        </div>
+        <div>
+          <span class="mx-num" aria-hidden="true">02</span>
+          <h3>Lowest Is Not Vaguest</h3>
+          <p>The lowest tier can be the most specific about what its readers act on, even while it loses every source.</p>
+        </div>
+        <div>
+          <span class="mx-num" aria-hidden="true">03</span>
+          <h3>Some Content Must Go</h3>
+          <p>Some claims have no safe lower-tier version. The right move is to leave them out, not to weaken the wording.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- next ---------- -->
+    <section class="bf-sec">
+      <div class="bf-statement">
+        <h2 class="bf-feature-sub bf-statement-label">What&rsquo;s Next</h2>
+        <p>Finishing the handover clip, recording all three clips, and reviewing them with the team and our subject matter expert. <!-- PLACEHOLDER --></p>
+      </div>
+    </section>
+
+    <!-- ---------- final thoughts ---------- -->
+    <section class="bf-final">
+      <h2 class="bf-final-title">Final Thoughts</h2>
+      <p><em>PLACEHOLDER</em> &mdash; what designing for an AI author taught you about keeping the reporter accountable.</p>
+    </section>
+
     <a class="bf-next" href="#butterfly">Next Project: Your Butterfly Companion &rarr;</a>
+  </div>
+</div>
+
+<!-- ================================================================
+     AGENTIC WORKFLOWS CASE STUDY  —  #agentic
+     Same bf-* system as Merlin and Butterfly, in an orange palette taken
+     from the homepage card (#f94500). Copy is DRAFT, pulled from Mia's
+     research notes (POVs are her own wording). Every .ph box is an image
+     slot: replace the whole <div class="ph">…</div> with an <img>.
+     ================================================================ -->
+<div id="view-agentic" class="cs-view" hidden>
+  <div class="shell">
+    <div class="bf-top">
+      <a class="bf-back" href="#work">&larr; All work</a>
+      <a class="bf-who" href="#top">Mia Biehler</a>
+    </div>
+
+    <header class="bf-hero">
+      <p class="bf-kicker">Case study</p>
+      <h1>Agentic Workflows:<br />Learning from Every Spec</h1>
+      <p class="bf-tagline">UX Research &nbsp;&middot;&nbsp; Service Design &nbsp;&middot;&nbsp; Human&ndash;AI Teaming</p>
+      <p class="bf-lede">AI agents are changing how software gets built, but also who defines the work and how it gets specified. Through interviews with engineers, designers and enterprise leaders, we mapped how teams actually work with AI, then designed a way for teams to connect the AI conversation behind each spec to what happened in production.</p>
+    </header>
+
+    <dl class="bf-meta">
+      <div><dt>Role</dt><dd>Co-interviewer, Research &amp; Interaction Design</dd></div>
+      <div><dt>Team</dt><dd>Sean <!-- PLACEHOLDER: full team names --></dd></div>
+      <div><dt>Partner</dt><dd>IBM Studio, NC State MGXD</dd></div>
+      <div><dt>Year</dt><dd>2026 <!-- PLACEHOLDER: duration --></dd></div>
+      <div><dt>Tools</dt><dd>Figma, Claude</dd></div>
+    </dl>
+
+    <div class="ph bf-hero-img" style="--ar: 2400 / 1100">Hero image &mdash; the team-lead spec review screen</div>
+
+    <!-- ---------- the question ---------- -->
+    <section class="bf-sec" id="ag-research">
+      <div class="bf-statement">
+        <h2 class="bf-feature-sub bf-statement-label">Point of View</h2>
+        <p>Software engineers who write specs with AI agents need a way to <span class="bf-hmw">connect the AI conversation behind each spec to its production outcome</span>, because building that data allows trends and lessons to surface, leading to better-written specs in the future.</p>
+      </div>
+    </section>
+
+    <!-- ---------- who we talked to ---------- -->
+    <section class="bf-sec">
+      <div class="bf-band">
+        <h2>Who We Talked To</h2>
+        <p>Ten semi-structured interviews across three groups, from students learning with AI to an enterprise architect governing it at scale.</p>
+        <div class="bf-three" style="margin-top: clamp(28px, 4vw, 52px)">
+          <div>
+            <span class="mx-num" aria-hidden="true">4</span>
+            <h3>Software Engineers</h3>
+            <p>Backend, Android and frontend engineers, including former big-tech engineers now at product companies and open-source teams.</p>
+          </div>
+          <div>
+            <span class="mx-num" aria-hidden="true">3</span>
+            <h3>Professionals</h3>
+            <p>A product designer, a UX research manager and an enterprise architect who walked us through AI governance across a large organization.</p>
+          </div>
+          <div>
+            <span class="mx-num" aria-hidden="true">3</span>
+            <h3>Students</h3>
+            <p>Graduate students and interns, including security testing, building their habits with AI tools as they enter the field.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- what we heard ---------- -->
+    <section class="bf-sec">
+      <h2 class="bf-center">What We Heard</h2>
+      <p class="bf-lede bf-center">Across interviews, the work of checking AI was everywhere, and almost none of it was seen.</p>
+      <div class="bf-three ag-findings" style="margin-top: clamp(28px, 4vw, 48px)">
+        <div>
+          <span class="mx-num" aria-hidden="true">01</span>
+          <h3>Verification Is Invisible</h3>
+          <p>Engineers check AI output through self-review, peers, QA, leads, security and clients, but organizations measure AI adoption, not that checking.</p>
+        </div>
+        <div>
+          <span class="mx-num" aria-hidden="true">02</span>
+          <h3>AI Work Is Siloed</h3>
+          <p>Prompts go in and code comes out, but the process behind it is never recorded, so what works for one engineer never reaches the team.</p>
+        </div>
+        <div>
+          <span class="mx-num" aria-hidden="true">03</span>
+          <h3>Usage Gets Rewarded</h3>
+          <p>Teams are encouraged to use AI for its own sake. Volume becomes the metric while output quality, cost and accuracy go unmeasured.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- mapping ---------- -->
+    <section class="bf-sec">
+      <div class="bf-two ag-maps">
+        <div>
+          <h2>Mapping the Ecosystem</h2>
+          <p class="bf-lede">We built stakeholder, ecosystem and journey maps from the transcripts, ranking each stakeholder only by what the data showed.</p>
+          <p>The most useful reframe centered the map on producing high-quality AI output, where efficiency, security, policy, accuracy and cost all pull on the same piece of work. An enterprise interview showed how AI governance at scale becomes a multi-stakeholder approval chain, very different from a small team's workflow.</p>
+        </div>
+        <div class="ph" style="--ar: 4 / 3">Stakeholder map &mdash; centered on high-quality AI output</div>
+      </div>
+      <div class="bf-row two" style="margin-top: clamp(16px, 2vw, 24px)">
+        <div class="ph" style="--ar: 4 / 3">Developer approval map &mdash; six checking spokes</div>
+        <div class="ph" style="--ar: 4 / 3">Current-state journey map &mdash; ticket to completion</div>
+      </div>
+    </section>
+
+    <!-- ---------- narrowing ---------- -->
+    <section class="bf-sec">
+      <h2 class="bf-center">Narrowing the Focus</h2>
+      <p class="bf-lede bf-center">Our point of view moved three times as the research and critique sharpened it.</p>
+      <ol class="ag-steps">
+        <li>
+          <span class="ag-step-n">01 &middot; Organizations</span>
+          <p>Organizations need a way to structure AI guardrails within their teams, because clear processes for checking AI outputs build trust deliberately rather than complacently.</p>
+        </li>
+        <li>
+          <span class="ag-step-n">02 &middot; Process</span>
+          <p>Engineers need a way to make their process with AI clear to themselves and their team, so better processes stop staying hidden.</p>
+        </li>
+        <li class="is-now">
+          <span class="ag-step-n">03 &middot; Specs</span>
+          <p>Feedback pushed us into spec-driven development, and to design one moment: receiving the outcome of a spec and acting on it for the next one.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ---------- principles ---------- -->
+    <section class="bf-sec">
+      <div class="bf-band">
+        <h2>Design Principles</h2>
+        <div class="bf-three" style="margin-top: clamp(28px, 4vw, 52px)">
+          <div>
+            <span class="mx-num" aria-hidden="true">01</span>
+            <h3>Human-Led</h3>
+            <p>People tag what they are doing and investigating, both what broke and how they teamed with AI. The AI helps, and reads activity that isn&rsquo;t tagged.</p>
+          </div>
+          <div>
+            <span class="mx-num" aria-hidden="true">02</span>
+            <h3>Quality over Usage</h3>
+            <p>The tool surfaces output quality, including token efficiency, never the volume of AI use.</p>
+          </div>
+          <div>
+            <span class="mx-num" aria-hidden="true">03</span>
+            <h3>Patterns, Not People</h3>
+            <p>Lessons draw on what works across the team without exposing a teammate&rsquo;s name or work.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- the flow ---------- -->
+    <section class="bf-sec" id="ag-flow">
+      <h2 class="bf-center">The Team-Lead Flow</h2>
+      <p class="bf-lede bf-center">A monthly review where a lead sees how the team&rsquo;s specs played out and turns what worked into a lesson for the next ones.</p>
+      <ol class="ag-flow">
+        <li><span class="ag-flow-n">1</span><h3>Monthly Spec Review</h3><div class="ph" style="--ar: 16 / 10">Screen &mdash; review overview</div></li>
+        <li><span class="ag-flow-n">2</span><h3>Find Patterns</h3><div class="ph" style="--ar: 16 / 10">Screen &mdash; patterns across specs</div></li>
+        <li><span class="ag-flow-n">3</span><h3>Draft a Lesson</h3><div class="ph" style="--ar: 16 / 10">Screen &mdash; lesson draft</div></li>
+        <li><span class="ag-flow-n">4</span><h3>Choose Who Hears It</h3><div class="ph" style="--ar: 16 / 10">Screen &mdash; notification settings</div></li>
+        <li><span class="ag-flow-n">5</span><h3>Publish</h3><div class="ph" style="--ar: 16 / 10">Screen &mdash; published lesson</div></li>
+      </ol>
+      <div class="bf-proj">
+        <div class="ph" style="--ar: 16 / 9">Prototype video &mdash; the full flow</div>
+      </div>
+    </section>
+
+    <!-- ---------- next ---------- -->
+    <section class="bf-sec">
+      <div class="bf-statement">
+        <h2 class="bf-feature-sub bf-statement-label">What&rsquo;s Next</h2>
+        <p>Usability testing a live prototype with team leads, then scaling the concept to a large enterprise team, tested against robust proxy data.</p>
+      </div>
+    </section>
+
+    <!-- ---------- final thoughts ---------- -->
+    <section class="bf-final">
+      <h2 class="bf-final-title">Final Thoughts</h2>
+      <p><em>PLACEHOLDER</em> &mdash; what this project taught you about researching a field that changes while you study it.</p>
+    </section>
+
+    <a class="bf-next" href="#merlin">Next Project: Merlin &rarr;</a>
   </div>
 </div>
 
@@ -3370,7 +3938,9 @@ window.__motion = (function () {
   const VIEWS = {
     '#merlin':    { el: document.getElementById('view-merlin'),    title: 'Merlin — Mia Biehler',    cls: 'is-merlin' },
     '#merlin-journey': { el: document.getElementById('view-merlin'), title: 'Merlin User Journey — Mia Biehler', cls: 'is-merlin', sub: 'is-mjourney' },
-    '#butterfly': { el: document.getElementById('view-butterfly'), title: 'Butterfly Exhibition — Mia Biehler', cls: 'is-butterfly' }
+    '#butterfly': { el: document.getElementById('view-butterfly'), title: 'Butterfly Exhibition — Mia Biehler', cls: 'is-butterfly' },
+    '#agentic':   { el: document.getElementById('view-agentic'),   title: 'Agentic Workflows — Mia Biehler', cls: 'is-agentic' },
+    '#tiered':    { el: document.getElementById('view-tiered'),    title: 'Multi-Tier Drafting — Mia Biehler', cls: 'is-tiered' }
   };
   const TITLES = { home: 'Mia Biehler' };
   let lastHash = location.hash;
