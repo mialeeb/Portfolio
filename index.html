@@ -178,11 +178,11 @@
   .hero-rule { align-self: stretch; width: 2px; border-radius: 2px;
     background: linear-gradient(transparent, color-mix(in srgb, var(--orchid) 70%, transparent) 18%, color-mix(in srgb, var(--orchid) 70%, transparent) 82%, transparent); }
   .hero-statement {
-    margin: 0; max-width: 21ch;
+    margin: 0; max-width: none;
     /* lead in Syne (one of the reel's faces) at a calm medium weight; the
        ending in the system's display face, extra-bold in the reel's orchid */
     font-family: 'Syne', var(--font-display); font-weight: 500;
-    font-size: clamp(1.7rem, 2.9vw, 2.7rem); line-height: 1.08; letter-spacing: -0.02em;
+    font-size: clamp(1.3rem, calc(100cqi / 11.2), 2.7rem); line-height: 1.1; letter-spacing: -0.02em;
     color: var(--plum-mid); text-wrap: pretty;
   }
   /* portrait opens the statement like a drop-in on its first line; the lines after it wrap under */
@@ -192,7 +192,9 @@
     border: 0.08em solid color-mix(in srgb, #fff 85%, transparent);
     box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--orchid) 45%, transparent), 0 14px 30px -16px color-mix(in srgb, var(--plum) 70%, transparent);
   }
-  .hero-statement .nowrap { white-space: nowrap; }
+  /* four set lines; the size follows the column so the longest line ("designer and researcher", ~11em) always fits */
+  .hero-say { container-type: inline-size; min-width: 0; }
+  .hero-statement .ln { display: block; white-space: nowrap; }
   .hero-statement em { display: block; font-style: normal; font-family: var(--font-display); font-weight: 800; letter-spacing: -0.03em; color: var(--orchid); }   /* large text holds 3:1 on gold */
   @media (max-width: 860px) {
     .hero-grid { grid-template-columns: minmax(0, 1fr); min-height: 0; gap: clamp(20px, 5vw, 32px); }
@@ -1850,7 +1852,9 @@
       </div>
       <span class="hero-rule" aria-hidden="true"></span>
       <!-- DRAFT statement: Mia is still writing this one -->
-      <p class="hero-statement"><img class="hero-portrait" src="images/mia-headshot.webp" width="400" height="400" alt="Mia Biehler" decoding="async"><span class="nowrap">User experience</span> designer and researcher <em>building the augmented future of AI-human teaming.</em></p>
+      <div class="hero-say">
+        <p class="hero-statement"><span class="ln"><img class="hero-portrait" src="images/mia-headshot.webp" width="400" height="400" alt="Mia Biehler" decoding="async">User experience</span> <span class="ln">designer and researcher</span> <em><span class="ln">building the future of</span> <span class="ln">human-AI teaming.</span></em></p>
+      </div>
     </div>
   </header>
 
