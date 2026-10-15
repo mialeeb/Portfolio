@@ -145,8 +145,8 @@
     transition: background-color 180ms ease, color 180ms ease;
   }
   .nav-ic { flex: none; opacity: 0.9; }
-  .nav-links a:hover { background: color-mix(in srgb, #000 12%, transparent); }
-  .nav-links a[aria-current="page"] { background: color-mix(in srgb, #000 24%, transparent); }   /* a deeper teal pill keeps the gold readable */
+  .nav-links a:hover { background: color-mix(in srgb, var(--paper) 8%, transparent); }
+  .nav-links a[aria-current="page"] { background: color-mix(in srgb, var(--paper) 14%, transparent); }   /* light pill, as in the first teal nav */
   .nav a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 14px; }
   @media (max-width: 640px) {
     .nav-links { gap: 2px; flex-wrap: nowrap; justify-content: space-between; }
@@ -1115,12 +1115,11 @@
   .work-group {
     margin: 0 0 clamp(14px, 1.6vw, 20px);
     font-family: var(--font-display); font-weight: var(--f-sub-weight); font-size: var(--f-sub); letter-spacing: var(--f-sub-track);
-    color: var(--plum); text-wrap: balance;
+    color: var(--teal); text-wrap: balance;
   }
   .work-group .wg-dot { color: var(--orchid); margin-inline: 0.35em; }
   .work-group:not(:first-child) { margin-top: clamp(52px, 6.5vw, 88px); }
   .work-group + .proj { margin-top: 0; }
-  .proj-name { color: var(--plum-mid); }
   .proj { margin-top: clamp(30px, 4vw, 54px); }
   .proj:first-of-type { margin-top: 0; }
   .rail-head {
@@ -1128,17 +1127,19 @@
     gap: 16px; margin-bottom: 10px;
   }
   .rail-head .eyebrow { margin: 0; }
-  .rail-nav { display: flex; gap: 6px; }
+  .rail-nav { display: flex; gap: 6px; margin-left: auto; }
   .rail-btn {
     width: 44px; height: 44px;
     border-radius: 999px;
-    border: 1px solid var(--rule);
-    background: var(--paper);
-    color: var(--plum);
-    font-family: var(--font-label); font-size: var(--t-body); line-height: 1;
+    border: 1.5px solid color-mix(in srgb, var(--teal) 35%, transparent);   /* outlined like the method chips */
+    background: #fff;
+    color: var(--teal);
+    font-family: var(--font-label); font-size: var(--t-body); font-weight: 700; line-height: 1;
     cursor: pointer;
+    transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
   }
-  .rail-btn:hover:not(:disabled) { background: var(--gold); border-color: var(--gold); color: #6d2f75; }
+  .rail-btn:hover:not(:disabled) { background: var(--teal); border-color: var(--teal); color: var(--gold-hero); }
+  .rail-btn:focus-visible { outline: 2px solid var(--orchid); outline-offset: 2px; }
   .rail-btn:disabled { opacity: 0.32; cursor: default; }
 
   .rail {
@@ -2026,7 +2027,6 @@
     <!-- ---------- Multi-tier drafting (Phase 2 RA work) ---------- -->
     <article class="proj" id="p-tiered">
       <div class="rail-head">
-        <p class="eyebrow proj-name">Multi-tier drafting</p>
         <div class="rail-nav">
           <button type="button" class="rail-btn" data-dir="-1" aria-label="Scroll Multi-tier drafting left">&larr;</button>
           <button type="button" class="rail-btn" data-dir="1" aria-label="Scroll Multi-tier drafting right">&rarr;</button>
@@ -2073,7 +2073,6 @@
     <!-- ---------- Merlin ---------- -->
     <article class="proj" id="p-merlin">
       <div class="rail-head">
-        <p class="eyebrow proj-name">Merlin</p>
         <div class="rail-nav">
           <button type="button" class="rail-btn" data-dir="-1" aria-label="Scroll Merlin left">&larr;</button>
           <button type="button" class="rail-btn" data-dir="1" aria-label="Scroll Merlin right">&rarr;</button>
@@ -2127,7 +2126,6 @@
     <!-- ---------- Agentic workflows ---------- -->
     <article class="proj" id="p-agentic">
       <div class="rail-head">
-        <p class="eyebrow proj-name">Agentic workflows</p>
         <div class="rail-nav">
           <button type="button" class="rail-btn" data-dir="-1" aria-label="Scroll Agentic workflows left">&larr;</button>
           <button type="button" class="rail-btn" data-dir="1" aria-label="Scroll Agentic workflows right">&rarr;</button>
@@ -2171,7 +2169,6 @@
     <!-- ---------- Butterfly exhibition ---------- -->
     <article class="proj" id="p-butterfly">
       <div class="rail-head">
-        <p class="eyebrow proj-name">Your Butterfly Companion</p>
         <div class="rail-nav">
           <button type="button" class="rail-btn" data-dir="-1" aria-label="Scroll Butterfly exhibition left">&larr;</button>
           <button type="button" class="rail-btn" data-dir="1" aria-label="Scroll Butterfly exhibition right">&rarr;</button>
